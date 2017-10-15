@@ -1,0 +1,44 @@
+package worldofzuul;
+
+public class Character_fight 
+{
+    //Har brugt samme variables som i monster pånær name.
+    private String name;
+    private int hp;
+    private boolean isDead = false;
+
+    //Character attributer
+    public Character_fight(String _name, int _hp) 
+    {
+        this._name = name;
+        this._hp = hp;
+    }
+
+    public void attack(Character_fight ef) 
+    {
+        int dmg = 0;
+        //udregn damage
+        dmg = (math.random(0 >= 10));
+        ef.takeDamage(dmg);
+    }
+
+    public void takeDamage(int dmg) 
+    {
+        //damage man tager
+        //Hvis dmg er større end hp og det er <= 0: død
+        if (hp - dmg <= 0) 
+        {
+            hp = 0;
+            isDead = true;
+        } 
+        else 
+        {
+            hp -= dmg;
+        }
+    }
+    //Ellers return død
+    public boolean isDead() 
+    {
+        return isDead;
+    }
+}
