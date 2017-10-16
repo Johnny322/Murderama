@@ -2,7 +2,7 @@ package worldofzuul;
 
 public class Character_fight 
 {
-    //Har brugt samme variables som i monster pånær name.
+    //Har brugt samme variables som i monster på nær name og boolean.
     private String name;
     private int hp;
     private boolean isDead = false;
@@ -14,12 +14,12 @@ public class Character_fight
         this._hp = hp;
     }
 
-    public void attack(Character_fight ef) 
+    public void attack(Character_fight _dmg) 
     {
         int dmg = 0;
         //udregn damage
         dmg = (math.random(0 >= 10));
-        ef.takeDamage(dmg);
+        _dmg.takeDamage(dmg);
     }
 
     public void takeDamage(int dmg) 
