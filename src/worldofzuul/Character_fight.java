@@ -18,7 +18,7 @@ public class Character_fight
     {
         int dmg = 0;
         //udregn damage
-        dmg = (math.random(0 >= 10));
+        dmg = (Math.random()*11);
         _dmg.takeDamage(dmg);
     }
 
@@ -28,7 +28,6 @@ public class Character_fight
         //Hvis dmg er større end hp og det er <= 0: død
         if (hp - dmg <= 0) 
         {
-            hp = 0;
             isDead = true;
         } 
         else 
