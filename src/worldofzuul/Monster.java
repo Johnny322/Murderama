@@ -11,31 +11,39 @@ package worldofzuul;
  */
 public class Monster {
     
-    private int dmg;
-    private int hp;
+    private int hp, damage;
     
-    public Monster(int _hp, int _dmg) {
-        this.hp = _hp;
-        this.dmg = _dmg;
-        
+    Monster(int hp, int damage) {
+        this.hp = hp;
+        this.damage = damage;
     }
     
-    public void fight(Character character) {
-        character.setHp(character.getHp() - this.dmg);
+    Monster() {
+        hp = 10;
+        damage = 2;
+    } 
+    
+    public void attack() {
+        this.hp = this.hp - this.damage;
     }
     
     public int getHp() {
         return this.hp;
     }
     
-    public void setHp(int damageTaken){
-        this.hp = hp - damageTaken;
+    public void setHp(int damageTaken) {
+    	this.hp = this.hp - damageTaken;
     }
     
-    public boolean isDead() {
-        if(this.hp > 0){
-            return false;
-        }
-        return true;
+    public int getDamage() {
+    	return this.damage;
     }
+    
+    public boolean alive() {
+        if(this.hp > 0) {
+            return true;
+        }
+        return false;
+    }
+    
 }

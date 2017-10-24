@@ -13,7 +13,6 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-    private Monster monsterInRoom;
     private Character jeff = new Character();
     private Step[][] stepList;
     private int currentPosition1 = 0;
@@ -41,7 +40,6 @@ public class Room
 //        this.monsterInRoom = new Monster(100,1);
     	this.player = jeff;
         this.stepList = new Step[length][depth];
-        this.currentPosition = stepList[0][0];
         buildStepList(length, depth);
     }
     
@@ -49,23 +47,11 @@ public class Room
     {
         this.description = description;
         this.exits = new HashMap<String, Room>();
-        this.monsterInRoom = monster;
     	this.player = jeff;
         this.stepList = new Step[3][3];
-        this.currentPosition = stepList[0][0];
         buildStepList(3, 3);
 
     }
-    
-    public void setMonster(int hp, int damage) 
-    {
-    	monsterInRoom = new Monster(hp, damage);
-    }
-    
-    public Monster getMonster() {
-        return monsterInRoom;
-    }
-
     
     public Character getPlayer() {
         return jeff;
@@ -111,31 +97,39 @@ public class Room
     
     public void setCurrentPosition(Step step, String direction) {
     	if(direction.equals("east")) {
-        	this.currentPosition = this.stepList[1][0];
+    		this.currentPosition1 = 1;
+    		this.currentPosition2 = 0;
+        	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
         	System.out.println("Currently at 1, 0");
     	}
     	
     	if(direction.equals("north")) {
-        	this.currentPosition = this.stepList[2][1];
+    		this.currentPosition1 = 2;
+    		this.currentPosition2 = 1;
+        	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
         	System.out.println("Currently at 2, 1");
     	}
     	
     	if(direction.equals("west")) {
-        	this.currentPosition = this.stepList[1][2];
+    		this.currentPosition1 = 1;
+    		this.currentPosition2 = 2;
+        	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
         	System.out.println("Currently at 1, 2");
     	}
     	
     	if(direction.equals("south")) {
-        	this.currentPosition = this.stepList[0][1];
+    		this.currentPosition1 = 0;
+    		this.currentPosition2 = 1;
+        	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
         	System.out.println("Currently at 0, 1");
     	}
     }
     
     public void buildStepList(int length, int depth) {
     	for(int i = 0; i < length; i++) {
-    		this.stepList[0][i] = new Step(new Character("Erik", 1000, "There is no cowlevel"));
+    		this.stepList[0][i] = new Step(new Character(true));
     		this.stepList[1][i] = new Step(new Monster(50, 10));
-    		this.stepList[2][i] = new Step(new Item("Potion", 2));
+    		this.stepList[2][i] = new Step(Item.POTION);
     	}
     }
     
@@ -233,7 +227,7 @@ public class Room
     		System.out.println("Character: " +step.getCharacter().getName());
     	} 
     	if(step.getItem() != null) {
-    		System.out.println("A  " +step.getItem().getName());
+    		System.out.println("A  " +step.getItem().toString());
     	} 
     	if(step.getMonster() != null) {
     		System.out.println("Monster: " + step.getMonster().getHp() + " hp");

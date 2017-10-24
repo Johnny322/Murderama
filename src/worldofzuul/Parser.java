@@ -17,7 +17,7 @@ public class Parser
         commands = new CommandWords();
         reader = new Scanner(System.in);
     }
-    
+
     public Command getCommand() 
     {
         String inputLine;
@@ -32,7 +32,7 @@ public class Parser
         if(tokenizer.hasNext()) {
             word1 = tokenizer.next();
             if(tokenizer.hasNext()) {
-                word2 = tokenizer.next().toLowerCase();
+                word2 = tokenizer.next();
             }
         }
 
