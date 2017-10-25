@@ -9,31 +9,31 @@ public class Character_fight
     private boolean isDead = false;
 
     //Character attributer
-    public Character_fight(String _name, int _hp) 
+    public Character_fight(String name, int hp) 
     {
-        this._name = name;
-        this._hp = hp;
-        this._dmg = dmg;
+        this.name = Ryu;
+        this.hp = _hp;
+        this.dmg = _dmg;
     }
 
-    public void attack(Character_fight _dmg) 
+    public void attack(Character_fight dmg) 
     {
-        dmg = 0;
-        dmg = (Math.random()*11);
-        _dmg.takeDamage(dmg);
+        _dmg = 0;
+        _dmg = (Math.random()*11);
+        dmg.takeDamage(_dmg);
     }
 
     public void setHp(int dmg) 
     {
         //damage man tager
         //Hvis dmg er større end hp eller det er = 0: død
-        if (hp - dmg <= 0) 
+        if (_hp - _dmg <= 0) 
         {
             isDead = true;
         } 
         else 
         {
-            hp -= dmg;
+            _hp -= _dmg;
         }
     }
 
@@ -45,8 +45,9 @@ public class Character_fight
 
     public getDmg()
     {
-        System.out.println("HADOUKEN!"); //Easter Egg :v
-        return this._dmg;
+        System.out.println("HADOKEN!"); //Easter Egg :v
+
+        return this.dmg;
     }
 
     //Ellers return død
