@@ -18,34 +18,32 @@ public class Game
 
     private void createRooms()
     {
-         Room outside, grydehutten, cafeteria, U55, basement,bib, hallway, TEK;
+        Room outside, cafeteria, U55, basement, library, hallway, TEK;
 
         outside = new Room("outside the main entrance of the university");
-        grydehutten = new Room("");
         cafeteria = new Room("in the cafeteria");
         U55 = new Room("in lecture room U55");
         basement = new Room("in the basement of the university");
         hallway = new Room ("in the long hallway in front of room U55");
-        bib = new Room (" in the university's library");
+        library = new Room (" in the university's library");
         TEK = new Room ("in front of the bronze stairs at TEK");
         
-       
-
+        
         outside.setExit("TEK", TEK);
         hallway.setExit("U55", U55);
-        hallway.setExit("cafeteria", cafeteria);
-        outside.setExit("basement", basement);
-        hallway.setExit("bib", bib);
-        outside.setExit("hallway", hallway);
-        outside.setExit("", grydehutten);
-        grydehutten.setExit("west", outside);
-        cafeteria.setExit("", outside);
-        U55.setExit("hallway", hallway);        
-        hallway.setExit("basement", basement);
-        basement.setExit("hallway", hallway);
-        TEK.setExit("outside", outside);
-        TEK.setExit("hallway", hallway);
-        cafeteria.setExit("hallway", hallway);
+        hallway.setExit("Cafeteria", cafeteria);
+        outside.setExit("Basement", basement);
+        hallway.setExit("Library", library);
+        outside.setExit("Hallway", hallway);
+        U55.setExit("Hallway", hallway);        
+        hallway.setExit("Basement", basement);
+        basement.setExit("Hallway", hallway);
+        TEK.setExit("Outside", outside);
+        TEK.setExit("Hallway", hallway);
+        cafeteria.setExit("Hallway", hallway);
+        library.setExit("Hallway", hallway);
+        hallway.setExit("Outside", outside);
+        outside.setExit("Basement", basement);
         
         currentRoom = outside;
     }
