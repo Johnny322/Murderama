@@ -14,30 +14,82 @@ import java.util.List;
  * @author Asmus
  */
 public class Inventory {
-     private List<Items> Inventory = new ArrayList<>();
-    
-    private int controlVariable = 0;
-    
-    public void addItem(){
-        if (controlVariable >= 16) {
-            System.out.println("Your inventory is full, you can't carry any more items");
-        }
-        else Inventory.add(get.Item);
-                controlVariable++;
+     private item[] inventory;
+     
+     public inventory() {
+          this.inventory = new Item[10];
+     }
+         /**
+     * Loots the given Item and adds it to the Inventory
+     * @param item 
+     */
+    public void lootItem(Item item) {
+    	if(! isInventoryFull()){
+    		for(int i = 0; i<inventory.length; i++) {
+    			if(inventory[i] == null) {
+    				inventory[i] = item;
+    				System.out.println(item.toString() + " has been added to inventory.");
+    				break;
+    			}
+    		}
+    	} else {
+    		System.out.println("Inventory is full");
+    	}	
     }
     
-    public void showInventory(){
-        for (int i = 0 ; i < this.Inventory.size(); i++){
-            System.out.println((i+1) + ". " + this.Inventory.getClass(i));
-        }
+    /**
+     * Uses the Item in the designated space in the Inventory
+     * @param numberInInventory 
+     */
+    public void useItem(int numberInInventory) {
+		Item item = inventory[numberInInventory];
+		if(item == Item.POTION) {
+			this.damage += 2;
+			System.out.println("Potion has been used. Damage has been increased to " + this.damage);
+			inventory[numberInInventory] = null;
+		} else {
+			System.out.println("Does not work");
+		}
+	}
+    
+    /**
+     * 
+     * @return true if the Inventory is full
+     */
+    public boolean isInventoryFull() {
+    	for(int i = 0; i<inventory.length; i++) {
+    		if(inventory[i] == null) {
+    			return false;
+    		}
+    	}
+    	return true;
     }
     
-    public void dropItem(){
-        Inventory.remove();
-        controlVariable--;
+    /**
+     * Shows the entire Inventory
+     */
+    public void showInventory() {
+    	for(int i = 0; i < inventory.length; i++) {
+    		if(inventory[i] != null) {
+    			System.out.println(inventory[i].toString());
+    		}
+    	}
     }
     
-    public void clearInventory(){
-        Inventory.clear();
+    
+    //Mangler throws, returner 0 i stedet for error
+    public int getItemFromInventory(int spaceInInventory)  {
+		if(inventory[spaceInInventory] != null) {
+			return spaceInInventory;
+		} 
+		System.out.println("No item in that space");
+		throw new NullPointerException();
     }
+    
+     public void clearInventory(){
+          inventory.clear;
+          system.out.println("Inventory cleared")
+     }
+          
 }
+
