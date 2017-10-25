@@ -11,7 +11,7 @@ public class Character_fight
     //Character attributer
     public Character_fight(String name, int hp) 
     {
-        this.name = Ryu;
+        this.name = "Ryu";
         this.hp = _hp;
         this.dmg = _dmg;
     }
