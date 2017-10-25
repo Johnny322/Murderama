@@ -45,6 +45,7 @@ public class Character_fight
 
     public getDmg()
     {
+        System.out.println("HADOUKEN!"); //Easter Egg :v
         return this._dmg;
     }
 
