@@ -121,6 +121,9 @@ public class Game
                 
              case TALK:
                  return talk();
+                 
+             case SHOWNOTES:
+                 return notes.showNotes();
                 
             default:
                 return wantToQuit;
@@ -348,7 +351,12 @@ public class Game
     public boolean talk() {
         String information = currentRoom.currentPosition().getCharacter().getInformation();
         System.out.println(information);
-        notes.addNote(information);
+        for (String s: notes.getNotes()) {
+            if (s.equals(currentRoom.currentPosition().getCharacter().getName() + " said: " + information)) {
+                return false;
+            }
+        }
+        notes.addNote(currentRoom.currentPosition().getCharacter().getName(), information);
         return false;
     }
     

@@ -18,28 +18,29 @@ This is based on an ArrayList of notes. It might be practical to make it a (Hash
 */
 public class Notes {
     private ArrayList<String> notes = new ArrayList<>();
-    
-    /*
-    This should be called when the user wants to write a new note. The method reads what the user writes, then adds it to the list of notes.
-    @param
-    @returns
-    @throws
-     */
-    public void writeNewNote() {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Write the new note:");
-        addNote(in.nextLine());
-        in.close();
-    }
-    
+//    
+//    /*
+//    This should be called when the user wants to write a new note. The method reads what the user writes, then adds it to the list of notes.
+//    @param
+//    @returns
+//    @throws
+//     */
+//    public boolean writeNewNote() {
+//        Scanner in = new Scanner(System.in);
+//        System.out.println("Write a new note: ");
+//        this.notes.add(in.nextLine());
+//        in.close();
+//        return false;
+//    }
+//    
     /*
     Adds a new note to the notes-list.
     @param
     @returns
     @throws
      */
-    public void addNote(String note) {
-        this.notes.add(note);
+    public void addNote(String name, String note) {
+        this.notes.add(name + " said: " + note);
     }
     
     /*
@@ -48,10 +49,11 @@ public class Notes {
     @returns
     @throws
      */
-    public void showNotes() {
+    public boolean showNotes() {
         for (int i = 0; i < this.notes.size(); i++) {
             System.out.println((i+1) + ". " + this.notes.get(i));
         }
+        return false;
     }
     
     /*

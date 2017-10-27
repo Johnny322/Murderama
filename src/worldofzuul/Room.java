@@ -137,7 +137,7 @@ public class Room
     
     public void buildStepList(int length, int depth) {
     	for(int i = 0; i < length; i++) {
-    		this.stepList[0][i] = new Step(new Character (true));
+    		this.stepList[0][i] = new Step(new Character("Bobby", 50, "Noget information."));
     		this.stepList[1][i] = new Step(new Monster(50, 10));
     		this.stepList[2][i] = new Step(Item.BEER);
     	}

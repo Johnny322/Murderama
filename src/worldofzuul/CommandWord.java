@@ -16,6 +16,7 @@ public enum CommandWord
     ACCUSE("accuse"), 
     FLEE("flee"), 
     TALK("talk"),
+    SHOWNOTES("show"),
     SEARCH("search");
     
     private String commandString;
