@@ -1,4 +1,4 @@
-package worldofzuul;
+package worldofzuul2;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,6 +8,22 @@ This is based on an ArrayList of notes. It might be practical to make it a (Hash
 */
 public class Notes {
     private ArrayList<String> notes = new ArrayList<>();
+    
+    /**
+     * Constructor.
+     */
+    public Notes() {
+        this.notes = new ArrayList<>();
+    }
+    
+    /**
+     * Constructor for list of notes, with a note already attached.
+     * @param note 
+     */
+    public Notes(String note) {
+        Notes notes = new Notes();
+        this.notes.add(note);
+    }
     
     /*
     This should be called when the user wants to write a new note. The method reads what the user writes, then adds it to the list of notes.
