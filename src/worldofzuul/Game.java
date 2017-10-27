@@ -1,10 +1,10 @@
-package worldofzuul2;
+package worldofzuul;
 
 /**
  * @author  Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
-public class Game 
+public class Game
 {
     private final Parser parser;
     private Room currentRoom;
@@ -61,6 +61,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
+        points.getPoints(); 
         System.out.println("Thank you for playing.  Good bye.");
     }
 

@@ -1,4 +1,4 @@
-package worldofzuul2;
+package worldofzuul;
 
 import java.util.Set;
 import java.util.HashMap;
@@ -106,28 +106,28 @@ public class Room
         	//System.out.println("Currently at 1, 0");
     	
         //}
-    	if(direction.equals("east")) {
+    	if(direction.toLowerCase().equals("east")) {
     		this.currentPosition1 = 1;
     		this.currentPosition2 = 0;
         	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
         	System.out.println("Currently at 1, 0");
     	}
     	
-    	if(direction.equals("north")) {
+    	if(direction.toLowerCase().equals("north")) {
     		this.currentPosition1 = 2;
     		this.currentPosition2 = 1;
         	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
         	System.out.println("Currently at 2, 1");
     	}
     	
-    	if(direction.equals("west")) {
+    	if(direction.toLowerCase().equals("west")) {
     		this.currentPosition1 = 1;
     		this.currentPosition2 = 2;
         	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
         	System.out.println("Currently at 1, 2");
     	}
     	
-    	if(direction.equals("south")) {
+    	if(direction.toLowerCase().equals("south")) {
     		this.currentPosition1 = 0;
     		this.currentPosition2 = 1;
         	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
@@ -137,14 +137,14 @@ public class Room
     
     public void buildStepList(int length, int depth) {
     	for(int i = 0; i < length; i++) {
-    		this.stepList[0][i] = new Step(Clue.VICTIM);
+    		this.stepList[0][i] = new Step(new Character (true));
     		this.stepList[1][i] = new Step(new Monster(50, 10));
     		this.stepList[2][i] = new Step(Item.BEER);
     	}
     }
     
-    public Step move(String move) {
-    	if(move.equals("up")) {
+    public Step move (String move) {
+    	if(move.toLowerCase().equals("up")) {
     		if(currentPosition1 - 1 >= 0) {
     			currentPosition1 = currentPosition1 - 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
@@ -156,7 +156,7 @@ public class Room
     			return null;
     			}
     	} 
-    	if(move.equals("down")) {
+    	if(move.toLowerCase().equals("down")) {
     		if(currentPosition1 + 1 <= 2) {
     			currentPosition1 = currentPosition1 + 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
@@ -168,7 +168,7 @@ public class Room
     			return null;	
     		}
     	} 
-    	if(move.equals("left")) {
+    	if(move.toLowerCase().equals("left")) {
     		if(currentPosition2 - 1 >= 0) {
     			currentPosition2 = currentPosition2 - 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
@@ -180,7 +180,7 @@ public class Room
     			return null;
     			}
     	} 
-    	if(move.equals("right")) {
+    	if(move.toLowerCase().equals("right")) {
     		if(currentPosition2 + 1 <= 2) {
     			currentPosition2 = currentPosition2 + 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
@@ -203,29 +203,46 @@ public class Room
     			System.out.println("You must be next to the door, at 1, 2.");
     			return false;
     		} 
+                   else { 
+            return true;
+        }
     	}
+      
+            
     	if(direction.equals("west")) {
     		if(this.currentPosition != this.stepList[1][0]) {
     			System.out.println("You must be next to the door, at 1, 0.");
     			return false;
     		} 
+                   else { 
+            return true;
+        }
     	}
+     
     	
     	if(direction.equals("north")) {
     		if(this.currentPosition != this.stepList[0][1]) {
     			System.out.println("You must be next to the door, at 0, 1.");
     			return false;
     		} 
-    	}
-    	
+                   else { 
+            return true;
+        }
+         
+        }
+       
     	if(direction.equals("south")) {
     		if(this.currentPosition != this.stepList[2][1]) {
     			System.out.println("You must be next to the door, at 2, 1.");
     			return false;
     		} 
-    	}
+                   else { 
+            return true;
+        }    	
+        } 
+        
     	
-    	return true;
+    	return false;
     }
     
     public void printStep(Step step) {

@@ -1,4 +1,4 @@
-package worldofzuul2;
+package worldofzuul;
 
 import java.util.HashMap;
 
@@ -11,9 +11,6 @@ public class CommandWords
 {
     private HashMap<String, CommandWord> validCommands;
 
-    /**
-     * Constructor for CommandWords
-     */
     public CommandWords()
     {
         validCommands = new HashMap<String, CommandWord>();
@@ -24,11 +21,6 @@ public class CommandWords
         }
     }
 
-    /**
-     * Accessor method based on a String commandWord
-     * @param commandWord
-     * @return CommandWord
-     */
     public CommandWord getCommandWord(String commandWord)
     {
         CommandWord command = validCommands.get(commandWord);
@@ -40,19 +32,11 @@ public class CommandWords
         }
     }
     
-    /**
-     * Checks if the String is a Command
-     * @param aString
-     * @return true if the Command is present in validCommands
-     */
     public boolean isCommand(String aString)
     {
         return validCommands.containsKey(aString);
     }
 
-    /**
-     * Shows all valid Commands
-     */
     public void showAll() 
     {
         for(String command : validCommands.keySet()) {
