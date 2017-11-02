@@ -6,9 +6,15 @@ public class Character {
 	private int hp;
 	private Item[] inventory;
 	private int damage;
+        private int lives;
 	private String information;
         private boolean isHostile;
         private boolean isMurderer;
+        private boolean isMurdererAlive = true;
+        private int walkSpeed;
+        private Notes notes;
+        private int fightSpeed;
+        private int searchSpeed;
     
 	/**
          * Creates the playable Character
@@ -20,7 +26,11 @@ public class Character {
 		this.damage = 11;
                 this.isHostile = false;
                 this.isMurderer = false;
-
+                this.lives = 3;
+                this.walkSpeed = 10;
+                this.fightSpeed = 5;
+                this.searchSpeed = 25;
+                this.notes = new Notes();
 	}
 	
         /**
@@ -60,11 +70,12 @@ public class Character {
          */
 	Character(boolean murderer) {
 		this.name = "Bob";
-		this.hp = 150;
+		this.hp = 12;
 		this.damage = 15;
 		this.isHostile = false;
                 this.isMurderer = true;
 	}
+        
 	
     
         /**
@@ -130,7 +141,71 @@ public class Character {
     public boolean isMurderer() {
     	return this.isMurderer;
     }
+    
+    public void setMurdererAlive() {
+        isMurdererAlive = false;
+    }
+    
+    public boolean isMurdererAlive() {
+        return isMurdererAlive;
+    }
 
+    public void setLives() {
+        this.lives -= 1;
+    }
+    
+    public int getLives() {
+        return this.lives;
+    }
+    
+    public void setWalkSpeed(int mutator) {
+        this.walkSpeed += mutator;
+    }
+    
+    public void setWalkSpeed() {
+        this.walkSpeed = 5;
+    }
+    
+    public int getWalkSpeed() {
+        return this.walkSpeed;
+    }
+    
+    public void setSearchSpeed(int mutator) {
+        this.searchSpeed += mutator;
+    }
+    
+    public void setSearchSpeed() {
+        this.searchSpeed = 10;
+    }
+    
+    public int getSearchSpeed() {
+        return this.searchSpeed;
+    }
+    
+    public void setFightSpeed(int mutator) {
+        this.fightSpeed += mutator;
+    }
+    
+    public void setFightSpeed() {
+        this.fightSpeed = 1;
+    }
+    
+    public int getFightSpeed() {
+        return this.fightSpeed;
+    }
+    
+    public Item[] getInventory() {
+        return this.inventory;
+    }
+    
+    public Notes getNotes() {
+        return this.notes;
+    }
+    
+    public String getInformation() {
+        return this.information;
+    }
+    
     /**
      * Loots the given Item and adds it to the Inventory
      * @param item 
@@ -169,11 +244,11 @@ public class Character {
      * @return true if the Inventory is full
      */
     public boolean isInventoryFull() {
-    	for(int i = 0; i<inventory.length; i++) {
-    		if(inventory[i] == null) {
-    			return false;
-    		}
-    	}
+            for (Item inventory1 : inventory) {
+                if (inventory1 == null) {
+                    return false;
+                }
+            }
     	return true;
     }
     
@@ -181,11 +256,11 @@ public class Character {
      * Shows the entire Inventory
      */
     public void showInventory() {
-    	for(int i = 0; i < inventory.length; i++) {
-    		if(inventory[i] != null) {
-    			System.out.println(inventory[i].toString());
-    		}
-    	}
+            for (Item inventory1 : inventory) {
+                if (inventory1 != null) {
+                    System.out.println(inventory1.toString());
+                }
+            }
     }
     
     
@@ -229,6 +304,9 @@ public class Character {
             if(character.alive()) {
                 System.out.println(character.getName() + " has " + character.getHp() + " hp left");
                 System.out.println("You have " + this.hp + " hp left");
+                if(isMurderer()) {
+                    
+                }
             } else {
                 System.out.println(character.getName() + " is dead");
                 System.out.println("You have " + this.hp + " hp left");

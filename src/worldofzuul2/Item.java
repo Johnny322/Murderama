@@ -5,8 +5,8 @@ public enum Item {
     POTION("potion"),
     BEER("beer"),
     COFFEE("coffee"),
-    UNKNOWN(""),
-    CLUE("clue");
+    UNKNOWN("");
+    
 
     private String item;
 

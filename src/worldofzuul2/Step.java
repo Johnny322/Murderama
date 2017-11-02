@@ -6,6 +6,7 @@ public class Step {
 	private Character character;
 	private String information;
 	private Monster monster;
+        private Clue clue;
 	
         /**
          * Empty constructor method for Step
@@ -36,19 +37,15 @@ public class Step {
 	}
 	
         /**
-         * Constructor for a Step with an information on it
-         * @param _information 
-         */
-	public Step(String _information) {
-		this.information = _information;
-	}
-	
-        /**
          * Constructor for a Step with an Monster on it
          * @param _monster 
          */
 	public Step(Monster _monster) {
 		this.monster = _monster;
+	}
+        
+        public Step(Clue clue) {
+		this.clue = clue;
 	}
 	
         /**
@@ -90,5 +87,9 @@ public class Step {
 	public Monster getMonster() {
 		return this.monster;
 	}
+        
+        public Clue getClue() {
+            return this.clue;
+        }
 
 }

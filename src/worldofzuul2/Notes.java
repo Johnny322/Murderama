@@ -9,8 +9,20 @@ This is based on an ArrayList of notes. It might be practical to make it a (Hash
 public class Notes {
     private ArrayList<String> notes = new ArrayList<>();
     
+    /**
+     * Constructor.
+     */
     public Notes() {
-        this.notes = notes;
+        this.notes = new ArrayList<>();
+    }
+    
+    /**
+     * Constructor for list of notes, with a note already attached.
+     * @param note 
+     */
+    public Notes(String note) {
+        Notes notes = new Notes();
+        this.notes.add(note);
     }
     
     /*
@@ -22,7 +34,7 @@ public class Notes {
     public void writeNewNote() {
         Scanner in = new Scanner(System.in);
         System.out.println("Write the new note:");
-        addNote(in.nextLine());
+        addNote("You ", in.nextLine());
         in.close();
     }
     
@@ -32,8 +44,8 @@ public class Notes {
     @returns
     @throws
      */
-    public void addNote(String note) {
-        this.notes.add(note);
+    public void addNote(String name, String note) {
+        this.notes.add(name + " said: " + note);
     }
     
     /*
@@ -42,10 +54,11 @@ public class Notes {
     @returns
     @throws
      */
-    public void showNotes() {
+    public boolean showNotes() {
         for (int i = 0; i < this.notes.size(); i++) {
             System.out.println((i+1) + ". " + this.notes.get(i));
         }
+        return false;
     }
     
     /*

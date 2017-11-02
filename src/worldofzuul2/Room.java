@@ -29,8 +29,8 @@ public class Room
         this.description = description;
         this.exits = new HashMap<String, Room>();
         this.stepList = new Step[3][3];
+        this.currentPosition = stepList[currentPosition1][currentPosition2];
     	this.player = jeff;
-        this.currentPosition = stepList[0][0];
         buildStepList(3, 3);
 
     }
@@ -48,6 +48,7 @@ public class Room
         this.exits = new HashMap<String, Room>();
     	this.player = jeff;
         this.stepList = new Step[length][depth];
+        this.currentPosition = stepList[0][0];
         buildStepList(length, depth);
     }
     
@@ -97,36 +98,28 @@ public class Room
     
     
     public void setCurrentPosition(Step step, String direction) {
-       // switch(direction) {
-         //   case "east": 
-           //     this.currentPosition1 = 1;
-             //   this.currentPosition2 = 0;
-               // this.currentPosition = this.stepList[currentPosition1][currentPosition2];
-        	//System.out.println("Currently at 1, 0");
-    	
-        //}
-    	if(direction.equals("east")) {
+    	if(direction.toLowerCase().equals("east")) {
     		this.currentPosition1 = 1;
     		this.currentPosition2 = 0;
         	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
         	System.out.println("Currently at 1, 0");
     	}
     	
-    	if(direction.equals("north")) {
+    	if(direction.toLowerCase().equals("north")) {
     		this.currentPosition1 = 2;
     		this.currentPosition2 = 1;
         	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
         	System.out.println("Currently at 2, 1");
     	}
     	
-    	if(direction.equals("west")) {
+    	if(direction.toLowerCase().equals("west")) {
     		this.currentPosition1 = 1;
     		this.currentPosition2 = 2;
         	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
         	System.out.println("Currently at 1, 2");
     	}
     	
-    	if(direction.equals("south")) {
+    	if(direction.toLowerCase().equals("south")) {
     		this.currentPosition1 = 0;
     		this.currentPosition2 = 1;
         	this.currentPosition = this.stepList[currentPosition1][currentPosition2];
@@ -136,14 +129,14 @@ public class Room
     
     public void buildStepList(int length, int depth) {
     	for(int i = 0; i < length; i++) {
-    		this.stepList[0][i] = new Step(new Character(true));
+    		this.stepList[0][i] = new Step(new Character("Bobby", 50, "You're a faggit, Harry"));
     		this.stepList[1][i] = new Step(new Monster(50, 10));
-    		this.stepList[2][i] = new Step(Item.POTION);
+    		this.stepList[2][i] = new Step(Item.BEER);
     	}
     }
     
     public Step move(String move) {
-    	if(move.equals("up")) {
+    	if(move.toLowerCase().equals("up")) {
     		if(currentPosition1 - 1 >= 0) {
     			currentPosition1 = currentPosition1 - 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
@@ -155,7 +148,7 @@ public class Room
     			return null;
     			}
     	} 
-    	if(move.equals("down")) {
+    	if(move.toLowerCase().equals("down")) {
     		if(currentPosition1 + 1 <= 2) {
     			currentPosition1 = currentPosition1 + 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
@@ -167,7 +160,7 @@ public class Room
     			return null;	
     		}
     	} 
-    	if(move.equals("left")) {
+    	if(move.toLowerCase().equals("left")) {
     		if(currentPosition2 - 1 >= 0) {
     			currentPosition2 = currentPosition2 - 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
@@ -179,7 +172,7 @@ public class Room
     			return null;
     			}
     	} 
-    	if(move.equals("right")) {
+    	if(move.toLowerCase().equals("right")) {
     		if(currentPosition2 + 1 <= 2) {
     			currentPosition2 = currentPosition2 + 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
@@ -197,34 +190,43 @@ public class Room
     }
     
     public boolean checkIfRoomTraversalIsOkay(String direction) {
-    	if(direction.equals("east")) {
+        if(direction.toLowerCase().equals("east")) {
     		if(this.currentPosition != this.stepList[1][2]) {
     			System.out.println("You must be next to the door, at 1, 2.");
     			return false;
-    		} 
-    	}
-    	if(direction.equals("west")) {
+    		} else {
+                    return true;
+                }
+    	} 
+    	if(direction.toLowerCase().equals("west")) {
     		if(this.currentPosition != this.stepList[1][0]) {
     			System.out.println("You must be next to the door, at 1, 0.");
     			return false;
-    		} 
-    	}
+    		} else {
+                    return true;
+                }
+    	} 
     	
-    	if(direction.equals("north")) {
+    	if(direction.toLowerCase().equals("north")) {
     		if(this.currentPosition != this.stepList[0][1]) {
     			System.out.println("You must be next to the door, at 0, 1.");
     			return false;
-    		} 
+    		} else {
+                    return true;
+                }
     	}
     	
-    	if(direction.equals("south")) {
+    	if(direction.toLowerCase().equals("south")) {
     		if(this.currentPosition != this.stepList[2][1]) {
     			System.out.println("You must be next to the door, at 2, 1.");
     			return false;
-    		} 
-    	}
+    		} else {
+                    return true;
+                }
+    	} 
+        
     	
-    	return true;
+    	return false;
     }
     
     public void printStep(Step step) {
@@ -248,7 +250,7 @@ public class Room
     public void printRoom() {
     	for(int i = 0; i < 3; i++) {
     		for(int j = 0; j < 3; j++) {
-    			if(this.stepList[i][j] == this.currentPosition) {
+    			if(this.stepList[i][j] == this.stepList[currentPosition1][currentPosition2]) {
     				System.out.print(" X ");
     			} else { 
     				System.out.print(" O ");
@@ -262,4 +264,3 @@ public class Room
     	return this.stepList[currentPosition1][currentPosition2];
     }
 }
-
