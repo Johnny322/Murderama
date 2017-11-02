@@ -1,4 +1,4 @@
-package worldofzuul;
+package worldofzuul2;
 
 /**
  * @author Michael Kolling and David J. Barnes
@@ -12,11 +12,16 @@ public enum CommandWord
     UNKNOWN("?"), 
     FIGHT("fight"), 
     LOOT("loot"), 
-    USE("use"), MOVE("move"), 
+    USE("use"), 
+    MOVE("move"), 
     ACCUSE("accuse"), 
     FLEE("flee"), 
     TALK("talk"),
     SHOWNOTES("show"),
+    W("w"),
+    A("a"),
+    S("s"),
+    D("d"),
     SEARCH("search");
     
     private String commandString;

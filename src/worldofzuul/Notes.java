@@ -1,14 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package worldofzuul;
-
-/**
- *
- * @author aqibsajjad
- */
+package worldofzuul2;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,21 +8,36 @@ This is based on an ArrayList of notes. It might be practical to make it a (Hash
 */
 public class Notes {
     private ArrayList<String> notes = new ArrayList<>();
-//    
-//    /*
-//    This should be called when the user wants to write a new note. The method reads what the user writes, then adds it to the list of notes.
-//    @param
-//    @returns
-//    @throws
-//     */
-//    public boolean writeNewNote() {
-//        Scanner in = new Scanner(System.in);
-//        System.out.println("Write a new note: ");
-//        this.notes.add(in.nextLine());
-//        in.close();
-//        return false;
-//    }
-//    
+    
+    /**
+     * Constructor.
+     */
+    public Notes() {
+        this.notes = new ArrayList<>();
+    }
+    
+    /**
+     * Constructor for list of notes, with a note already attached.
+     * @param note 
+     */
+    public Notes(String note) {
+        Notes notes = new Notes();
+        this.notes.add(note);
+    }
+    
+    /*
+    This should be called when the user wants to write a new note. The method reads what the user writes, then adds it to the list of notes.
+    @param
+    @returns
+    @throws
+     */
+    public void writeNewNote() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Write the new note:");
+        addNote("You ", in.nextLine());
+        in.close();
+    }
+    
     /*
     Adds a new note to the notes-list.
     @param
@@ -85,5 +90,4 @@ public class Notes {
     public void clearNotes() {
         this.notes.clear();
     }
-} 
-
+}

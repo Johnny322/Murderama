@@ -1,23 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package worldofzuul;
+package worldofzuul2;
 
-/**
- *
- * @author aqibsajjad
- */
 public class Character {
- 	private String name;
+	
+	private String name;
 	private int hp;
 	private Item[] inventory;
 	private int damage;
         private int lives;
 	private String information;
         private boolean isHostile;
-        private boolean isMurderer;
+        private final boolean isMurderer;
         private boolean isMurdererAlive = true;
         private int walkSpeed;
         private Notes notes;
@@ -78,8 +70,8 @@ public class Character {
          */
 	Character(boolean murderer) {
 		this.name = "Bob";
-		this.hp = 12;
-		this.damage = 15;
+		this.hp = 150;
+		this.damage = 111;
 		this.isHostile = false;
                 this.isMurderer = true;
 	}

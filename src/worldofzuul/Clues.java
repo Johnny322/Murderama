@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package worldofzuul;
+package worldofzuul2;
 
-/**
- *
- * @author aqibsajjad
- */
 import java.util.HashMap;
 
 public class Clues {
 	
-    private HashMap<String, Clue> listOfClues;
+    private final HashMap<String, Clue> listOfClues;
 	
 	public Clues() {
         listOfClues = new HashMap<String, Clue>();

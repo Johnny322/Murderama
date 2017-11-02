@@ -1,8 +1,9 @@
-package worldofzuul;
+package worldofzuul2;
 
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 
 
 /**
@@ -31,7 +32,7 @@ public class Room
         this.stepList = new Step[3][3];
         this.currentPosition = stepList[currentPosition1][currentPosition2];
     	this.player = jeff;
-        buildStepList(3, 3);
+        buildStepList(new Character(true));
 
     }
     
@@ -41,15 +42,15 @@ public class Room
      * @param length
      * @param depth 
      */
-    public Room(String description, int length, int depth) 
+    public Room(String description, Item item)  
     {
     	
         this.description = description;
         this.exits = new HashMap<String, Room>();
     	this.player = jeff;
-        this.stepList = new Step[length][depth];
+        this.stepList = new Step[3][3];
         this.currentPosition = stepList[0][0];
-        buildStepList(length, depth);
+        buildStepList(item);
     }
     
 
@@ -98,14 +99,6 @@ public class Room
     
     
     public void setCurrentPosition(Step step, String direction) {
-       // switch(direction) {
-         //   case "east": 
-           //     this.currentPosition1 = 1;
-             //   this.currentPosition2 = 0;
-               // this.currentPosition = this.stepList[currentPosition1][currentPosition2];
-        	//System.out.println("Currently at 1, 0");
-    	
-        //}
     	if(direction.toLowerCase().equals("east")) {
     		this.currentPosition1 = 1;
     		this.currentPosition2 = 0;
@@ -135,15 +128,105 @@ public class Room
     	}
     }
     
-    public void buildStepList(int length, int depth) {
-    	for(int i = 0; i < length; i++) {
-    		this.stepList[0][i] = new Step(new Character("Bobby", 50, "Noget information."));
-    		this.stepList[1][i] = new Step(new Monster(50, 10));
-    		this.stepList[2][i] = new Step(Item.BEER);
-    	}
+    public void buildStepList(Character character) {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+        this.stepList[space1][space2] = new Step(character);
+
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[space1][space2] != this.stepList[i][j]) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
     }
     
-    public Step move (String move) {
+    public void buildStepList(Item item) {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+        this.stepList[space1][space2] = new Step(item);
+
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[space1][space2] != this.stepList[i][j]) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    public void buildStepList(Clue clue) {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+        this.stepList[space1][space2] = new Step(clue);
+
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[space1][space2] != this.stepList[i][j]) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    public void buildStepList(Monster monster) {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+        this.stepList[space1][space2] = new Step(monster);
+
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[space1][space2] != this.stepList[i][j]) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    public void buildStepList(Character character, Item item) {
+        Random random = new Random();
+        int spaceCharacter1 = random.nextInt(3);
+        int spaceCharacter2 = random.nextInt(3);
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(character);
+        
+        int spaceItem1 = random.nextInt(3);
+        int spaceItem2 = random.nextInt(3);
+        this.stepList[spaceItem1][spaceItem2] = new Step(item);
+
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[spaceCharacter1][spaceCharacter2] != this.stepList[i][j] || this.stepList[spaceItem1][spaceItem2] != this.stepList[i][j]) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    public void buildStepList(Character character, Clue clue) {
+        Random random = new Random();
+        int spaceCharacter1 = random.nextInt(3);
+        int spaceCharacter2 = random.nextInt(3);
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(character);
+        
+        int spaceClue1 = random.nextInt(3);
+        int spaceClue2 = random.nextInt(3);
+        this.stepList[spaceClue1][spaceClue2] = new Step(clue);
+
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[spaceCharacter1][spaceCharacter2] != this.stepList[i][j] || this.stepList[spaceClue1][spaceClue2] != this.stepList[i][j]) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    public Step move(String move) {
     	if(move.toLowerCase().equals("up")) {
     		if(currentPosition1 - 1 >= 0) {
     			currentPosition1 = currentPosition1 - 1;
@@ -152,7 +235,6 @@ public class Room
     			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
-    			System.out.println("Out of bounds, try again"); 
     			return null;
     			}
     	} 
@@ -164,7 +246,6 @@ public class Room
     			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
-    			System.out.println("Out of bounds, try again"); 
     			return null;	
     		}
     	} 
@@ -176,7 +257,6 @@ public class Room
     			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
-    			System.out.println("Out of bounds, try again"); 
     			return null;
     			}
     	} 
@@ -188,9 +268,8 @@ public class Room
     			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
-    			System.out.println("Out of bounds, try again"); 
     			return null;
-    			}
+                }
     	} else {
     		System.out.println("Bad move");
     		return null;
@@ -198,58 +277,49 @@ public class Room
     }
     
     public boolean checkIfRoomTraversalIsOkay(String direction) {
-        if(direction.equals("east")) {
+        if(direction.toLowerCase().equals("east")) {
     		if(this.currentPosition != this.stepList[1][2]) {
     			System.out.println("You must be next to the door, at 1, 2.");
     			return false;
-    		} 
-                   else { 
-            return true;
-        }
-    	}
-      
-            
-    	if(direction.equals("west")) {
+    		} else {
+                    return true;
+                }
+    	} 
+    	if(direction.toLowerCase().equals("west")) {
     		if(this.currentPosition != this.stepList[1][0]) {
     			System.out.println("You must be next to the door, at 1, 0.");
     			return false;
-    		} 
-                   else { 
-            return true;
-        }
-    	}
-     
+    		} else {
+                    return true;
+                }
+    	} 
     	
-    	if(direction.equals("north")) {
+    	if(direction.toLowerCase().equals("north")) {
     		if(this.currentPosition != this.stepList[0][1]) {
     			System.out.println("You must be next to the door, at 0, 1.");
     			return false;
-    		} 
-                   else { 
-            return true;
-        }
-         
-        }
-       
-    	if(direction.equals("south")) {
+    		} else {
+                    return true;
+                }
+    	}
+    	
+    	if(direction.toLowerCase().equals("south")) {
     		if(this.currentPosition != this.stepList[2][1]) {
     			System.out.println("You must be next to the door, at 2, 1.");
     			return false;
-    		} 
-                   else { 
-            return true;
-        }    	
-        } 
+    		} else {
+                    return true;
+                }
+    	} 
         
     	
     	return false;
     }
     
     public void printStep(Step step) {
-    	System.out.println("On this step, there is: ");
     	if(step.getInformation() != null) {
     		System.out.println(step.getInformation());
-    	} else { System.out.println("No information"); }
+    	} 
     	if(step.getCharacter() != null) {
     		System.out.println("Character: " +step.getCharacter().getName());
     	} 
@@ -264,16 +334,48 @@ public class Room
     }
     
     public void printRoom() {
+        Set<String> keys = exits.keySet();
+        String east = "", west = "", south = "";
+        for(String exit : keys) {
+            if(exit.equals("north")) {
+                System.out.println("      d       ");
+            }  
+            if(exit.equals("south")) {
+                south = "      d       ";
+            }
+            if(exit.equals("west")) {
+                west = "d ";
+            } else {
+                west = "  ";
+            }
+            if(exit.equals("east")) {
+                east = " d";
+            }
+        }
     	for(int i = 0; i < 3; i++) {
+            if(i == 0 || i == 2) {
+                System.out.print("  ");
+            }
     		for(int j = 0; j < 3; j++) {
     			if(this.stepList[i][j] == this.stepList[currentPosition1][currentPosition2]) {
     				System.out.print(" X ");
-    			} else { 
-    				System.out.print(" O ");
-    			}
+    			} else if(this.stepList[i][j].getCharacter() != null) { 
+    				System.out.print(" C ");
+    			} else if(this.stepList[i][j].getItem() != null) {
+                                System.out.print(" I ");
+                        } else {
+                            System.out.print(" O ");
+                        }
     		}
+                if(i == 1) {
+                    System.out.print(east);
+                }
     		System.out.println();
+                if(i == 0) {
+                    System.out.print(west);
+                }
     	}
+        System.out.println(south);
     }
     
     public Step currentPosition() {

@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package worldofzuul;
-
-/**
- *
- * @author aqibsajjad
- */
+//@Jeanjohnsen Jeanjohnsen Har lavede nogle updates for pointsystem classen og worldofzuul2
+package worldofzuul2;
 import java.util.*;
 
 public class PointSystem
@@ -30,8 +21,8 @@ public class PointSystem
     
 
     //Void da det sparer kode
-    void getPoints()
+    public int getPoints()
     {
-        System.out.println("Your final score is: " + (10000 - this.points));
+        return (10000 - this.points);
     }
 }

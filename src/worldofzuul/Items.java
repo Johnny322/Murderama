@@ -1,43 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package worldofzuul;
+package worldofzuul2;
 
-/**
- *
- * @author aqibsajjad
- */
 import java.util.HashMap;
 
 public class Items {
-	
+
     private HashMap<String, Item> listOfItems;
-	
-	public Items() {
+
+    public Items() {
         listOfItems = new HashMap<String, Item>();
-        for(Item item : Item.values()) {
-            if(item != Item.UNKNOWN) {
+        for (Item item : Item.values()) {
+            if (item != Item.UNKNOWN) {
                 listOfItems.put(item.toString(), item);
             }
         }
-	}
-	
-	public Item getItem(String item)
-    {
+    }
+
+    public Item getItem(String item) {
         Item temp = listOfItems.get(item);
-        if(temp != null) {
+        if (temp != null) {
             return temp;
-        }
-        else {
+        } else {
             return Item.UNKNOWN;
         }
     }
-	
-	public boolean isItem(String aString)
-    {
+
+    public boolean isItem(String aString) {
         return listOfItems.containsKey(aString);
     }
 }
-
