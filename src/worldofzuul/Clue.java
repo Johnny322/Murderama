@@ -1,6 +1,8 @@
 
 package worldofzuul2;
 
+
+
 public enum Clue {
     KNIFE("knife"),
     FINGERPRINT("fingerprint"),

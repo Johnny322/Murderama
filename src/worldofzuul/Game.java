@@ -1,5 +1,6 @@
 package worldofzuul2;
 
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,7 +38,7 @@ public class Game
     }
     
     public static void printHighscore() {
-        File file = new File("C:/Users/Simon/Documents/NetBeansProjects/WorldOfZuul2/src/worldofzuul2/Highscore.txt");
+        File file = new File("src/worldofzuul2/Highscore.txt");
         try {
             Scanner scanner = new Scanner(file);
             System.out.println("Current highscore is: " + scanner.nextInt());
@@ -47,7 +48,7 @@ public class Game
     }
     
     public void updateHighscore(int currentScore) {
-        File file = new File("C:/Users/Simon/Documents/NetBeansProjects/WorldOfZuul2/src/worldofzuul2/Highscore.txt");
+        File file = new File("src/worldofzuul2/Highscore.txt");
         try {
             Scanner scanner = new Scanner(file);
             int currentHighscore = scanner.nextInt();
@@ -60,9 +61,7 @@ public class Game
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
     private void createRooms()
@@ -219,6 +218,7 @@ public class Game
         points.updateOnAction(player.getFightSpeed());
     	player.fight(character);
         if(currentRoom.getCharacter().getHp() <= 0) {
+            points.setScoreZero();
             return false;
         }
     	if(character.getHp() <= 0) {
@@ -302,6 +302,7 @@ public class Game
         }
         if(currentRoom.getCharacter().getLives() <= 0) {
             System.out.println("You dont have any lives left. You have lost the game");
+            points.setScoreZero();
             return true;
         }
     	return false;

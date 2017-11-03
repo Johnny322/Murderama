@@ -1,5 +1,7 @@
 package worldofzuul2;
 
+
+
 public class Step {
 	
 	private Item item;
