@@ -8,14 +8,14 @@ package worldofzuul2;
 
 /**
  *
- * @author Simon
+ * @author aqibsajjad
  */
 public class Evil extends Character implements NPC {
     
     private final String information;
     private final boolean isMurderer;
     private boolean isHostile;
-    
+    private boolean friendly;
     
     //Constructor, tager navn, damage og hp og bruger den i Character-constructoren, her kaldet som "super"
     public Evil (String name, int damage, int hp, String information, boolean isMurderer) {
@@ -23,6 +23,7 @@ public class Evil extends Character implements NPC {
         this.information = information;
         this.isMurderer = isMurderer;
         this.isHostile = true;
+        this.friendly = false;
     }
     
     @Override
@@ -44,6 +45,9 @@ public class Evil extends Character implements NPC {
         return isMurderer;
     }
     
+    public boolean friendly(){
+        return friendly;
+    }
     /**
      *
      * @return
@@ -56,11 +60,6 @@ public class Evil extends Character implements NPC {
             return null;
         }
         return this.information;
-    }
-    
-    @Override
-    public boolean isEvil() {
-        return true;
     }
     
 }
