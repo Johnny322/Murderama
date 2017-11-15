@@ -7,7 +7,7 @@ package worldofzuul2;
 
 /**
  *
- * @author aqibsajjad
+ * @author Simon
  */
 public class Monster extends Character implements NPC {
 
@@ -55,9 +55,18 @@ public class Monster extends Character implements NPC {
     @Override
     public boolean isMurderer() {
         return false;
-   }
+    }
+    
+    @Override
+    public boolean isEvil() {
+        return true;
+    }
     
     public boolean friendly(){
         return false;
+    }
+    
+    public String getAdditionalInformation() {    
+        return "No more info";
     }
 }

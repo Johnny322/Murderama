@@ -12,6 +12,7 @@ package worldofzuul2;
  */
 public class WorldOfZuul2 {
     public static void main(String[] args)  {
+        
         Game game = new Game();
         game.play();        
     }  

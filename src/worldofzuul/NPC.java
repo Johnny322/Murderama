@@ -17,4 +17,7 @@ public interface NPC {
     public boolean isMurderer();
     public boolean isEvil();
     public boolean friendly();
+    public String getAdditionalInformation();  
+
+
 }
