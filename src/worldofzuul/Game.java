@@ -19,14 +19,14 @@ public class Game
     private final PointSystem points = new PointSystem();
     private final Notes notes = new Notes();
     private Room outside, cafeteria, U55, basement, library, hallway, TEK;
-    private Player player = new Player("Jeff", 150, 12);
-
     
     /**
      *
      */
     public Game() 
     {
+        Gui start = new Gui();
+        Gui.start();
         printHighscore();
         createRooms();
         parser = new Parser();
@@ -62,7 +62,6 @@ public class Game
     private void createRooms()
     {
         
-
         outside = new Room("outside the main entrance of the university");
         outside.buildOutside();
         cafeteria = new Room("in the cafeteria");
@@ -83,14 +82,12 @@ public class Game
         hallway.setExit("south", cafeteria);
         hallway.setExit("north", library);
         outside.setExit("east", hallway);
-        U55.setExit("east", hallway);        
+        U55.setExit("east", hallway);
         TEK.setExit("east", outside);
+        //TEK.setExit("Hallway", hallway);
         cafeteria.setExit("north", hallway);
         library.setExit("south", hallway);
         hallway.setExit("west", outside);
-
-
-
         
         currentRoom = outside;
     }
@@ -136,20 +133,20 @@ public class Game
                  printHelp();
                  break;
                  
-//            case GO:
-//                goRoom("north");
-//                break;
-//                
-//            case MOVE:
-//                move(command);
-//                break;
+            case GO:
+                goRoom("north");
+                break;
+                
+            case MOVE:
+                move(command);
+                break;
                 
             case QUIT:
                 wantToQuit = quit(command);
                 break;
                 
-            case FIGHT:
-                return fight(command);
+//            case FIGHT:
+//                return fight(command);
                 
             case LOOT:
                 return loot(currentRoom);     
@@ -200,78 +197,136 @@ public class Game
         parser.showCommands();
     }
     
-    private boolean processFight(NPC npc) {
-        Character character = (Character) npc;
-        points.updateOnAction(player.getFightSpeed());
+    private boolean processFight(Character character) {
+        Player player = currentRoom.getPlayer();
+        points.updateOnAction(currentRoom.getPlayer().getFightSpeed());
     	player.setHp(character.getDamage());
-        System.out.println("You have " + player.getHp() + " hp");
         character.changeHp(player.getDamage());
-        System.out.println(character.getName() + " has " + character.getHp() + " hp");
     	if(character.getHp() <= 0) {
-    		System.out.println("Enemy is dead!");
-                if(npc.isEvil()) {
-                    npc.setHostile(false);
-                    character.setHP(100);
-                } else {
-                    currentRoom.currentPosition().voidNPC();
-                }
+    		System.out.println("Monster is dead!");
     		currentRoom.printRoom();
     		return false;
     	}
     	return true;
     }
-    
-    private boolean fight(Command command) {
-        Room room = currentRoom;
-        if (room.currentPosition().getCharacter() != null) {
-            NPC npc = room.currentPosition().getNPC();
-            Character character = (Character) npc;
-            if(!npc.isHostile()) {
-                System.out.println(character.getName() + " is not hostile");
-                return false;
-            }
-            boolean wantsToFight = processFight(npc);
-            String word = "";
-            while (wantsToFight) {
-                Scanner scan = new Scanner(System.in);
-                word = scan.next();
-                if (word.toLowerCase().equals("fight")) {
-                    wantsToFight = processFight(npc);
-                } else if (word.toLowerCase().equals("flee")) {
-                    System.out.println("You fled");
-                    wantsToFight = false;
-                }
-            }
-            return false;
-        }
-        System.out.println("There is no enemy here");
-        return false;
-    }
-    
-
+//    
+//    private boolean fight(Command command) {
+//    	Room room = currentRoom;
+//    	if(!command.hasSecondWord()) {
+//            System.out.println("Fight monster or character?");
+//            return false;
+//        }
+//        
+//        System.out.println("You attack the monster. Type fight to attack the monster or flee if you do not want to fight. ");
+//        boolean wantsToFight = processFight(monster);
+//        while(wantsToFight) {	
+//            Command command1 = parser.getCommand();
+//            switch (command1.getCommandWord()) {
+//                case FLEE:
+//                    wantsToFight = false;
+//                    room.printRoom();
+//                    break;
+//                                        
+//                case FIGHT:
+//                    wantsToFight = processFight(room.currentPosition().getMonster());
+//                    break;
+//                                        
+//                default:
+//                    System.out.println("Bad keyword. Try fight or flee. ");
+//                    break;
+//            }
+//        }
+//        return false;
+//        
+//        
+//        Monster monster = room.currentPosition().getMonster();
+//        Character character = room.currentPosition().getCharacter();
+//    	if(command.getSecondWord().toLowerCase().equals("monster")) {
+//    		if(monster != null) {
+//                        System.out.println("You attack the monster. Type fight to attack the monster or flee if you do not want to fight. ");
+//        		boolean wantsToFight = processFight(monster);
+//        		while(wantsToFight) {	
+//        			Command command1 = parser.getCommand();
+//                                switch (command1.getCommandWord()) {
+//                                    case FLEE:
+//                                        wantsToFight = false;
+//                                        room.printRoom();
+//                                        break;
+//                                        
+//                                    case FIGHT:
+//                                        wantsToFight = processFight(room.currentPosition().getMonster());
+//                                        break;
+//                                        
+//                                    default:
+//                                        System.out.println("Bad keyword. Try fight or flee. ");
+//                                        break;
+//                            }
+//        		}
+//        		return false;
+//        	} else {
+//        		System.out.println("There is no monster on this step, try again");
+//        		return false;
+//        	}
+//    	} else if(command.getSecondWord().toLowerCase().equals("character")) {
+//    		if(character != null) {
+//                        System.out.println("You attack " + character.getName() + ". Type fight to attack or flee if you do not want to fight. ");
+//        		boolean wantsToFight = processFight(character);
+//        		while(wantsToFight) {	
+//        			Command command1 = parser.getCommand();
+//        			if(command1.getCommandWord().equals(CommandWord.FLEE)) {
+//        				wantsToFight = false;
+//        				room.printRoom();
+//        			} else if(command1.getCommandWord().equals(CommandWord.FIGHT)) {
+//        				wantsToFight = processFight(room.currentPosition().getCharacter());
+//        			} else { 
+//        				System.out.println("Bad keyword. Try fight or flee. ");
+//        				wantsToFight = true;
+//        			}
+//        		}
+//        	} else {
+//        		System.out.println("There is no character on this step, try again");
+//        		return false;
+//        	}
+//    	}
+////        if(currentRoom.getCharacter().getHp() <= 0) {
+//            System.out.println("You are dead");
+//            return true;
+//        }
+//        
+//        if(!currentRoom.getCharacter().isMurdererAlive()) {
+//            System.out.println("You have killed the murderer. You have won the game!");
+//            return true;
+//        }
+//        if(currentRoom.getCharacter().getLives() <= 0) {
+//            System.out.println("You dont have any lives left. You have lost the game");
+//            points.setScoreZero();
+//            return true;
+//        }
+//    	return false;
+//    }
     
     private boolean loot(Room room) {
     	if(room.currentPosition().getItem() != null) {
-                points.updateOnAction(player.getFightSpeed());
-    		System.out.println(player.lootItem(room.currentPosition().getItem()));
+                points.updateOnAction(currentRoom.getPlayer().getFightSpeed());
+    		System.out.println(room.getPlayer().lootItem(room.currentPosition().getItem()));
                 room.currentPosition().voidItem();
     	} else { System.out.println("No item here"); }
         return false;
     }
     
     private boolean use(Command command) {
-        Item[] inventory = player.getInventory();
+        Item[] inventory = currentRoom.getPlayer().getInventory();
         String secondWord = command.getSecondWord();
         
         if(!command.hasSecondWord()) {
             System.out.println("Use what?");
-            player.showInventory();
+            currentRoom.getPlayer().showInventory();
             return false;
         }
         for(int i = 0; i < inventory.length; i++) {
             if(inventory[i] != null) {
                 if(items.getConsumable(secondWord).equals(inventory[i])) {
-                    points.updateOnAction(player.getFightSpeed());
+                    points.updateOnAction(currentRoom.getPlayer().getFightSpeed());
                     getItemEffect(items.getConsumable(secondWord));
                     System.out.println("Used " + inventory[i].getName());
                     inventory[i] = null;
@@ -285,24 +340,35 @@ public class Game
     }
     
 
-    private void goRoom(String direction) {
+    private void goRoom(String direction) 
+    {
+//        if(!command.hasSecondWord()) {
+  //          System.out.println("Go where?");
+    //        return;
+      //  }
+
+        //String direction = command.getSecondWord();
+
         Room nextRoom = currentRoom.getExit(direction);
 
+        
         if (nextRoom == null) {
             System.out.println("There is no door!");
-        } else if (!currentRoom.checkIfRoomTraversalIsOkay(direction)) {
-            System.out.println("Try again!");
-        } else {
-            points.updateOnAction(player.getWalkSpeed());
-            nextRoom.setCurrentPosition(currentRoom.currentPosition(), direction);
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
-            currentRoom.printStep(currentRoom.currentPosition());
+        } else if(!currentRoom.checkIfRoomTraversalIsOkay(direction)) {
+        	System.out.println("Try again!");
+        }
+        else {
+                points.updateOnAction(currentRoom.getPlayer().getWalkSpeed());
+        	nextRoom.setCurrentPosition(currentRoom.currentPosition(), direction);
+                currentRoom = nextRoom;
+                System.out.println(currentRoom.getLongDescription());
+                currentRoom.printStep(currentRoom.currentPosition());
         }
     }
-
-    private void move(Command command) {
-        if (!command.hasSecondWord()) {
+    
+    private void move(Command command) 
+    {
+        if(!command.hasSecondWord()) {
             System.out.println("Invalid move!");
             return;
         }
@@ -312,12 +378,12 @@ public class Game
         Step nextStep = currentRoom.move(direction);
 
         if (nextStep != null) {
-            points.updateOnAction(player.getWalkSpeed());
+            points.updateOnAction(currentRoom.getPlayer().getWalkSpeed());
             currentRoom.printStep(nextStep);
         } else {
             goRoom(direction);
         }
-
+        
     }
     
     
@@ -349,11 +415,16 @@ public class Game
         Step nextStep = currentRoom.move(direction);
 
         if (nextStep != null) {
-            points.updateOnAction(player.getWalkSpeed());
+            points.updateOnAction(currentRoom.getPlayer().getWalkSpeed());
             currentRoom.printStep(nextStep);
         } else {
             goRoom(original);
         } 
+        if (currentRoom.currentPosition().getNPC().friendly())
+        { 
+           currentRoom.currentPosition().getNPC().getInformation();
+            System.out.println((currentRoom.currentPosition().getNPC().getInformation()));
+        }
     }
 
     private boolean quit(Command command) 
@@ -369,48 +440,38 @@ public class Game
     
     private boolean accuse(Room room) 
     {
-        if (room.currentPosition().getNPC() != null) {
-            NPC npc = room.currentPosition().getNPC();
-            Character character = room.currentPosition().getCharacter();
-            npc.setHostile(true);
-            if (npc.isMurderer()) {
-                System.out.println("You are correct, " + character.getName() + " is the murderer. ");
-                System.out.println(character.getName() + " wants to fight you. ");
-                fight(new Command(CommandWord.FIGHT, "character"));
-                return true;
-            } else {
-                System.out.println("You are not correct, " + character.getName() + " is not the murderer. ");
-                System.out.println(character.getName() + " wants to fight you for believing he was a murderer. ");
-                fight(new Command(CommandWord.FIGHT, "character"));
-                player.setLives(1);
-                System.out.println("You now have " + player.getLives() + " lives left");
-                return false;
-            }
-        }
-        System.out.println("No character here");
-        return false;
-
+    	NPC npc = room.currentPosition().getNPC();
+        Character character = room.currentPosition().getCharacter();
+                npc.setHostile(true);
+    	if(npc.isMurderer()) {
+    		System.out.println("You are correct, " + character.getName() + " is the murderer. ");
+    		System.out.println(character.getName() + " wants to fight you. ");
+    		return false;//fight(new Command(CommandWord.FIGHT, "character"));
+    	} else {
+    		System.out.println("You are not correct, " + character.getName() + " is not the murderer. ");
+    		System.out.println(character.getName() + " wants to fight you for believing he was a murderer. ");
+    		return false; //fight(new Command(CommandWord.FIGHT, "character"));
+    	}
+    	
     }
     
     public boolean search() {
         if(currentRoom.currentPosition().getItem() != null) {
             Item item = currentRoom.currentPosition().getItem();
             if(item.isMovable()) {
-                System.out.println(getItemString(item));
-                return false;
-            } else {
                 getClue(item);
-                return false;
+            } else {
+                System.out.println(item.getName() + " is not movable");
             }
             
         }
-        System.out.println("There is no item here");
+        System.out.println("There is no clue here.");
         return false;
     }
     
     public boolean talk() {
         if(currentRoom.currentPosition().getNPC() == null) {
-            System.out.println("There is no one to talk to");
+            System.out.println("There is no NPC here");
             return false;
         }
         String information = currentRoom.currentPosition().getNPC().getInformation();
@@ -430,39 +491,39 @@ public class Game
     private void getItemEffect(Item item) {
         switch((Consumable) item) {
             case BEER:
-                player.setWalkSpeed(2);
-                player.setFightSpeed(2);
-                player.setSearchSpeed(2);
+                currentRoom.getPlayer().setWalkSpeed(2);
+                currentRoom.getPlayer().setFightSpeed(2);
+                currentRoom.getPlayer().setSearchSpeed(2);
                 System.out.println("You feel slower. ");
                 break;
                 
             case POTION:
-                player.setHp(-25);
+                currentRoom.getPlayer().setHp(-25);
                 System.out.println("Potion has been used. ");
-                System.out.println("Your current hp has been increased by 25 to " + player.getHp());
+                System.out.println("Your current hp has been increased by 25 to " + currentRoom.getPlayer().getHp());
                 break;
                 
             case COFFEE:
-                if(player.getWalkSpeed() - 2 < 5) {
-                    player.setWalkSpeed(0);
+                if(currentRoom.getPlayer().getWalkSpeed() - 2 < 5) {
+                    currentRoom.getPlayer().setWalkSpeed(0);
                 } else {
-                    player.setWalkSpeed(-2);
+                    currentRoom.getPlayer().setWalkSpeed(-2);
                 }
                 
-                if(player.getSearchSpeed() - 3 < 10) {
-                    player.setSearchSpeed(0);
+                if(currentRoom.getPlayer().getSearchSpeed() - 3 < 10) {
+                    currentRoom.getPlayer().setSearchSpeed(0);
                 } else {
-                    player.setSearchSpeed(-3);
+                    currentRoom.getPlayer().setSearchSpeed(-3);
                 }
                 
-                if(player.getFightSpeed() - 1 < 0) {
-                    player.setFightSpeed(0);
+                if(currentRoom.getPlayer().getFightSpeed() - 1 < 0) {
+                    currentRoom.getPlayer().setFightSpeed(0);
                 } else {
-                    player.setFightSpeed(-1);
+                    currentRoom.getPlayer().setFightSpeed(-1);
                 }
                 System.out.println("You feel energized. ");
                 break;
-
+                
             case KEY:
                 if (currentRoom == outside || currentRoom == hallway) {
                     hallway.setExit("west", basement);
@@ -470,31 +531,15 @@ public class Game
                     basement.setExit("south", outside);
                     outside.setExit("north", basement);
                     System.out.println("The key has opened a door to the basement!");
-                } else {
+                }
+                else {
                     System.out.println("The key doesn't fit in any doors in this area.");
                 }
                 break;
-
                 
             default:
                 System.out.println("This item does not exist. ");
                 break;
-        }
-    }
-    
-    private String getItemString(Item item) {
-        switch((Consumable) item) {
-            case BEER:
-                return "Makes you slower, but more likable";
-                
-            case POTION:
-                return "Heals you";
-                
-            case COFFEE:
-                return "Makes you faster";
-                
-            default:
-                return "This item does not exist";
         }
     }
     
@@ -509,19 +554,19 @@ public class Game
                 break;
                 
             case WITNESS:
-                player.setWalkSpeed(-2);
+                currentRoom.getPlayer().setWalkSpeed(-2);
                 break;
                 
             case FINGERPRINT:
-                player.setWalkSpeed(-2);
+                currentRoom.getPlayer().setWalkSpeed(-2);
                 break;
                 
             case FOOTPRINT:
-                player.setWalkSpeed(-2);
+                currentRoom.getPlayer().setWalkSpeed(-2);
                 break;
                 
             case CLOTHES:
-                player.setWalkSpeed(-2);
+                currentRoom.getPlayer().setWalkSpeed(-2);
                 break;
                 
             case LAMP:
@@ -532,5 +577,5 @@ public class Game
                 System.out.println("This clue does not exist. ");
                 break;
         }
-    }   
+   }   
 }
