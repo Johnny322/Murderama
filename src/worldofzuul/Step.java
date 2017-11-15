@@ -1,14 +1,11 @@
 package worldofzuul2;
 
-
-
 public class Step {
 	
 	private Item item;
-	private Character character;
 	private String information;
 	private Monster monster;
-        private Clue clue;
+        private NPC npc;
 	
         /**
          * Empty constructor method for Step
@@ -16,7 +13,7 @@ public class Step {
          */
 	public Step() {
 		this.item = null;
-		this.character = null;
+		this.npc = null;
 		this.information = null;
 		this.monster = null;
 	}
@@ -31,11 +28,11 @@ public class Step {
 	}
 	
         /**
-         * Constructor for a Step with a Character on it
-         * @param _character 
+         * Constructor for a Step with a NPC on it
+         * @param _npc
          */
-	public Step(Character _character) {
-		this.character = _character;
+	public Step(NPC _npc) {
+		this.npc = _npc;
 	}
 	
         /**
@@ -45,18 +42,19 @@ public class Step {
 	public Step(Monster _monster) {
 		this.monster = _monster;
 	}
-        
-        public Step(Clue clue) {
-		this.clue = clue;
-	}
+
 	
         /**
          * Accessor for Character
          * @return Character
          */
-	public Character getCharacter() {
-		return this.character;
+	public NPC getNPC() {
+		return this.npc;
 	}
+        
+        public Character getCharacter() {
+            return (Character) this.npc;
+        }
 	
         /**
          * Method to void an Item at the Step
@@ -64,6 +62,14 @@ public class Step {
 	// Temp shitty setup
         public void voidItem() {
             this.item = null;
+        }
+        
+        /**
+         * Method to void an Item at the Step
+         */
+	// Temp shitty setup
+        public void voidNPC() {
+            this.npc = null;
         }
 	
         /**
@@ -89,9 +95,4 @@ public class Step {
 	public Monster getMonster() {
 		return this.monster;
 	}
-        
-        public Clue getClue() {
-            return this.clue;
-        }
-
 }

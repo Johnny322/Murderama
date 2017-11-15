@@ -6,21 +6,12 @@ public abstract class Character {
 	private int hp;
 	private int damage;
     
-	/**
-         * Creates the playable Character
-         */
-	public Character() {
-		this.name = "Jeff";
-		this.hp = 100;
-		this.damage = 10;
-	}
-	
         /**
          * Constructor for NPC with Item(s)
          * @param name Name of the NPC
          * @param hp hp of the NPC
          */
-	Character(String name, int hp, int damage) {
+	Character(String name, int damage, int hp) {
 		this.name = name;
 		this.hp = hp;
 		this.damage = damage;
@@ -38,10 +29,15 @@ public abstract class Character {
      * Mutator for hp of the Character
      * @param damageTaken 
      */
-    public void setHp(int damageTaken) 
+    public void changeHp(int damageTaken) 
     {
     	this.hp = hp - damageTaken;
     }
+    
+    public void setHP(int hp) {
+        this.hp = hp;
+    }
+    
     
     /**
      * Accessor for the hp of a Character
@@ -67,5 +63,8 @@ public abstract class Character {
         return this.hp > 0;
     }
     
-    
+    //Standard setter for damage
+    public void changeDamage(int increase) {
+        this.damage += increase;
+    }
 }
