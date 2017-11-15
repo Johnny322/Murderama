@@ -16,4 +16,5 @@ public interface NPC {
     public boolean isHostile();
     public boolean isMurderer();
     public boolean isEvil();
+    public boolean friendly();
 }
