@@ -8,20 +8,22 @@ package worldofzuul2;
 
 /**
  *
- * @author Simon
+  * @author aqibsajjad
  */
 public class Friendly extends Character implements NPC {
 
     private final String information;
     private final boolean isMurderer;
     private boolean isHostile;
+    private boolean friendly;
     
     //Constructor, tager name, damage og hp til Character-constructoren
-    public Friendly (String name, int damage, int hp, String information, boolean isMurderer) {
+    public Friendly (String name, int damage, int hp, String information, boolean isMurderer, boolean friendly) {
         super(name, damage, hp);
         this.information = information;
         this.isMurderer = isMurderer;
         this.isHostile = false;
+        this.friendly = friendly;
     }
 
     @Override
@@ -33,7 +35,10 @@ public class Friendly extends Character implements NPC {
     public boolean isHostile() {
         return this.isHostile;
     }
-
+ @Override
+    public boolean friendly() {
+        return this.friendly;
+    }
     /**
      *
      * @return
@@ -55,10 +60,5 @@ public class Friendly extends Character implements NPC {
             return null;
         }
         return this.information;
-    }
-
-    @Override
-    public boolean isEvil() {
-        return false;
     }
 }
