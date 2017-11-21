@@ -72,8 +72,10 @@ public class Game {
         library.buildLibrary();
         TEK = new Room("in front of the bronze stairs at TEK");
         TEK.buildTEK();
-        U183 = new Room("inside room U183");    
+        U183 = new Room("inside room U183"); 
+        U183.buildU183();
         projectRoom = new Room("inside a project room at TEK");
+        projectRoom.buildProjectRoom();
         
 
         outside.setExit("west", TEK);
