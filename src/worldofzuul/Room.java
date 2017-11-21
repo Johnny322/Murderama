@@ -240,6 +240,54 @@ public class Room
         }
     }
     
+    public void buildU183() {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+        this.stepList[space1][space2] = new Step(Clue.VICTIM);
+
+        int spaceCharacter1 = random.nextInt(3);
+        int spaceCharacter2 = random.nextInt(3);
+        while(spaceCharacter1 == space1 && spaceCharacter2 == space2) {
+            spaceCharacter1 = random.nextInt(3);
+            spaceCharacter2 = random.nextInt(3);
+        }
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Evil("Srik Eørensen", 10, 150, "The person who did it starts with J", false, "Teacher of Computer Systems, small feet and large hands"));
+
+        
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[i][j] == null) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    public void buildProjectRoom() {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+        this.stepList[space1][space2] = new Step(Clue.VICTIM);
+
+        int spaceCharacter1 = random.nextInt(3);
+        int spaceCharacter2 = random.nextInt(3);
+        while(spaceCharacter1 == space1 && spaceCharacter2 == space2) {
+            spaceCharacter1 = random.nextInt(3);
+            spaceCharacter2 = random.nextInt(3);
+        }
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Evil("Steen", 10, 150, "The person who did this has large feet", false, "Head of SIF, small stature, small feet and small hands"));
+
+        
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[i][j] == null) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
     public void buildStepList(Item item) {
         Random random = new Random();
         int space1 = random.nextInt(3);
