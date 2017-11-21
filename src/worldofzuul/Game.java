@@ -185,10 +185,37 @@ public class Game {
         System.out.println("Your command words are:");
         parser.showCommands();
     }
-
+    
+private boolean processFight(NPC npc) {
+        Character character = (Character) npc;
+        points.updateOnAction(player.getFightSpeed());
+        player.setHp(character.getDamage());
+        System.out.println("You have " + player.getHp() + " hp");
+        character.changeHp(player.getDamage());
+        System.out.println(character.getName() + " has " + character.getHp() + " hp");
+        if (character.getHp() <= 0) {
+            System.out.println("Enemy is dead!");
+            if (npc.isEvil()) {
+                npc.setHostile(false);
+                character.setHP(100);
+            } else {
+                currentRoom.currentPosition().voidNPC();
+            }
+            currentRoom.printRoom();
+            return false;
         }
-
-
+        if (player.getHp() <= 0) {
+            System.out.println("You got knocked out");
+            player.setLives(1);
+            System.out.println("You now have " + player.getLives() + " live(s left");
+            player.setHP(150);
+        } if (player.getLives() <= 0){
+            System.out.println("You are dead");
+            return false;
+        }
+        return true;
+    }
+    
     private boolean fight(Command command) {
         Room room = currentRoom;
         if (room.currentPosition().getCharacter() != null) {
