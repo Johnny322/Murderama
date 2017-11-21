@@ -19,8 +19,8 @@ public class Evil extends Character implements NPC {
     
     
     //Constructor, tager navn, damage og hp og bruger den i Character-constructoren, her kaldet som "super"
-    public Evil (String name, int damage, int hp, String information, boolean isMurderer) {
-        super(name, damage, hp);
+    public Evil (String name, int damage, int hp, String information, boolean isMurderer, String description) {
+        super(name, damage, hp, description);
         this.information = information;
         this.isMurderer = isMurderer;
         this.isHostile = true;
