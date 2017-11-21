@@ -335,13 +335,15 @@ private boolean processFight(NPC npc) {
         if (currentRoom.currentPosition().getNPC() != null) {
             if (currentRoom.currentPosition().getNPC().friendly()) {
                 Character character = (Character) currentRoom.currentPosition().getNPC();
-                System.out.println(character.getName() + " wants to talk to you. ");
-                System.out.println((currentRoom.currentPosition().getNPC().getInformation()));
-                Scanner scan = new Scanner(System.in);
-                String word = scan.next();
-                if(word.toLowerCase().equals("talk")) {
-                    System.out.println(currentRoom.currentPosition().getNPC().getAdditionalInformation());
-                } 
+                if (currentRoom.currentPosition().getNPC().getThreshold() < player.getLikeability()) {
+                    System.out.println(character.getName() + " wants to talk to you. ");
+                    System.out.println((currentRoom.currentPosition().getNPC().getInformation()));
+                    Scanner scan = new Scanner(System.in);
+                    String word = scan.next();
+                    if (word.toLowerCase().equals("talk")) {
+                        System.out.println(currentRoom.currentPosition().getNPC().getAdditionalInformation());
+                    }
+                }
             }
         }
     }
