@@ -366,6 +366,10 @@ private boolean processFight(NPC npc) {
                 fight(new Command(CommandWord.FIGHT, "character"));
                 player.setLives(1);
                 System.out.println("You now have " + player.getLives() + " lives left");
+                if (player.getLives() <= 0) {
+                    System.out.println("you lost, you accused to many people wrongly");
+                    return true;
+                }
                 return false;
             }
         }
