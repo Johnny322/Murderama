@@ -23,8 +23,8 @@ public class Monster extends Character implements NPC {
      * @param information
      */
     //Constructor for monster, tager name, damage og hp og bruger dem i Character-constructoren. 
-    public Monster (String name, int damage, int hp, String information) {
-        super(name, damage, hp);
+    public Monster (String name, int damage, int hp, String information, String description) {
+        super(name, damage, hp, description);
         this.information = information;
         this.isHostile = true;
         this.threshold = 0;
