@@ -5,8 +5,7 @@ public abstract class Character {
 	private final String name;
 	private int hp;
 	private int damage;
-	private final String description;
-
+        private final String description;
     
         /**
          * Constructor for NPC with Item(s)
@@ -17,10 +16,9 @@ public abstract class Character {
 		this.name = name;
 		this.hp = hp;
 		this.damage = damage;
-		this.description = description;
-
+                this.description = description;
 	}
-	
+
     public String getDescription() {
         return description;
     }

@@ -2,7 +2,6 @@ package worldofzuul2;
 
 import java.util.Set;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Random;
 
 
@@ -115,7 +114,7 @@ public class Room
             space2 = random.nextInt(3);
         }
         
-        this.stepList[space1][space2] = new Step(new Evil("Jeff", 10, 10, "Hello", true));
+        this.stepList[space1][space2] = new Step(new Evil("Jeff", 10, 10, "I think I saw Janiel Dørgensen in the projekt room earlier", true, "Student, big guy, large feet, small hands"));
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if(this.stepList[i][j] == null) {
@@ -131,7 +130,7 @@ public class Room
         int space2 = random.nextInt(3);
 
         
-        this.stepList[space1][space2] = new Step(new Friendly("Jan Ithor", 10, 150, "Jeff is the murderer", false, true, "So what", 150));
+        this.stepList[space1][space2] = new Step(new Friendly("Jan Ithor", 10, 150, "I definately saw Jeff with the victim earlier", false, true, "What's your problem?", 150, "Janitor, big guy, large feet and large hands"));
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if(this.stepList[i][j] == null) {
@@ -154,7 +153,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg så noget ske", false, true, "De døde allesammen, det var Jeff", 500));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg tror jeg så ofret i project room tidligere", false, true, "Det er sindssygt", 200,  "A very nervous guy. Needs to get to know you before he will tell you anything"));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -178,7 +177,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg så noget ske", false, true, "Men jeg så noget", 300));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Lunchlady", 150, 10, "The victim was from Jeff's class", false, true, "They had an argument some days ago", 100, "Lunchlady, has a lot of information"));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -203,7 +202,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Janiel Dørgensen", 150, 10, "Det var Jeff", false, false, "fuck", 50));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Janiel Dørgensen", 150, 10, "", false, false, "fuck", 0, "Teacher of Object Oriented Programming"));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -228,7 +227,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Librarian", 150, 10, "Det var Jeff", false, true, "lol", 10));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Librarian", 150, 10, "Det var Jeff", false, true, "lol", 20, "Librarian, likely tells the truth"));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -328,6 +327,8 @@ public class Room
             }
         }
     }
+    
+    
     
     
     public Step move(String move) {

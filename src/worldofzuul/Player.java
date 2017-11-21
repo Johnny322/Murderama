@@ -27,7 +27,7 @@ public class Player extends Character {
      * @param hp
      */
     public Player(String name, int damage, int hp) {
-        super(name, hp, damage);
+        super(name, hp, damage, "");
         this.inventory = new Item[10];
         this.lives = 3;
         this.walkSpeed = 10;

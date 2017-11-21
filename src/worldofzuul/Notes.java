@@ -48,6 +48,10 @@ public class Notes {
         this.notes.add(name + " said: " + note);
     }
     
+    public void addClue(String note) {
+        this.notes.add(note);
+    }
+    
     /*
     Prints the contents of the notes-list in the console.
     @param
