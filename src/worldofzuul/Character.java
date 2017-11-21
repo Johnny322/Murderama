@@ -5,17 +5,25 @@ public abstract class Character {
 	private final String name;
 	private int hp;
 	private int damage;
+	private final String description;
+
     
         /**
          * Constructor for NPC with Item(s)
          * @param name Name of the NPC
          * @param hp hp of the NPC
          */
-	Character(String name, int damage, int hp) {
+	Character(String name, int damage, int hp, String description) {
 		this.name = name;
 		this.hp = hp;
 		this.damage = damage;
+		this.description = description;
+
 	}
+	
+    public String getDescription() {
+        return description;
+    }
     
         /**
          * Accessor for damage of Character
