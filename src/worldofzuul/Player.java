@@ -18,6 +18,7 @@ public class Player extends Character {
     private final Notes notes;
     private int fightSpeed;
     private int searchSpeed;
+    private int likeability;
 
     /**
      * Creates the playable Character
@@ -33,6 +34,7 @@ public class Player extends Character {
         this.fightSpeed = 5;
         this.searchSpeed = 25;
         this.notes = new Notes();
+        this.likeability = 0;
     }
 
     public void setLives(int lives) {
@@ -110,6 +112,13 @@ public class Player extends Character {
                 System.out.println("A " + inventory[i].getName());
             }
         }
+    }    
+
+    public void increaseLikeability(int increment) {
+        this.likeability += increment;
     }
-    
+
+    public int getLikeability() {
+        return this.likeability;
+    }
 }

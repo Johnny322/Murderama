@@ -13,6 +13,7 @@ public class Monster extends Character implements NPC {
 
     private final String information;
     private boolean isHostile;
+    private int threshold;
     
     /**
      *
@@ -26,6 +27,7 @@ public class Monster extends Character implements NPC {
         super(name, damage, hp);
         this.information = information;
         this.isHostile = true;
+        this.threshold = 0;
     }
     
     /**
@@ -42,6 +44,11 @@ public class Monster extends Character implements NPC {
         return this.information;
     }
 
+    @Override
+    public int getThreshold() {
+        return this.threshold;
+    }
+    
     @Override
     public void setHostile(boolean isHostile) {
         this.isHostile = isHostile;

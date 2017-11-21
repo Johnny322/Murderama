@@ -189,6 +189,7 @@ public class Game {
 private boolean processFight(NPC npc) {
         Character character = (Character) npc;
         points.updateOnAction(player.getFightSpeed());
+        player.increaseLikeability(player.getFightSpeed());
         player.setHp(character.getDamage());
         System.out.println("You have " + player.getHp() + " hp");
         character.changeHp(player.getDamage());
@@ -246,6 +247,7 @@ private boolean processFight(NPC npc) {
     private boolean loot(Room room) {
         if (room.currentPosition().getItem() != null) {
             points.updateOnAction(player.getFightSpeed());
+            player.increaseLikeability(player.getFightSpeed());
             System.out.println(player.lootItem(room.currentPosition().getItem()));
             room.currentPosition().voidItem();
         } else {
@@ -267,6 +269,7 @@ private boolean processFight(NPC npc) {
             if (inventory[i] != null) {
                 if (items.getConsumable(secondWord).equals(inventory[i])) {
                     points.updateOnAction(player.getFightSpeed());
+                    player.increaseLikeability(player.getFightSpeed());
                     getItemEffect(items.getConsumable(secondWord));
                     System.out.println("Used " + inventory[i].getName());
                     inventory[i] = null;
@@ -288,6 +291,7 @@ private boolean processFight(NPC npc) {
             System.out.println("Try again!");
         } else {
             points.updateOnAction(player.getWalkSpeed());
+            player.increaseLikeability((player.getWalkSpeed()));
             nextRoom.setCurrentPosition(currentRoom.currentPosition(), direction);
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
@@ -323,6 +327,7 @@ private boolean processFight(NPC npc) {
 
         if (nextStep != null) {
             points.updateOnAction(player.getWalkSpeed());
+            player.increaseLikeability(player.getWalkSpeed());
             currentRoom.printStep(nextStep);
         } else {
             goRoom(original);
@@ -365,11 +370,13 @@ private boolean processFight(NPC npc) {
                 System.out.println(character.getName() + " wants to fight you for believing he was a murderer. ");
                 fight(new Command(CommandWord.FIGHT, "character"));
                 player.setLives(1);
-                System.out.println("You now have " + player.getLives() + " lives left");
                 if (player.getLives() <= 0) {
                     System.out.println("you lost, you accused to many people wrongly");
                     return true;
                 }
+                System.out.println("You now have " + player.getLives() + " lives left");
+                player.increaseLikeability(-100);
+                System.out.println("People will like you less because of your mistake.");
                 return false;
             }
         }
@@ -378,6 +385,7 @@ private boolean processFight(NPC npc) {
 
     }
 
+    // Vi havde vidst slet ikke brugt SearchSpeed til at tælle tiden op. Jeg har tilføjet den her, men kun når det faktisk er en clue, der searches. /P
     public boolean search() {
         if (currentRoom.currentPosition().getItem() != null) {
             Item item = currentRoom.currentPosition().getItem();
@@ -386,6 +394,8 @@ private boolean processFight(NPC npc) {
                 return false;
             } else {
                 getClue(item);
+                points.updateOnAction(player.getSearchSpeed());
+                player.increaseLikeability(player.getSearchSpeed());
                 return false;
             }
 
@@ -394,6 +404,7 @@ private boolean processFight(NPC npc) {
         return false;
     }
 
+    // Tiden tælles vidst ikke op, når man snakker med folk. Bør dette ændres? /P
     public boolean talk() {
         if (currentRoom.currentPosition().getNPC() == null) {
             System.out.println("There is no one to talk to");
@@ -403,7 +414,12 @@ private boolean processFight(NPC npc) {
         if (information == null) {
             return false;
         }
+        if (player.getLikeability() < currentRoom.currentPosition().getNPC().getThreshold()) {
+            System.out.println("This person does not trust you yet.");
+            return false;
+        }
         System.out.println(information);
+        player.increaseLikeability(20);
         for (String note : notes.getNotes()) {
             if (note.equals(currentRoom.currentPosition().getCharacter().getName() + " said: " + information)) {
                 return false;
@@ -424,7 +440,8 @@ private boolean processFight(NPC npc) {
                 player.setWalkSpeed(2);
                 player.setFightSpeed(2);
                 player.setSearchSpeed(2);
-                System.out.println("You feel slower. ");
+                player.increaseLikeability(25);
+                System.out.println("You feel slower, but more talkative. ");
                 break;
 
             case POTION:

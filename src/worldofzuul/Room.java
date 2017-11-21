@@ -131,7 +131,7 @@ public class Room
         int space2 = random.nextInt(3);
 
         
-        this.stepList[space1][space2] = new Step(new Friendly("Jan Ithor", 10, 150, "Jeff is the murderer", false, true, "So what"));
+        this.stepList[space1][space2] = new Step(new Friendly("Jan Ithor", 10, 150, "Jeff is the murderer", false, true, "So what", 150));
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if(this.stepList[i][j] == null) {
@@ -154,7 +154,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg så noget ske", false, true, "De døde allesammen, det var Jeff"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg så noget ske", false, true, "De døde allesammen, det var Jeff", 500));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -178,7 +178,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg så noget ske", false, true, "Men jeg så noget"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg så noget ske", false, true, "Men jeg så noget", 300));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -203,7 +203,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Janiel Dørgensen", 150, 10, "Det var Jeff", false, false, "fuck"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Janiel Dørgensen", 150, 10, "Det var Jeff", false, false, "fuck", 50));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -228,7 +228,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Librarian", 150, 10, "Det var Jeff", false, true, "lol"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Librarian", 150, 10, "Det var Jeff", false, true, "lol", 10));
 
         
     	for(int i = 0; i < 3; i++) {
