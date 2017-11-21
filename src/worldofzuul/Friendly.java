@@ -21,8 +21,8 @@ public class Friendly extends Character implements NPC {
 
     
     //Constructor, tager name, damage og hp til Character-constructoren
-    public Friendly (String name, int damage, int hp, String information, boolean isMurderer, boolean friendly, String additionalInformation, int threshold) {
-        super(name, damage, hp);
+    public Friendly (String name, int damage, int hp, String information, boolean isMurderer, boolean friendly, String additionalInformation, int threshold, String description) {
+        super(name, damage, hp, description);
         this.information = information;
         this.isMurderer = isMurderer;
         this.isHostile = false;
