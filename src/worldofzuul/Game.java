@@ -18,7 +18,7 @@ public class Game {
     private final Consumables items = new Consumables();
     private final PointSystem points = new PointSystem();
     private final Notes notes = new Notes();
-    private Room outside, cafeteria, U55, basement, library, hallway, TEK;
+    private Room outside, cafeteria, U55, basement, library, hallway, TEK, U183, projectRoom;
     private final Player player = new Player("Jeff", 150, 12);
 
     /**
@@ -57,7 +57,7 @@ public class Game {
         }
     }
 
-    private void createRooms() {
+   private void createRooms() {
 
         outside = new Room("outside the main entrance of the university");
         outside.buildOutside();
@@ -72,21 +72,28 @@ public class Game {
         library.buildLibrary();
         TEK = new Room("in front of the bronze stairs at TEK");
         TEK.buildTEK();
+        U183 = new Room("inside room U183");    
+        projectRoom = new Room("inside a project room at TEK");
+        
 
         outside.setExit("west", TEK);
+        outside.setExit("south", projectRoom);
+        projectRoom.setExit("north", outside);
+
         hallway.setExit("east", U55);
         hallway.setExit("south", cafeteria);
         hallway.setExit("north", library);
         outside.setExit("east", hallway);
         U55.setExit("east", hallway);
         TEK.setExit("east", outside);
+        TEK.setExit("north", U183);
+        U183.setExit("south", TEK);
         cafeteria.setExit("north", hallway);
         library.setExit("south", hallway);
         hallway.setExit("west", outside);
 
         currentRoom = outside;
     }
-
     public void play() {
         printWelcome();
 
