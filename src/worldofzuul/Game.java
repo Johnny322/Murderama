@@ -350,10 +350,12 @@ private boolean processFight(NPC npc) {
                 if (currentRoom.currentPosition().getNPC().getThreshold() < player.getLikeability()) {
                     System.out.println(character.getName() + " wants to talk to you. ");
                     System.out.println((currentRoom.currentPosition().getNPC().getInformation()));
+                    notes.addNote(currentRoom.currentPosition().getCharacter().getName(), currentRoom.currentPosition().getNPC().getInformation());
                     Scanner scan = new Scanner(System.in);
                     String word = scan.next();
                     if (word.toLowerCase().equals("talk")) {
                         System.out.println(currentRoom.currentPosition().getNPC().getAdditionalInformation());
+                        notes.addNote(currentRoom.currentPosition().getCharacter().getName(), currentRoom.currentPosition().getNPC().getAdditionalInformation());
                     }
                 }
             }
@@ -434,12 +436,17 @@ private boolean processFight(NPC npc) {
         }
         System.out.println(information);
         player.increaseLikeability(20);
+        if (!currentRoom.currentPosition().getNPC().friendly()) {
+            boolean hasNote = false;
         for (String note : notes.getNotes()) {
             if (note.equals(currentRoom.currentPosition().getCharacter().getName() + " said: " + information)) {
-                return false;
+                hasNote = true;
             }
         }
-        notes.addNote(currentRoom.currentPosition().getCharacter().getName(), information);
+            if (!hasNote) {
+            notes.addNote(currentRoom.currentPosition().getCharacter().getName(), information);
+            }
+        }
         Scanner scan = new Scanner(System.in);
         String word = scan.next();
         if (word.toLowerCase().equals("talk")) {
