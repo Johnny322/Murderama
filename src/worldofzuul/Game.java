@@ -20,6 +20,7 @@ public class Game {
     private final Notes notes = new Notes();
     private Room outside, cafeteria, U55, basement, library, hallway, TEK, U183, projectRoom;
     private final Player player = new Player("Jeff", 150, 12);
+    private boolean hasWon = false;
 
     /**
      *
@@ -45,7 +46,7 @@ public class Game {
         try {
             Scanner scanner = new Scanner(file);
             int currentHighscore = scanner.nextInt();
-            if (currentScore > currentHighscore) {
+            if (currentScore > currentHighscore && hasWon) {
                 PrintStream writer = new PrintStream(file);
                 writer.println(Integer.toString(currentScore));
                 System.out.println("You now have the current highscore with: " + currentScore);
@@ -208,6 +209,8 @@ private boolean processFight(NPC npc) {
             if (npc.isEvil()) {
                 npc.setHostile(false);
                 character.setHP(100);
+            } else if(npc.isMurderer()) {
+                hasWon = true;
             } else {
                 currentRoom.currentPosition().voidNPC();
             }
