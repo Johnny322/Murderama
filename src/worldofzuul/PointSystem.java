@@ -1,6 +1,5 @@
 //@Jeanjohnsen Jeanjohnsen Har lavede nogle updates for pointsystem classen og worldofzuul2
 package worldofzuul2;
-
 import java.util.*;
 
 public class PointSystem
@@ -20,11 +19,11 @@ public class PointSystem
         this.points += update;
     }
     
-    public void setScoreZero (){
+    public void setScoreZero() {
         this.points = 10000;
     }
+    
 
-    //Void da det sparer kode
     public int getPoints()
     {
         return (10000 - this.points);

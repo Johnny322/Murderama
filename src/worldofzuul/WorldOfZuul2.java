@@ -6,13 +6,13 @@
 package worldofzuul2;
 
 
-
 /**
  *
  * @author Simon
  */
 public class WorldOfZuul2 {
     public static void main(String[] args)  {
+        
         Game game = new Game();
         game.play();        
     }  

@@ -1,5 +1,4 @@
 package worldofzuul2;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -47,6 +46,10 @@ public class Notes {
      */
     public void addNote(String name, String note) {
         this.notes.add(name + " said: " + note);
+    }
+    
+    public void addClue(String note) {
+        this.notes.add(note);
     }
     
     /*

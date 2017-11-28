@@ -5,48 +5,26 @@
  */
 package worldofzuul2;
 
+
 /**
  *
  * @author Simon
  */
-public class Monster extends Character implements NPC {
-
+public class Evil extends Character implements NPC {
+    
     private final String information;
+    private final boolean isMurderer;
     private boolean isHostile;
     private int threshold;
     
-    /**
-     *
-     * @param name
-     * @param damage
-     * @param hp
-     * @param information
-     */
-    //Constructor for monster, tager name, damage og hp og bruger dem i Character-constructoren. 
-    public Monster (String name, int damage, int hp, String information, String description) {
+    
+    //Constructor, tager navn, damage og hp og bruger den i Character-constructoren, her kaldet som "super"
+    public Evil (String name, int damage, int hp, String information, boolean isMurderer, String description) {
         super(name, damage, hp, description);
         this.information = information;
+        this.isMurderer = isMurderer;
         this.isHostile = true;
         this.threshold = 0;
-    }
-    
-    /**
-     *
-     * @return
-     */
-    //Overrider funktionen getInformation, der er blevet defineret for NPC-interfacet
-    @Override
-    public String getInformation() {
-        if(this.isHostile) {
-            System.out.println(super.getName() + " is hostile and cannot be talked to");
-            return null;
-        }
-        return this.information;
-    }
-
-    @Override
-    public int getThreshold() {
-        return this.threshold;
     }
     
     @Override
@@ -58,10 +36,33 @@ public class Monster extends Character implements NPC {
     public boolean isHostile() {
         return this.isHostile;
     }
-    
+
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isMurderer() {
-        return false;
+        return isMurderer;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    //Overrider metoden getInformation fra interfacet NPC
+    @Override
+    public String getInformation() {
+        if(this.isHostile) {
+            System.out.println(super.getName() + " is hostile and cannot be talked to until you defeat them in combat");
+            return null;
+        }
+        return this.information;
+    }
+    
+    @Override
+    public int getThreshold() {
+        return this.threshold;
     }
     
     @Override
