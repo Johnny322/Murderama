@@ -7,7 +7,10 @@ package murderama.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuButton;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -15,6 +18,15 @@ import javafx.fxml.Initializable;
  * @author jeanjohnsen
  */
 public class UiFxmlController implements Initializable {
+
+    @FXML
+    private MenuButton menuButtonBar;
+    @FXML
+    private AnchorPane textOutputField;
+    @FXML
+    private AnchorPane mapPane;
+    @FXML
+    private AnchorPane gamePane;
 
     /**
      * Initializes the controller class.

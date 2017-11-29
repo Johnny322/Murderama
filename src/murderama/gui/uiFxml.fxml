@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="610.0" text="Murderama" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="murderama.gui.UiFxmlController">
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="610.0" text="Murderama" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="murderama.gui.UiFxmlController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="430.0" prefWidth="421.0">
          <children>
@@ -14,17 +14,20 @@
                <children>
                   <VBox prefHeight="437.0" prefWidth="201.0">
                      <children>
-                        <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="163.0" text="MenuButton">
+                        <MenuButton fx:id="menuButtonBar" mnemonicParsing="false" prefHeight="30.0" prefWidth="163.0" text="MenuButton">
                           <items>
                             <MenuItem mnemonicParsing="false" text="Save Game" />
                             <MenuItem mnemonicParsing="false" text="Load Game" />
                           </items>
                         </MenuButton>
+                        <AnchorPane fx:id="textOutputField" prefHeight="143.0" prefWidth="201.0" />
+                        <AnchorPane fx:id="mapPane" prefHeight="243.0" prefWidth="201.0" />
+                        <AnchorPane prefHeight="25.0" prefWidth="201.0" />
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="-10.0" layoutY="1.0" prefHeight="436.0" prefWidth="418.0" />
+            <AnchorPane fx:id="gamePane" layoutX="-10.0" layoutY="1.0" prefHeight="436.0" prefWidth="418.0" />
          </children></AnchorPane>
   </content>
 </TitledPane>
