@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package murderama.gui;
+package murderama.UI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,9 +31,10 @@ public class UiFxmlController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
 }
