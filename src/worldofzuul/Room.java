@@ -1,6 +1,6 @@
 package worldofzuul2;
 
-
+import java.io.Serializable;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,16 +11,39 @@ import java.util.Random;
  * @author  Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
-public class Room 
+public class Room implements Serializable
 {
     private String description;
     private HashMap<String, Room> exits;
-    private Character jeff = new Character();
+    private Player player = new Player("Jeff", 150, 12);
     private Step[][] stepList;
     private int currentPosition1 = 0;
     private int currentPosition2 = 0;
     private Step currentPosition;
-    private Character player;
+    
+   public void setStepList(Step[][] stepList) {
+        this.stepList = stepList;
+    }
+   
+    public Step[][] getStepList() {
+        return stepList;
+    }
+    
+    public void setCurrentPosition1(int currentPosition1) {
+        this.currentPosition1 = currentPosition1;
+    }
+
+    public void setCurrentPosition2(int currentPosition2) {
+        this.currentPosition2 = currentPosition2;
+    }
+    
+    public Step getCurrentPosition() {
+        return currentPosition;
+    }
+    
+    public String getPosition() {
+        return currentPosition1 + " " + currentPosition2;
+    }
     
     /**
      * Constructor for the room that the player spawns in
@@ -32,34 +55,13 @@ public class Room
         this.exits = new HashMap<String, Room>();
         this.stepList = new Step[3][3];
         this.currentPosition = stepList[currentPosition1][currentPosition2];
-    	this.player = jeff;
-        buildStepList(new Character(true));
-
     }
-    
-    /** 
-     * 
-     * @param description
-     * @param length
-     * @param depth 
-     */
-    public Room(String description, Item item)  
-    {
-    	
-        this.description = description;
-        this.exits = new HashMap<String, Room>();
-    	this.player = jeff;
-        this.stepList = new Step[3][3];
-        this.currentPosition = stepList[0][0];
-        buildStepList(item);
-    }
-    
 
     /**
      * Accessor method for the Player
      * @return 
      */
-    public Character getCharacter() {
+    public Player getPlayer() {
         return this.player;
     }
     
@@ -129,15 +131,137 @@ public class Room
     	}
     }
     
-    public void buildStepList(Character character) {
+    public void buildOutside() {
         Random random = new Random();
         int space1 = random.nextInt(3);
         int space2 = random.nextInt(3);
-        this.stepList[space1][space2] = new Step(character);
+        //Lav liste over Rooms til 0,0 i outside for map
+       // this.stepList[0][0] = new Step();
 
+        while(space1 == 0 && space2 == 0) {
+            space1 = random.nextInt(3);
+            space2 = random.nextInt(3);
+        }
+        
+        this.stepList[space1][space2] = new Step(new Evil("Jeff", 150, 10, "Hello", false));
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if(this.stepList[space1][space2] != this.stepList[i][j]) {
+                if(this.stepList[i][j] == null) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    public void buildHallway() {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+
+        
+        this.stepList[space1][space2] = new Step(new Friendly("Jan Ithor", 10, 150, "Bob is the murderer", false));
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[i][j] == null) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    public void buildTEK() {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+        this.stepList[space1][space2] = new Step(Consumable.BEER);
+        System.out.println("Clue placed at " + space1 + ", " + space2);
+
+        int spaceCharacter1 = random.nextInt(3);
+        int spaceCharacter2 = random.nextInt(3);
+        while(spaceCharacter1 == space1 && spaceCharacter2 == space2) {
+            spaceCharacter1 = random.nextInt(3);
+            spaceCharacter2 = random.nextInt(3);
+        }
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg så noget ske", false));
+
+        
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[i][j] == null) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    public void buildCafeteria() {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+        this.stepList[space1][space2] = new Step(Clue.VICTIM);
+
+        int spaceCharacter1 = random.nextInt(3);
+        int spaceCharacter2 = random.nextInt(3);
+        while(spaceCharacter1 == space1 && spaceCharacter2 == space2) {
+            spaceCharacter1 = random.nextInt(3);
+            spaceCharacter2 = random.nextInt(3);
+        }
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg så noget ske", false));
+
+        
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[i][j] == null) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    public void buildU55() {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+        this.stepList[space1][space2] = new Step(Consumable.POTION);
+        System.out.println("Clue placed at " + space1 + ", " + space2);
+
+        int spaceCharacter1 = random.nextInt(3);
+        int spaceCharacter2 = random.nextInt(3);
+        while(spaceCharacter1 == space1 && spaceCharacter2 == space2) {
+            spaceCharacter1 = random.nextInt(3);
+            spaceCharacter2 = random.nextInt(3);
+        }
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Janiel Dørgensen", 150, 10, "Det var Jeff", false));
+
+        
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[i][j] == null) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    public void buildLibrary() {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+        this.stepList[space1][space2] = new Step(Consumable.POTION);
+        System.out.println("Clue placed at " + space1 + ", " + space2);
+
+        int spaceCharacter1 = random.nextInt(3);
+        int spaceCharacter2 = random.nextInt(3);
+        while(spaceCharacter1 == space1 && spaceCharacter2 == space2) {
+            spaceCharacter1 = random.nextInt(3);
+            spaceCharacter2 = random.nextInt(3);
+        }
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Librarian", 150, 10, "Det var Jeff", false));
+
+        
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[i][j] == null) {
                     this.stepList[i][j] = new Step();
                 }
             }
@@ -159,44 +283,21 @@ public class Room
         }
     }
     
-    public void buildStepList(Clue clue) {
-        Random random = new Random();
-        int space1 = random.nextInt(3);
-        int space2 = random.nextInt(3);
-        this.stepList[space1][space2] = new Step(clue);
-
-    	for(int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if(this.stepList[space1][space2] != this.stepList[i][j]) {
-                    this.stepList[i][j] = new Step();
-                }
-            }
-        }
-    }
     
-    public void buildStepList(Monster monster) {
-        Random random = new Random();
-        int space1 = random.nextInt(3);
-        int space2 = random.nextInt(3);
-        this.stepList[space1][space2] = new Step(monster);
-
-    	for(int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if(this.stepList[space1][space2] != this.stepList[i][j]) {
-                    this.stepList[i][j] = new Step();
-                }
-            }
-        }
-    }
     
-    public void buildStepList(Character character, Item item) {
+    public void buildStepList(NPC npc, Item item) {
         Random random = new Random();
         int spaceCharacter1 = random.nextInt(3);
         int spaceCharacter2 = random.nextInt(3);
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(character);
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(npc);
         
         int spaceItem1 = random.nextInt(3);
         int spaceItem2 = random.nextInt(3);
+        while(spaceItem1 == spaceCharacter1 && spaceItem2 == spaceCharacter2) {
+            spaceItem1 = random.nextInt(3);
+            spaceItem2 = random.nextInt(3);
+        }
+        
         this.stepList[spaceItem1][spaceItem2] = new Step(item);
 
     	for(int i = 0; i < 3; i++) {
@@ -208,65 +309,39 @@ public class Room
         }
     }
     
-    public void buildStepList(Character character, Clue clue) {
-        Random random = new Random();
-        int spaceCharacter1 = random.nextInt(3);
-        int spaceCharacter2 = random.nextInt(3);
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(character);
-        
-        int spaceClue1 = random.nextInt(3);
-        int spaceClue2 = random.nextInt(3);
-        this.stepList[spaceClue1][spaceClue2] = new Step(clue);
-
-    	for(int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if(this.stepList[spaceCharacter1][spaceCharacter2] != this.stepList[i][j] || this.stepList[spaceClue1][spaceClue2] != this.stepList[i][j]) {
-                    this.stepList[i][j] = new Step();
-                }
-            }
-        }
-    }
     
     public Step move(String move) {
-    	if(move.toLowerCase().equals("up")) {
+    	if(move.toLowerCase().equals("north")) {
     		if(currentPosition1 - 1 >= 0) {
     			currentPosition1 = currentPosition1 - 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
-    	    	System.out.print("\r" + "\r" + "\r" + "\r");
-    			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
     			return null;
     			}
     	} 
-    	if(move.toLowerCase().equals("down")) {
+    	if(move.toLowerCase().equals("south")) {
     		if(currentPosition1 + 1 <= 2) {
     			currentPosition1 = currentPosition1 + 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
-    	    	System.out.print("\r" + "\r" + "\r" + "\r");
-    			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
     			return null;	
     		}
     	} 
-    	if(move.toLowerCase().equals("left")) {
+    	if(move.toLowerCase().equals("west")) {
     		if(currentPosition2 - 1 >= 0) {
     			currentPosition2 = currentPosition2 - 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
-    	    	System.out.print("\r" + "\r" + "\r" + "\r");
-    			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
     			return null;
     			}
     	} 
-    	if(move.toLowerCase().equals("right")) {
+    	if(move.toLowerCase().equals("east")) {
     		if(currentPosition2 + 1 <= 2) {
     			currentPosition2 = currentPosition2 + 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
-    	    	System.out.print("\r" + "\r" + "\r" + "\r");
-    			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
     			return null;
@@ -330,7 +405,7 @@ public class Room
     	if(step.getMonster() != null) {
     		System.out.println("Monster: " + step.getMonster().getHp() + " hp");
     	} 
-    	printRoom();
+     	printRoom();
     	   	
     }
     
@@ -360,10 +435,12 @@ public class Room
     		for(int j = 0; j < 3; j++) {
     			if(this.stepList[i][j] == this.stepList[currentPosition1][currentPosition2]) {
     				System.out.print(" X ");
-    			} else if(this.stepList[i][j].getCharacter() != null) { 
+    			} else if(this.stepList[i][j].getNPC() != null) { 
     				System.out.print(" C ");
     			} else if(this.stepList[i][j].getItem() != null) {
                                 System.out.print(" I ");
+                        }else if(this.stepList[i][j].getMonster() != null) {
+                                System.out.print(" M ");
                         } else {
                             System.out.print(" O ");
                         }

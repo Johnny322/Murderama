@@ -1,9 +1,9 @@
 package worldofzuul2;
 
-
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Clues {
+public class Clues implements Serializable {
 	
     private final HashMap<String, Clue> listOfClues;
 	

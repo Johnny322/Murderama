@@ -9,48 +9,10 @@ package worldofzuul2;
  *
  * @author Simon
  */
-public class NPC extends Character {
+public interface NPC {
     
-    private String information;
-    private final Character character;
-    private boolean isHostile;
-    private final boolean isMurderer;
-    
-    public NPC (Character character, String information, boolean isHostile, boolean isMurderer) {
-        this.character = character;
-        this.isHostile = isHostile;
-        this.isMurderer = isMurderer;
-        this.information = information;
-    }
-    
-    public void setStatus() {
-        this.isHostile = true;
-    }
-
-    /**
-     * 
-     * @return true if the NPC is hostile
-     */
-    public boolean getStatus() {
-        return this.isHostile;
-    }
-    
-    public void test() {
-        super.setHp(10);
-        super.alive();
-    }
-
-        /**
-     * 
-     * @return true if the NPC checked is the murderer
-     */
-    public boolean isMurderer() {
-    	return this.isMurderer;
-    }
-    
-    public String getInformation() {
-        return this.information;
-    }
-    
-    
+    public String getInformation();
+    public void setHostile(boolean isHostile);
+    public boolean isHostile();
+    public boolean isMurderer();
 }

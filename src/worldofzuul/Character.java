@@ -1,20 +1,13 @@
 package worldofzuul2;
 
-public abstract class Character {
+import java.io.Serializable;
+
+public abstract class Character implements Serializable {
 	
 	private final String name;
 	private int hp;
 	private int damage;
     
-	/**
-         * Creates the playable Character
-         */
-	public Character() {
-		this.name = "Jeff";
-		this.hp = 100;
-		this.damage = 10;
-	}
-	
         /**
          * Constructor for NPC with Item(s)
          * @param name Name of the NPC
@@ -30,6 +23,7 @@ public abstract class Character {
          * Accessor for damage of Character
          * @return 
          */
+   
     public int getDamage() {
         return this.damage;
     }
@@ -38,10 +32,12 @@ public abstract class Character {
      * Mutator for hp of the Character
      * @param damageTaken 
      */
-    public void setHp(int damageTaken) 
+    public void changeHp(int damageTaken) 
     {
     	this.hp = hp - damageTaken;
     }
+    
+    
     
     /**
      * Accessor for the hp of a Character
@@ -67,5 +63,8 @@ public abstract class Character {
         return this.hp > 0;
     }
     
-    
+    //Standard setter for damage
+    public void changeDamage(int increase) {
+        this.damage += increase;
+    }
 }
