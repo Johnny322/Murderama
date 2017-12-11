@@ -50,6 +50,9 @@ public class Player extends Character implements Serializable {
     public void setWalkSpeed(int walkSpeed) {
         this.walkSpeed = walkSpeed;
     }
+    public void setCurrentHp (int hp) {
+        super.currentHp(hp);
+    } 
 
     public void setFightSpeed(int fightSpeed) {
         this.fightSpeed = fightSpeed;
