@@ -1,7 +1,9 @@
 package worldofzuul2;
 
+import java.io.Serializable;
 import java.util.Set;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 
@@ -9,14 +11,39 @@ import java.util.Random;
  * @author  Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
-public class Room 
+public class Room implements Serializable
 {
-    private final String description;
-    private final HashMap<String, Room> exits;
-    private final Step[][] stepList;
+    private String description;
+    private HashMap<String, Room> exits;
+    private Player player = new Player("Jeff", 150, 12);
+    private Step[][] stepList;
     private int currentPosition1 = 0;
     private int currentPosition2 = 0;
     private Step currentPosition;
+    
+   public void setStepList(Step[][] stepList) {
+        this.stepList = stepList;
+    }
+   
+    public Step[][] getStepList() {
+        return stepList;
+    }
+    
+    public void setCurrentPosition1(int currentPosition1) {
+        this.currentPosition1 = currentPosition1;
+    }
+
+    public void setCurrentPosition2(int currentPosition2) {
+        this.currentPosition2 = currentPosition2;
+    }
+    
+    public Step getCurrentPosition() {
+        return currentPosition;
+    }
+    
+    public String getPosition() {
+        return currentPosition1 + " " + currentPosition2;
+    }
     
     /**
      * Constructor for the room that the player spawns in
@@ -34,7 +61,9 @@ public class Room
      * Accessor method for the Player
      * @return 
      */
- 
+    public Player getPlayer() {
+        return this.player;
+    }
     
     /**
      * Method to set exit for a room
@@ -114,7 +143,7 @@ public class Room
             space2 = random.nextInt(3);
         }
         
-        this.stepList[space1][space2] = new Step(new Evil("Jeff", 10, 10, "I think I saw Janiel Dørgensen in the projekt room earlier", true, "Student, big guy, large feet, small hands"));
+        this.stepList[space1][space2] = new Step(new Evil("Jeff", 150, 10, "Hello", false));
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if(this.stepList[i][j] == null) {
@@ -130,7 +159,7 @@ public class Room
         int space2 = random.nextInt(3);
 
         
-        this.stepList[space1][space2] = new Step(new Friendly("Jan Ithor", 10, 150, "I definately saw Jeff with the victim earlier", false, true, "What's your problem?", 150, "Janitor, big guy, large feet and large hands"));
+        this.stepList[space1][space2] = new Step(new Friendly("Jan Ithor", 10, 150, "Bob is the murderer", false));
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if(this.stepList[i][j] == null) {
@@ -144,7 +173,7 @@ public class Room
         Random random = new Random();
         int space1 = random.nextInt(3);
         int space2 = random.nextInt(3);
-        this.stepList[space1][space2] = new Step(Consumable.KEY);
+        this.stepList[space1][space2] = new Step(Consumable.BEER);
         System.out.println("Clue placed at " + space1 + ", " + space2);
 
         int spaceCharacter1 = random.nextInt(3);
@@ -153,7 +182,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg tror jeg så ofret i project room tidligere", false, true, "Det er sindssygt", 200,  "A very nervous guy. Needs to get to know you before he will tell you anything"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg så noget ske", false));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -177,7 +206,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Lunchlady", 150, 10, "The victim was from Jeff's class", false, true, "They had an argument some days ago", 100, "Lunchlady, has a lot of information"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, "Jeg så noget ske", false));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -202,7 +231,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Janiel Dørgensen", 150, 10, "", false, false, "fuck", 0, "Teacher of Object Oriented Programming"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Janiel Dørgensen", 150, 10, "Det var Jeff", false));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -227,55 +256,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Librarian", 150, 10, "Det var Jeff", false, true, "lol", 20, "Librarian, likely tells the truth"));
-
-        
-    	for(int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if(this.stepList[i][j] == null) {
-                    this.stepList[i][j] = new Step();
-                }
-            }
-        }
-    }
-    
-    public void buildU183() {
-        Random random = new Random();
-        int space1 = random.nextInt(3);
-        int space2 = random.nextInt(3);
-        this.stepList[space1][space2] = new Step(Clue.VICTIM);
-
-        int spaceCharacter1 = random.nextInt(3);
-        int spaceCharacter2 = random.nextInt(3);
-        while(spaceCharacter1 == space1 && spaceCharacter2 == space2) {
-            spaceCharacter1 = random.nextInt(3);
-            spaceCharacter2 = random.nextInt(3);
-        }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Evil("Srik Eørensen", 10, 150, "The person who did it starts with J", false, "Teacher of Computer Systems, small feet and large hands"));
-
-        
-    	for(int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if(this.stepList[i][j] == null) {
-                    this.stepList[i][j] = new Step();
-                }
-            }
-        }
-    }
-    
-    public void buildProjectRoom() {
-        Random random = new Random();
-        int space1 = random.nextInt(3);
-        int space2 = random.nextInt(3);
-        this.stepList[space1][space2] = new Step(Clue.VICTIM);
-
-        int spaceCharacter1 = random.nextInt(3);
-        int spaceCharacter2 = random.nextInt(3);
-        while(spaceCharacter1 == space1 && spaceCharacter2 == space2) {
-            spaceCharacter1 = random.nextInt(3);
-            spaceCharacter2 = random.nextInt(3);
-        }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Evil("Steen", 10, 150, "The person who did this has large feet", false, "Head of SIF, small stature, small feet and small hands"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Librarian", 150, 10, "Det var Jeff", false));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -329,48 +310,38 @@ public class Room
     }
     
     
-    
-    
     public Step move(String move) {
-    	if(move.toLowerCase().equals("up")) {
+    	if(move.toLowerCase().equals("north")) {
     		if(currentPosition1 - 1 >= 0) {
     			currentPosition1 = currentPosition1 - 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
-    	    	System.out.print("\r" + "\r" + "\r" + "\r");
-    			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
     			return null;
     			}
     	} 
-    	if(move.toLowerCase().equals("down")) {
+    	if(move.toLowerCase().equals("south")) {
     		if(currentPosition1 + 1 <= 2) {
     			currentPosition1 = currentPosition1 + 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
-    	    	System.out.print("\r" + "\r" + "\r" + "\r");
-    			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
     			return null;	
     		}
     	} 
-    	if(move.toLowerCase().equals("left")) {
+    	if(move.toLowerCase().equals("west")) {
     		if(currentPosition2 - 1 >= 0) {
     			currentPosition2 = currentPosition2 - 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
-    	    	System.out.print("\r" + "\r" + "\r" + "\r");
-    			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
     			return null;
     			}
     	} 
-    	if(move.toLowerCase().equals("right")) {
+    	if(move.toLowerCase().equals("east")) {
     		if(currentPosition2 + 1 <= 2) {
     			currentPosition2 = currentPosition2 + 1;
     			this.currentPosition = stepList[currentPosition1][currentPosition2];
-    	    	System.out.print("\r" + "\r" + "\r" + "\r");
-    			System.out.println("Currently at " + currentPosition1 + ", " + currentPosition2);
     			return currentPosition;
     		} else { 
     			return null;

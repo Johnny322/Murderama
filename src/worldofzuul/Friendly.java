@@ -15,27 +15,15 @@ public class Friendly extends Character implements NPC {
     private final String information;
     private final boolean isMurderer;
     private boolean isHostile;
-    private final boolean friendly;
-    private String additionalInformation;
-    private int threshold;
-
     
     //Constructor, tager name, damage og hp til Character-constructoren
-    public Friendly (String name, int damage, int hp, String information, boolean isMurderer, boolean friendly, String additionalInformation, int threshold, String description) {
-        super(name, damage, hp, description);
+    public Friendly (String name, int damage, int hp, String information, boolean isMurderer) {
+        super(name, damage, hp);
         this.information = information;
         this.isMurderer = isMurderer;
         this.isHostile = false;
-        this.friendly = friendly;
-        this.additionalInformation = additionalInformation;
-        this.threshold = threshold;
     }
 
-    @Override
-    public int getThreshold() {
-        return this.threshold;
-    }
-    
     @Override
     public void setHostile(boolean isHostile) {
         this.isHostile = isHostile;
@@ -68,19 +56,4 @@ public class Friendly extends Character implements NPC {
         }
         return this.information;
     }
-
-    @Override
-    public boolean isEvil() {
-        return false;
-    }
-    
-    @Override
-    public boolean friendly(){
-        return this.friendly;
-    }
-    
-    public String getAdditionalInformation() {    
-        return this.additionalInformation;
-    }
-    
 }

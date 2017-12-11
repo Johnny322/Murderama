@@ -15,10 +15,4 @@ public interface NPC {
     public void setHostile(boolean isHostile);
     public boolean isHostile();
     public boolean isMurderer();
-    public boolean isEvil();
-    public boolean friendly();
-    public String getAdditionalInformation();
-    public int getThreshold();
-
-
 }

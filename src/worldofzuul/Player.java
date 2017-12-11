@@ -5,11 +5,13 @@
  */
 package worldofzuul2;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Simon
  */
-public class Player extends Character {
+public class Player extends Character implements Serializable {
     
     private final Item[] inventory;
     private int lives;
@@ -18,7 +20,8 @@ public class Player extends Character {
     private final Notes notes;
     private int fightSpeed;
     private int searchSpeed;
-    private int likeability;
+    private Item item;
+
 
     /**
      * Creates the playable Character
@@ -27,18 +30,17 @@ public class Player extends Character {
      * @param hp
      */
     public Player(String name, int damage, int hp) {
-        super(name, hp, damage, "");
+        super(name, damage, hp);
         this.inventory = new Item[10];
         this.lives = 3;
         this.walkSpeed = 10;
         this.fightSpeed = 5;
         this.searchSpeed = 25;
         this.notes = new Notes();
-        this.likeability = 0;
     }
 
     public void setLives(int lives) {
-        this.lives -= lives;
+        this.lives = lives;
     }
 
     public void setIsMurdererAlive(boolean isMurdererAlive) {
@@ -59,31 +61,32 @@ public class Player extends Character {
 
 
     public Item[] getInventory() {
-        return this.inventory;
+        return inventory;
     }
+    
 
     public int getLives() {
-        return this.lives;
+        return lives;
     }
 
     public boolean isIsMurdererAlive() {
-        return this.isMurdererAlive;
+        return isMurdererAlive;
     }
 
     public int getWalkSpeed() {
-        return this.walkSpeed;
+        return walkSpeed;
     }
 
     public Notes getNotes() {
-        return this.notes;
+        return notes;
     }
 
     public int getFightSpeed() {
-        return this.fightSpeed;
+        return fightSpeed;
     }
 
     public int getSearchSpeed() {
-        return this.searchSpeed;
+        return searchSpeed;
     }
 
     public void setHp(int i) {
@@ -112,13 +115,6 @@ public class Player extends Character {
                 System.out.println("A " + inventory[i].getName());
             }
         }
-    }    
-
-    public void increaseLikeability(int increment) {
-        this.likeability += increment;
     }
-
-    public int getLikeability() {
-        return this.likeability;
-    }
+    
 }

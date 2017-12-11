@@ -1,4 +1,5 @@
 package worldofzuul2;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,12 +7,15 @@ import java.util.Scanner;
 This is based on an ArrayList of notes. It might be practical to make it a (Hash)Map, but we had not yet heard about Maps when I wrote this.
 @author Patrick
 */
-public class Notes {
+public class Notes implements Serializable{
+
+   
     private ArrayList<String> notes = new ArrayList<>();
     
     /**
      * Constructor.
      */
+   
     public Notes() {
         this.notes = new ArrayList<>();
     }
@@ -46,10 +50,6 @@ public class Notes {
      */
     public void addNote(String name, String note) {
         this.notes.add(name + " said: " + note);
-    }
-    
-    public void addClue(String note) {
-        this.notes.add(note);
     }
     
     /*
@@ -94,4 +94,9 @@ public class Notes {
     public void clearNotes() {
         this.notes.clear();
     }
+    
+    public void setNotes(ArrayList<String> notes) {
+        this.notes = notes;
+    }
+   
 }
