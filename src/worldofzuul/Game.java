@@ -203,10 +203,7 @@ public class Game implements Serializable {
         }
     }
 
-    private void createRooms()
-    {
-        
-        Room outside, cafeteria, U55, basement, library, hallway, TEK;
+    private void createRooms() {
 
         outside = new Room("outside the main entrance of the university");
         outside.buildOutside();
@@ -215,31 +212,34 @@ public class Game implements Serializable {
         U55 = new Room("in lecture room U55");
         U55.buildU55();
         basement = new Room("in the basement of the university");
-        hallway = new Room ("in the long hallway in front of room U55");
+        hallway = new Room("in the long hallway in front of room U55");
         hallway.buildHallway();
-        library = new Room (" in the university's library");
+        library = new Room(" in the university's library");
         library.buildLibrary();
-        TEK = new Room ("in front of the bronze stairs at TEK");
+        TEK = new Room("in front of the bronze stairs at TEK");
         TEK.buildTEK();
+        U183 = new Room("inside room U183"); 
+        U183.buildU183();
+        projectRoom = new Room("inside a project room at TEK");
+        projectRoom.buildProjectRoom();
         
-        
+
         outside.setExit("west", TEK);
+        outside.setExit("south", projectRoom);
+        projectRoom.setExit("north", outside);
+
         hallway.setExit("east", U55);
         hallway.setExit("south", cafeteria);
-        outside.setExit("south", basement);
         hallway.setExit("north", library);
         outside.setExit("east", hallway);
-        U55.setExit("east", hallway);        
-        hallway.setExit("Basement", basement);
-        basement.setExit("Hallway", hallway);
-        basement.setExit("south", outside);
+        U55.setExit("east", hallway);
         TEK.setExit("east", outside);
-        //TEK.setExit("Hallway", hallway);
+        TEK.setExit("north", U183);
+        U183.setExit("south", TEK);
         cafeteria.setExit("north", hallway);
         library.setExit("south", hallway);
         hallway.setExit("west", outside);
-        outside.setExit("north", basement);
-        
+
         currentRoom = outside;
     }
 
