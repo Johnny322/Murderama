@@ -576,6 +576,17 @@ public class Game implements Serializable {
                 }
                 System.out.println("You feel energized. ");
                 break;
+                case KEY:
+                if (currentRoom == outside || currentRoom == hallway) {
+                    hallway.setExit("west", basement);
+                    basement.setExit("east", hallway);
+                    basement.setExit("south", outside);
+                    outside.setExit("north", basement);
+                    System.out.println("The key has opened a door to the basement!");
+                } else {
+                    System.out.println("The key doesn't fit in any doors in this area.");
+                }
+                break;
                 
             default:
                 System.out.println("This item does not exist. ");
