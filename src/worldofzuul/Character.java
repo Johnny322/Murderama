@@ -67,4 +67,7 @@ public abstract class Character implements Serializable {
     public void changeDamage(int increase) {
         this.damage += increase;
     }
+	public void currentHp(int hp){
+    this.hp = hp;
+    }
 }
