@@ -22,9 +22,9 @@ public enum CommandWord
     A("a"),
     S("s"),
     D("d"),
-    SAVE("save"),
+    SEARCH("search"),
     LOAD("load"),
-    SEARCH("search");
+    SAVE("save");
     
     private String commandString;
     

@@ -5,13 +5,11 @@
  */
 package worldofzuul2;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Simon
  */
-public class Player extends Character implements Serializable {
+public class Player extends Character {
     
     private final Item[] inventory;
     private int lives;
@@ -20,8 +18,7 @@ public class Player extends Character implements Serializable {
     private final Notes notes;
     private int fightSpeed;
     private int searchSpeed;
-    private Item item;
-
+    private int likeability;
 
     /**
      * Creates the playable Character
@@ -30,17 +27,18 @@ public class Player extends Character implements Serializable {
      * @param hp
      */
     public Player(String name, int damage, int hp) {
-        super(name, damage, hp);
+        super(name, hp, damage);
         this.inventory = new Item[10];
         this.lives = 3;
         this.walkSpeed = 10;
         this.fightSpeed = 5;
         this.searchSpeed = 25;
         this.notes = new Notes();
+        this.likeability = 0;
     }
 
     public void setLives(int lives) {
-        this.lives = lives;
+        this.lives -= lives;
     }
 
     public void setIsMurdererAlive(boolean isMurdererAlive) {
@@ -50,9 +48,6 @@ public class Player extends Character implements Serializable {
     public void setWalkSpeed(int walkSpeed) {
         this.walkSpeed = walkSpeed;
     }
-    public void setCurrentHp (int hp) {
-        super.currentHp(hp);
-    } 
 
     public void setFightSpeed(int fightSpeed) {
         this.fightSpeed = fightSpeed;
@@ -64,41 +59,31 @@ public class Player extends Character implements Serializable {
 
 
     public Item[] getInventory() {
-        return inventory;
+        return this.inventory;
     }
-    
-    public void addInventory(Item item) {
-        for (int i = 0; i < this.inventory.length; i++) {
-                if (this.inventory[i] == null) {
-                    this.inventory[i] = item;
-                   break;
-                }
-            }
-    }
-    
 
     public int getLives() {
-        return lives;
+        return this.lives;
     }
 
     public boolean isIsMurdererAlive() {
-        return isMurdererAlive;
+        return this.isMurdererAlive;
     }
 
     public int getWalkSpeed() {
-        return walkSpeed;
+        return this.walkSpeed;
     }
 
     public Notes getNotes() {
-        return notes;
+        return this.notes;
     }
 
     public int getFightSpeed() {
-        return fightSpeed;
+        return this.fightSpeed;
     }
 
     public int getSearchSpeed() {
-        return searchSpeed;
+        return this.searchSpeed;
     }
 
     public void setHp(int i) {
@@ -121,12 +106,32 @@ public class Player extends Character implements Serializable {
 
     }
     
+    public void setCurrentHp (int hp) {
+        super.setHP(hp);
+    } 
+    
     public void showInventory() {
         for(int i = 0; i < this.inventory.length; i++) {
             if(inventory[i] != null) {
                 System.out.println("A " + inventory[i].getName());
             }
         }
-    }
+    }  
     
+    public void addInventory(Item item) {
+        for (int i = 0; i < this.inventory.length; i++) {
+                if (this.inventory[i] == null) {
+                    this.inventory[i] = item;
+                   break;
+                }
+            }
+    }
+
+    public void increaseLikeability(int increment) {
+        this.likeability += increment;
+    }
+
+    public int getLikeability() {
+        return this.likeability;
+    }
 }

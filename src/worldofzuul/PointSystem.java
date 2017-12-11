@@ -1,16 +1,11 @@
 //@Jeanjohnsen Jeanjohnsen Har lavede nogle updates for pointsystem classen og worldofzuul2
 package worldofzuul2;
-import java.io.Serializable;
 import java.util.*;
 
-public class PointSystem implements Serializable
+public class PointSystem
 {
 
     private int points;
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
 
 
     public PointSystem()
@@ -32,5 +27,9 @@ public class PointSystem implements Serializable
     public int getPoints()
     {
         return (10000 - this.points);
+    }
+    
+    public void setPoints(int points) {
+        this.points = points;
     }
 }

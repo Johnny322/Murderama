@@ -20,10 +20,8 @@ public enum Clue implements Item {
 
     @Override
     public String toString() {
-    return this.clue; 
-        
+        return this.clue;
     }
-
     
     @Override
     public String getName() {

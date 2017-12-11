@@ -63,6 +63,14 @@ public class Step {
         public void voidItem() {
             this.item = null;
         }
+        
+        /**
+         * Method to void an Item at the Step
+         */
+	// Temp shitty setup
+        public void voidNPC() {
+            this.npc = null;
+        }
 	
         /**
          * 

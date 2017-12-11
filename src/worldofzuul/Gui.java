@@ -1,4 +1,4 @@
-package worldofzuul;
+package worldofzuul2;
 
 
 import javafx.scene.Scene;

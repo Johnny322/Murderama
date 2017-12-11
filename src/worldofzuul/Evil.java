@@ -15,14 +15,18 @@ public class Evil extends Character implements NPC {
     private final String information;
     private final boolean isMurderer;
     private boolean isHostile;
+    private int threshold;
+    private String description;
     
     
     //Constructor, tager navn, damage og hp og bruger den i Character-constructoren, her kaldet som "super"
-    public Evil (String name, int damage, int hp, String information, boolean isMurderer) {
+    public Evil (String name, int damage, int hp, String information, boolean isMurderer, String description) {
         super(name, damage, hp);
         this.information = information;
         this.isMurderer = isMurderer;
         this.isHostile = true;
+        this.threshold = 0;
+        this.description = description;
     }
     
     @Override
@@ -44,6 +48,11 @@ public class Evil extends Character implements NPC {
         return isMurderer;
     }
     
+
+    public String getDescription() {
+        return description;
+    }
+    
     /**
      *
      * @return
@@ -58,4 +67,21 @@ public class Evil extends Character implements NPC {
         return this.information;
     }
     
+    @Override
+    public int getThreshold() {
+        return this.threshold;
+    }
+    
+    @Override
+    public boolean isEvil() {
+        return true;
+    }
+    
+    public boolean friendly(){
+        return false;
+    }
+    
+    public String getAdditionalInformation() {    
+        return "No more info";
+    }
 }

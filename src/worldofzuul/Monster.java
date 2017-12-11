@@ -13,6 +13,8 @@ public class Monster extends Character implements NPC {
 
     private final String information;
     private boolean isHostile;
+    private int threshold;
+    private String description;
     
     /**
      *
@@ -22,10 +24,12 @@ public class Monster extends Character implements NPC {
      * @param information
      */
     //Constructor for monster, tager name, damage og hp og bruger dem i Character-constructoren. 
-    public Monster (String name, int damage, int hp, String information) {
+    public Monster (String name, int damage, int hp, String information, String description) {
         super(name, damage, hp);
         this.information = information;
         this.isHostile = true;
+        this.threshold = 0;
+        this.description = description;
     }
     
     /**
@@ -43,6 +47,16 @@ public class Monster extends Character implements NPC {
     }
 
     @Override
+    public int getThreshold() {
+        return this.threshold;
+    }
+    
+
+    public String getDescription() {
+        return this.description;
+    }
+    
+    @Override
     public void setHostile(boolean isHostile) {
         this.isHostile = isHostile;
     }
@@ -57,5 +71,16 @@ public class Monster extends Character implements NPC {
         return false;
     }
     
+    @Override
+    public boolean isEvil() {
+        return true;
+    }
     
+    public boolean friendly(){
+        return false;
+    }
+    
+    public String getAdditionalInformation() {    
+        return "No more info";
+    }
 }

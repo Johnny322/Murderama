@@ -1,9 +1,8 @@
 package worldofzuul2;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
-public class Consumables implements Serializable{
+public class Consumables {
 
     private HashMap<String, Consumable> listOfConsumables;
 
