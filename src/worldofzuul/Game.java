@@ -14,35 +14,24 @@ import java.util.logging.Logger;
  * @version 2006.03.30
  */
 public class Game implements Serializable {
-    
     private final Parser parser;
     private Room currentRoom;
-    private Room outside, cafeteria, U55, basement, library, hallway, TEK, U183, projectRoom; 
     private final Consumables items = new Consumables();
     private final PointSystem points = new PointSystem();
     private final Notes notes = new Notes();
-    private String[] changedRooms = new String[9];
+    private Room outside, cafeteria, U55, basement, library, hallway, TEK, U183, projectRoom;
+    private final Player player = new Player("Jeff", 150, 12);
+    private boolean hasWon = false;
     private Item item;
-    private Player player;
-
-   
   
-
     
+    
+
     /**
      *
      */
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-    
-    public Game() 
-    {
-       // printHighscore();
+    public Game() {
+        printHighscore();
         createRooms();
         parser = new Parser();
     }
@@ -81,8 +70,7 @@ public class Game implements Serializable {
             } else if (currentRoom == projectRoom) {
                 writer.println("projectRoom" + "\n"); //8
             }
-            //writer.print(room.currentPosition().getItem() + "\n");
-         
+            
             
             Item[] tempInventory = player.getInventory();
             for(int i = 0; i < tempInventory.length; i++) {
@@ -99,6 +87,10 @@ public class Game implements Serializable {
             }
             writer.println(" www");
 
+            
+               
+     
+      
             scanner.close();
             System.out.println("Spillet er nu saved");
         } catch (FileNotFoundException ex) {
@@ -158,7 +150,6 @@ public class Game implements Serializable {
            
             }
           
-           
             String s = ""; 
             String temp = scanner.next();
             while(!"www".equals(temp)) {
@@ -183,7 +174,7 @@ public class Game implements Serializable {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
+    }  
    
     public static void printHighscore() {
         File file = new File("src/worldofzuul2/Highscore.txt");
