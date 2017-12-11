@@ -51,6 +51,9 @@ public class Notes implements Serializable{
     public void addNote(String name, String note) {
         this.notes.add(name + " said: " + note);
     }
+   public void addNote(String note) {
+        this.notes.add(note);
+    }
     
     /*
     Prints the contents of the notes-list in the console.
