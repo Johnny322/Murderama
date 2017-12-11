@@ -67,6 +67,15 @@ public class Player extends Character implements Serializable {
         return inventory;
     }
     
+    public void addInventory(Item item) {
+        for (int i = 0; i < this.inventory.length; i++) {
+                if (this.inventory[i] == null) {
+                    this.inventory[i] = item;
+                   break;
+                }
+            }
+    }
+    
 
     public int getLives() {
         return lives;
