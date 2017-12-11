@@ -3,6 +3,7 @@ package worldofzuul2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.io.Serializable;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -16,7 +17,7 @@ public class Game implements Serializable {
     
     private final Parser parser;
     private Room currentRoom;
-    private Room outside, cafeteria, U55, basement, library, hallway, TEK; 
+    private Room outside, cafeteria, U55, basement, library, hallway, TEK, U183, projectRoom; 
     private final Consumables items = new Consumables();
     private final PointSystem points = new PointSystem();
     private final Notes notes = new Notes();
