@@ -23,6 +23,7 @@ public class Game implements Serializable {
     private final Notes notes = new Notes();
     private String[] changedRooms = new String[9];
     private Item item;
+    private Player player;
 
    
   
