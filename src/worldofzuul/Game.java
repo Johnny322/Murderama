@@ -44,34 +44,59 @@ public class Game implements Serializable {
         createRooms();
         parser = new Parser();
     }
-    
     public void SaveData() {
                 
-                File file = new File("src/worldofzuul/data.ser");
+                File file = new File("src/worldofzuul2/data.ser");
         try {
             Scanner scanner = new Scanner(file);
 
             PrintStream writer = new PrintStream(file);
-            writer.println(currentRoom.getPosition() + "\n");
-            writer.println(points.getPoints() + "\n");
-            writer.println(currentRoom.getPlayer().getLives() + "\n");
-            writer.println(currentRoom.getPlayer().getFightSpeed() + "\n");
-            writer.println(currentRoom.getPlayer().getWalkSpeed() + "\n");
-            writer.println(currentRoom.getPlayer().getHp() + "\n");
-            writer.println(currentRoom.getPlayer().getSearchSpeed() + "\n");
+            writer.println(currentRoom.getPosition() + "\n");  //1
+            writer.println(player.getLives() + "\n"); //2
+            writer.println(10000 - points.getPoints() + "\n"); //3
+
+            writer.println(player.getFightSpeed() + "\n"); //4
+            writer.println(player.getWalkSpeed() + "\n"); //5
+            writer.println(player.getHp() + "\n"); //6
+            writer.println(player.getSearchSpeed() + "\n"); //7
+
+            if (currentRoom == U55) {
+                writer.println("U55" + "\n"); //8
+            } else if (currentRoom == outside) {
+                writer.println("outside" + "\n"); //8
+            } else if (currentRoom == cafeteria) {
+                writer.println("cafeteria" + "\n"); //8
+            } else if (currentRoom == basement) {
+                writer.println("basement" + "\n"); //8
+            } else if (currentRoom == library) {
+                writer.println("library" + "\n"); //8
+            } else if (currentRoom == hallway) {
+                writer.println("hallway" + "\n"); //8
+            } else if (currentRoom == TEK) {
+                writer.println("TEK" + "\n"); //8
+            } else if (currentRoom == U183) {
+                writer.println("U183" + "\n"); //8
+            } else if (currentRoom == projectRoom) {
+                writer.println("projectRoom" + "\n"); //8
+            }
             //writer.print(room.currentPosition().getItem() + "\n");
-            writer.print(notes.getNotes().clone() + "\n"); 
-           
-          
-
-
-           
-          
-
+         
             
-            //writer.println(notes.getNotes()); //Der mangler loader.
-            //writer.println(currentRoom.getPlayer().getInventory()); //Mangler Inventory
+            Item[] tempInventory = player.getInventory();
+            for(int i = 0; i < tempInventory.length; i++) {
+               if(tempInventory[i] != null){
+                    writer.print(tempInventory[i].getName() + " ");//9
+                }
+            } 
+            writer.print(" qqq \n");
             
+            
+            ArrayList<String> tempNotes = notes.getNotes();
+            for (String s : tempNotes) {
+                writer.println(s + " "); //10
+            }
+            writer.println(" www");
+
             scanner.close();
             System.out.println("Spillet er nu saved");
         } catch (FileNotFoundException ex) {
@@ -82,28 +107,77 @@ public class Game implements Serializable {
         
     
     public void LoadData(){
-        File file = new File("src/worldofzuul/data.ser");
+        File file = new File("src/worldofzuul2/data.ser");
         try {
-            Scanner scanner = new Scanner(file);
-            currentRoom.setCurrentPosition1(scanner.nextInt());
-            currentRoom.setCurrentPosition2(scanner.nextInt());
-            currentRoom.getPlayer().setLives(scanner.nextInt());
-            points.setPoints(scanner.nextInt());
-            currentRoom.getPlayer().setHp(scanner.nextInt()); 
-            currentRoom.getPlayer().setFightSpeed(scanner.nextInt());
-            currentRoom.getPlayer().setWalkSpeed(scanner.nextInt());
-            currentRoom.getPlayer().setSearchSpeed(scanner.nextInt());
+            Scanner scanner = new Scanner(file); 
+            
+            currentRoom.setCurrentPosition1(scanner.nextInt()); //1
+            currentRoom.setCurrentPosition2(scanner.nextInt());//1
+           
+            player.setLives(scanner.nextInt()); //2 
+       
+            points.setPoints(scanner.nextInt()); //3
+            player.setFightSpeed(scanner.nextInt()); //4
+            player.setWalkSpeed(scanner.nextInt()); //5
+            player.setCurrentHp(scanner.nextInt()); //6
+            player.setSearchSpeed(scanner.nextInt()); //7
+            
+            String roomName = scanner.next();
+            switch(roomName) {
+                case "U55": currentRoom = U55;
+                case "outside": currentRoom = outside;
+                case "cafeteria": currentRoom = cafeteria;
+                case "basement": currentRoom = basement;
+                case "library": currentRoom = library;
+                case "hallway": currentRoom = hallway;
+                case "TEK": currentRoom = TEK;
+                case "U183": currentRoom = U183;
+                case "projectRoom": currentRoom = projectRoom;
+            }
+           
            
             
-            
+           
+            String setInventory = scanner.next();
+            while(!"qqq".equals(setInventory) && scanner.hasNext()) {
+            switch(setInventory) {
+                case "potion": player.addInventory(Consumable.POTION); 
+                break;
+                case "coffee": player.addInventory(Consumable.COFFEE);
+                break;
+                case "beer": player.addInventory(Consumable.BEER);
+                break;
+                case "key": player.addInventory(Consumable.KEY);
+                break;
+                //case " ": continue;
+                default: break;
+            }
+           setInventory = scanner.next();
+           
+            }
+          
+           
+            String s = ""; 
+            String temp = scanner.next();
+            while(!"www".equals(temp)) {
+                if(scanner.hasNext()) {
+                    s = s + " " + temp;
+                    temp = scanner.next();
+                    
+                } else {
+                    break;
+                }
+            }
+            notes.addNote(s); //10
             
             System.out.println("Din score er: " + points.getPoints());
-            System.out.println("Du har " + currentRoom.getPlayer().getHp() + " Hp");
-            System.out.println("Din walk-speed er: " + currentRoom.getPlayer().getWalkSpeed());
-            System.out.println("Din fight-speed er: " + currentRoom.getPlayer().getFightSpeed());
-            System.out.println("Din search-speed er: " + currentRoom.getPlayer().getSearchSpeed());
+            System.out.println("Du har " + player.getHp() + " Hp");
+            System.out.println("Din walk-speed er: " + player.getWalkSpeed());
+            System.out.println("Din fight-speed er: " + player.getFightSpeed());
+            System.out.println(" ");
+            System.out.println("You're currently at " + roomName);
             currentRoom.printRoom();
-
+ 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
