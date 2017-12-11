@@ -5,6 +5,7 @@ public enum Consumable implements Item {
     POTION("potion"),
     BEER("beer"),
     COFFEE("coffee"),
+    KEY("key"),
     UNKNOWN("");
     
 
