@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  * @author Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
-public class Game implements Serializable {
+public class Game {
     private final Parser parser;
     private Room currentRoom;
     private final Consumables items = new Consumables();
