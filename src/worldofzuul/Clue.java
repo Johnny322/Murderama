@@ -6,12 +6,12 @@ package worldofzuul2;
  */
 public enum Clue implements Item {
 
-    KNIFE("knife"),
-    FINGERPRINT("fingerprint"),
-    FOOTPRINT("footprint"),
-    CLOTHES("bloody clothes"),
-    VICTIM("victim"),
-    WITNESS("witness"),
+    KNIFE("You can use the knife to attack and fight other players"),
+    FINGERPRINT("This is a bloody fingerprint and there is dirt all around it"),
+    FOOTPRINT("That is a large footprint and it is fresh. It may be of someone who have just entered the university"),
+    CLOTHES("There are several bloodstains on these clothes, they may help you find the murderer"),
+    VICTIM("This is a victim"),
+    WITNESS("You can ask the witness for any anomalies around the university"),
     UNKNOWN(""),
     LAMP("lamp");
     /**
