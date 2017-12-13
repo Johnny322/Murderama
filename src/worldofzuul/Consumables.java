@@ -1,30 +1,51 @@
 package worldofzuul2;
 
-import java.util.HashMap;
+public enum Consumable implements Item {
+    POTION("potion"),
+    BEER("beer"),
+    COFFEE("coffee"),
+    KEY("key"),
+    UNKNOWN("");
 
-public class Consumables {
+    public String name;
 
-    private HashMap<String, Consumable> listOfConsumables;
-
-    public Consumables() {
-        listOfConsumables = new HashMap<String, Consumable>();
-        for (Consumable consumable : Consumable.values()) {
-            if (consumable != Consumable.UNKNOWN) {
-                listOfConsumables.put(consumable.toString(), consumable);
-            }
-        }
+    /**
+     * Accessor for the Consumables.
+     *
+     * @param item.
+     * @returns Item name.
+     */
+    private Consumable(String item) {
+        this.name = item;
     }
 
-    public Consumable getConsumable(String consumable) {
-        Consumable temp = listOfConsumables.get(consumable.toLowerCase());
-        if (temp != null) {
-            return temp;
-        } else {
-            return Consumable.UNKNOWN;
-        }
+    /**
+     * Overrides the previous string.
+     *
+     * @return the name.
+     */
+    @Override
+    public String toString() {
+        return name;
     }
 
-    public boolean isItem(String aString) {
-        return listOfConsumables.containsKey(aString);
+    /**
+     * Accessor for the name of the Consumable
+     *
+     * @return the name of item.
+     */
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * If the consumable is movable it returns true.
+     *
+     * @return true.
+     */
+    @Override
+    public boolean isMovable() {
+        return true;
     }
 }
