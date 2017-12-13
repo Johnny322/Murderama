@@ -1,49 +1,63 @@
 package worldofzuul2;
 
-import java.util.HashMap;
+/**
+ *
+ * Since there's only a few Clues, we decided to use enum for the clues.
+ */
+public enum Clue implements Item {
 
-public class Clues {
+    KNIFE("knife"),
+    FINGERPRINT("fingerprint"),
+    FOOTPRINT("footprint"),
+    CLOTHES("bloody clothes"),
+    VICTIM("victim"),
+    WITNESS("witness"),
+    UNKNOWN(""),
+    LAMP("lamp");
+    /**
+     *
+     * This shows Clue has a String. Clues contains information needed to play
+     * the game.
+     */
+    private final String clue;
 
     /**
-     * Creates a HashMap with Strings and clues, which is called listOfClues.
+     * Accessor for clue.
+     *
+     * @param clue - accesses the clue.
      */
-    private final HashMap<String, Clue> listOfClues;
-
-    /**
-     * Constructor which is used instantiate clues.
-     */
-    public Clues() {
-        listOfClues = new HashMap<String, Clue>();
-        for (Clue clue : Clue.values()) {
-            if (clue != Clue.UNKNOWN) {
-                listOfClues.put(clue.toString(), clue);
-            }
-        }
+    private Clue(String clue) {
+        this.clue = clue;
     }
 
     /**
-     * Accessor which accesses the clue from listOfClues
+     * It is a method which overrides a clue.
      *
-     * @param clue - it is a clue from the list.
-     * @return it is the clue from the list.
-     *
+     * @return clue.
      */
-    public Clue getClue(String clue) {
-        Clue temp = listOfClues.get(clue);
-        if (temp != null) {
-            return temp;
-        } else {
-            return Clue.UNKNOWN;
-        }
+    @Override
+    public String toString() {
+        return this.clue;
     }
 
     /**
-     * It clue is in the list by checking for key(clue).
+     * Accessor to the name of the clue in play.
      *
-     * @param aString it is the key.
-     * @return it returns the clue.
+     * @return clue - name of the clue.
      */
-    public boolean isClue(String aString) {
-        return listOfClues.containsKey(aString);
+    @Override
+    public String getName() {
+        return clue;
     }
+
+    /**
+     * It checks if the clue is Movable
+     *
+     * @return false - if it is, it should return false.
+     */
+    @Override
+    public boolean isMovable() {
+        return false;
+    }
+
 }
