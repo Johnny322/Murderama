@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="Load" prefHeight="376.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui_test.FXMLDocumentController">
+    <children>
+        <Label fx:id="label" layoutX="11.0" layoutY="6.0" minHeight="16" minWidth="69" text="Murderama" />
+      <Button fx:id="accuse" layoutX="66.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleButtonAccuse" text="Accuse" />
+      <Button fx:id="fight" layoutX="186.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleButtonFight" text="Fight" />
+      <Button fx:id="use" layoutX="357.0" layoutY="258.0" mnemonicParsing="false" onAction="#handleButtonUse" text="Use" />
+      <Button fx:id="loot" layoutX="245.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleButtonLoot" text="Loot" />
+      <Button fx:id="search" layoutX="306.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleButtonSearch" text="Search" />
+      <Button fx:id="talk" layoutX="375.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleButtonTalk" text="Talk" />
+      <Button fx:id="load" layoutX="424.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleButtonLoad" text="Load" />
+      <Button fx:id="save" layoutX="425.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleButtonSave" text="Save" />
+      <Button fx:id="showNotes" layoutX="26.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleButtonShowNotes" text="Show Notes" />
+      <TextField fx:id="writable" layoutX="405.0" layoutY="258.0" prefHeight="25.0" prefWidth="80.0" />
+      <Button fx:id="button1" layoutX="424.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleButtonW" text="W" />
+      <Button fx:id="button3" layoutX="393.0" layoutY="193.0" mnemonicParsing="false" onAction="#handleButtonA" text="A" />
+      <Button fx:id="button4" layoutX="426.0" layoutY="218.0" mnemonicParsing="false" onAction="#handleButtonS" text="S" />
+      <Button fx:id="button2" layoutX="454.0" layoutY="193.0" mnemonicParsing="false" onAction="#handleButtonD" text="D" />
+      <TextArea fx:id="area1" layoutX="45.0" layoutY="37.0" prefHeight="243.0" prefWidth="270.0" />
+      <TextArea fx:id="area2" layoutX="343.0" layoutY="37.0" prefHeight="116.0" prefWidth="124.0" />
+    </children>
+</AnchorPane>
