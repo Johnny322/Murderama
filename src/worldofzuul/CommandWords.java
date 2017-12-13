@@ -12,7 +12,8 @@ public class CommandWords
     private HashMap<String, CommandWord> validCommands;
 
     /**
-     * Constructor for CommandWords
+     * Checks if the commandWord is valid.
+     * Constructor for CommandWords.
      */
     public CommandWords()
     {
@@ -25,9 +26,9 @@ public class CommandWords
     }
 
     /**
-     * Accessor method based on a String commandWord
-     * @param commandWord
-     * @return CommandWord
+     * Accessor method based on a String commandWord.
+     * @param commandWord.
+     * @return the String CommandWord.
      */
     public CommandWord getCommandWord(String commandWord)
     {
@@ -41,9 +42,9 @@ public class CommandWords
     }
     
     /**
-     * Checks if the String is a Command
-     * @param aString
-     * @return true if the Command is present in validCommands
+     * Checks if the String is a Command.
+     * @param aString.
+     * @return true if the Command is present in validCommands.
      */
     public boolean isCommand(String aString)
     {
@@ -51,7 +52,7 @@ public class CommandWords
     }
 
     /**
-     * Shows all valid Commands
+     * Shows all valid Commands.
      */
     public void showAll() 
     {
