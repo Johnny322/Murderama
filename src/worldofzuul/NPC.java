@@ -6,20 +6,28 @@
 package worldofzuul2;
 
 /**
+ * This is an interface. It's implemented by Evil, Friendly and Monster.
  *
  * @author Simon
  */
 public interface NPC {
-    
-    public String getInformation();
-    public void setHostile(boolean isHostile);
-    public boolean isHostile();
-    public boolean isMurderer();
-    public boolean isEvil();
-    public boolean friendly();
-    public String getAdditionalInformation();
-    public int getThreshold();
-    public String getDescription();
 
+    public String getInformation();
+
+    public void setHostile(boolean isHostile);
+
+    public boolean isHostile();
+
+    public boolean isMurderer();
+
+    public boolean isEvil();
+
+    public boolean friendly();
+
+    public String getAdditionalInformation();
+
+    public int getThreshold();
+
+    public String getDescription();
 
 }
