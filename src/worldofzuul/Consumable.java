@@ -1,49 +1,51 @@
 package worldofzuul2;
 
-import java.util.HashMap;
+public enum Consumable implements Item {
+    POTION("potion"),
+    BEER("beer"),
+    COFFEE("coffee"),
+    KEY("key"),
+    UNKNOWN("");
 
-public class Clues {
+    public String name;
 
     /**
-     * Creates a HashMap with Strings and clues, which is called listOfClues.
+     * Accessor for the Consumables.
+     *
+     * @param item.
+     * @returns Item name.
      */
-    private final HashMap<String, Clue> listOfClues;
-
-    /**
-     * Constructor which is used instantiate clues.
-     */
-    public Clues() {
-        listOfClues = new HashMap<String, Clue>();
-        for (Clue clue : Clue.values()) {
-            if (clue != Clue.UNKNOWN) {
-                listOfClues.put(clue.toString(), clue);
-            }
-        }
+    private Consumable(String item) {
+        this.name = item;
     }
 
     /**
-     * Accessor which accesses the clue from listOfClues
+     * Overrides the previous string.
      *
-     * @param clue - it is a clue from the list.
-     * @return it is the clue from the list.
-     *
+     * @return the name.
      */
-    public Clue getClue(String clue) {
-        Clue temp = listOfClues.get(clue);
-        if (temp != null) {
-            return temp;
-        } else {
-            return Clue.UNKNOWN;
-        }
+    @Override
+    public String toString() {
+        return name;
     }
 
     /**
-     * It clue is in the list by checking for key(clue).
+     * Accessor for the name of the Consumable
      *
-     * @param aString it is the key.
-     * @return it returns the clue.
+     * @return the name of item.
      */
-    public boolean isClue(String aString) {
-        return listOfClues.containsKey(aString);
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * If the consumable is movable it returns true.
+     *
+     * @return true.
+     */
+    @Override
+    public boolean isMovable() {
+        return true;
     }
 }
