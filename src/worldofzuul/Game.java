@@ -3,17 +3,22 @@ package worldofzuul2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * This class contains most of the functionality in the game.
+ *
  * @author Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
 public class Game {
+
+    /**
+     * Various attributes for describing the current situation in the game.
+     */
     private final Parser parser;
     private Room currentRoom;
     private final Consumables items = new Consumables();
@@ -22,17 +27,23 @@ public class Game {
     private Room outside, cafeteria, U55, basement, library, hallway, TEK, U183, projectRoom;
     private final Player player = new Player("Jeff", 150, 12);
     private boolean hasWon = false;
-    
-    
 
     /**
-     *
+     * This is the method that is called when the game is played. It begins the
+     * game itself.
      */
     public Game() {
         printHighscore();
         createRooms();
         parser = new Parser();
     }
+
+    /**
+     * This method is used for saving a current game. It writes several
+     * important attributes to data.ser, so these can later be loaded back in to
+     * the game, in case the player wants to continue from this point in the
+     * game.
+     */
     public void SaveData() {
 
         File file = new File("src/worldofzuul2/data.ser");
@@ -77,13 +88,11 @@ public class Game {
             }
             writer.print(" qqq \n");
 
-            //Save Funktionen
             ArrayList<String> tempNotes = notes.getNotes();
             for (String s : tempNotes) {
-                writer.println(s + " " + "xxx"); //10
-
+                writer.println(s + " "); //10
             }
-            writer.print(" www");
+            writer.println(" www");
 
             scanner.close();
             System.out.println("Spillet er nu saved");
@@ -92,6 +101,11 @@ public class Game {
         }
     }
 
+    /**
+     * This method loads the game data that has been saved by SaveData. It reads
+     * the values from data.ser, and uses these to set the appropriate
+     * attributes to the correct values.
+     */
     public void LoadData() {
         File file = new File("src/worldofzuul2/data.ser");
         try {
@@ -173,17 +187,16 @@ public class Game {
             String s = "";
             String temp = scanner.next();
             while (!"www".equals(temp)) {
-                while (!"xxx".equals(temp)) {
+                if (scanner.hasNext()) {
                     s = s + " " + temp;
                     temp = scanner.next();
 
+                } else {
+                    break;
                 }
-                notes.addNote(s);
-                s = "";
-                temp = scanner.next();
             }
+            notes.addNote(s); //10
 
-            System.out.println("Dine gemte notes: \n" + notes.showNotes());
             System.out.println("Din score er: " + points.getPoints());
             System.out.println("Du har " + player.getHp() + " Hp");
             System.out.println("Din walk-speed er: " + player.getWalkSpeed());
@@ -197,6 +210,12 @@ public class Game {
         }
     }
 
+    /**
+     * This method is used to read a value representing a highscore from
+     * Highscore.txt, and to print this, so the player knows what the current
+     * highscore is before the game begins. It is called whenever the game is
+     * started.
+     */
     public static void printHighscore() {
         File file = new File("src/worldofzuul2/Highscore.txt");
         try {
@@ -205,14 +224,22 @@ public class Game {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
-    
+    }
+
+    /**
+     * The method responsible for updating the highscore whenever it is
+     * necessary. It is called at the end of the game, and it checks whether the
+     * players current score is higher than the one saved in Highscore.txt. If
+     * it is, then the current score is saved as the new highscore.
+     *
+     * @param currentScore - the players current score.
+     */
     public void updateHighscore(int currentScore) {
         File file = new File("src/worldofzuul2/Highscore.txt");
         try {
             Scanner scanner = new Scanner(file);
             int currentHighscore = scanner.nextInt();
-            if(currentScore > currentHighscore) {
+            if (currentScore > currentHighscore) {
                 PrintStream writer = new PrintStream(file);
                 writer.println(Integer.toString(currentScore));
                 System.out.println("You now have the current highscore with: " + currentScore);
@@ -224,6 +251,12 @@ public class Game {
         }
     }
 
+    /**
+     * This is where the Rooms are built. Constructors for every room 
+     * used in the story will be called here, and the appropriate exits will be set
+     * for each of the rooms. Since the player starts outside, the current room 
+     * is set to outside by default.
+     */
     private void createRooms() {
 
         outside = new Room("outside the main entrance of the university");
@@ -239,11 +272,10 @@ public class Game {
         library.buildLibrary();
         TEK = new Room("in front of the bronze stairs at TEK");
         TEK.buildTEK();
-        U183 = new Room("inside room U183"); 
+        U183 = new Room("inside room U183");
         U183.buildU183();
         projectRoom = new Room("inside a project room at TEK");
         projectRoom.buildProjectRoom();
-        
 
         outside.setExit("west", TEK);
         outside.setExit("south", projectRoom);
@@ -263,6 +295,13 @@ public class Game {
 
         currentRoom = outside;
     }
+
+    /**
+     * This method is used to actually play the game. It is a loop that keeps running 
+     * for as long as the game is not finished, and keeps processing the players commands.
+     * Additionally, it prints messages to the player at the beginning and end of the game, 
+     * and manages the highscore.
+     */
     public void play() {
         printWelcome();
 
@@ -276,6 +315,9 @@ public class Game {
         System.out.println("Thank you for playing.  Good bye.");
     }
 
+    /**
+     * Prints a welcome-message for the player, and shows the room for the first time.
+     */
     private void printWelcome() {
         System.out.println();
         System.out.println("Welcome to the World of Zuul!");
@@ -286,6 +328,11 @@ public class Game {
         currentRoom.printRoom();
     }
 
+    /**
+     * This switch-case is used to determine what the user wants to do next.
+     * @param command - the command given by the user.
+     * @return the appropriate method call for the given command.
+     */
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
@@ -300,13 +347,12 @@ public class Game {
                 printHelp();
                 break;
 
-
             case QUIT:
                 wantToQuit = quit(command);
                 break;
 
             case FIGHT:
-                return fight(command);
+                return fight();
 
             case LOOT:
                 return loot(currentRoom);
@@ -341,13 +387,13 @@ public class Game {
 
             case SHOWNOTES:
                 return notes.showNotes();
-            
+
             case SAVE:
-                SaveData(); 
+                SaveData();
                 break;
-            
+
             case LOAD:
-                LoadData();   
+                LoadData();
                 break;
 
             default:
@@ -356,6 +402,10 @@ public class Game {
         return wantToQuit;
     }
 
+    /**
+     * Prints out a helping message for the player. Is called when the player uses 
+     * the help-command.
+     */
     private void printHelp() {
         System.out.println("You are lost. You are alone. You wander");
         System.out.println("around at the university.");
@@ -363,7 +413,15 @@ public class Game {
         System.out.println("Your command words are:");
         parser.showCommands();
     }
-    
+
+    /**
+     * Processes a fight between the player and a NPC, called when the fight-command is used. 
+     * Handles changing the hp when a character is damaged, and removing a character from the 
+     * game if it is killed. If the player defeats the murderer, the hasWon-boolean is set to 
+     * true, resulting in the player winning the game.
+     * @param npc - the non-player character that the player is fighting.
+     * @return a boolean that represents whether or not the fight is over.
+     */
     private boolean processFight(NPC npc) {
         Character character = (Character) npc;
         points.updateOnAction(player.getFightSpeed());
@@ -377,7 +435,7 @@ public class Game {
             if (npc.isEvil()) {
                 npc.setHostile(false);
                 character.setHP(100);
-            } else if(npc.isMurderer()) {
+            } else if (npc.isMurderer()) {
                 hasWon = true;
             } else {
                 currentRoom.currentPosition().voidNPC();
@@ -390,14 +448,21 @@ public class Game {
             player.setLives(1);
             System.out.println("You now have " + player.getLives() + " live(s left");
             player.setHP(150);
-        } if (player.getLives() <= 0){
+        }
+        if (player.getLives() <= 0) {
             System.out.println("You are dead");
             return false;
         }
         return true;
     }
-    
-    private boolean fight(Command command) {
+
+    /**
+     * Starts a fight with a character. This is called when the player gives the 
+     * fight-command. This method also handles the flee-option.
+     * @return a boolean which is always false. This saves code by removing the 
+     * need for else-statements.
+     */
+    private boolean fight() {
         Room room = currentRoom;
         if (room.currentPosition().getCharacter() != null) {
             NPC npc = room.currentPosition().getNPC();
@@ -424,6 +489,12 @@ public class Game {
         return false;
     }
 
+    /**
+     * Adds an item to the inventory when a player uses the loot-command, and 
+     * removes the item from the room. 
+     * @param room - the room that the player is currently in.
+     * @return a boolean which is always false.
+     */
     private boolean loot(Room room) {
         if (room.currentPosition().getItem() != null) {
             points.updateOnAction(player.getFightSpeed());
@@ -436,6 +507,13 @@ public class Game {
         return false;
     }
 
+    /**
+     * Handles using an item, which involves getting the effect of the specified item 
+     * and applying it, and then removing the item from the inventory.
+     * @param command - the command given by the player, indicating which item the 
+     * player wants to use.
+     * @return a boolean which is always false.
+     */
     private boolean use(Command command) {
         Item[] inventory = player.getInventory();
         String secondWord = command.getSecondWord();
@@ -452,8 +530,8 @@ public class Game {
                     player.increaseLikeability(player.getFightSpeed());
                     getItemEffect(items.getConsumable(secondWord));
                     System.out.println("Used " + inventory[i].getName());
-                    if(!secondWord.equals("key")) {
-                    	inventory[i] = null;
+                    if (!secondWord.equals("key")) {
+                        inventory[i] = null;
                     }
                     return false;
                 }
@@ -464,6 +542,11 @@ public class Game {
         return false;
     }
 
+    /**
+     * This method is used to move the player between rooms. It is called when it 
+     * has been determined that the player is not trying to move to a new step.
+     * @param direction - the direction in which the player wants to move.
+     */
     private void goRoom(String direction) {
         Room nextRoom = currentRoom.getExit(direction);
 
@@ -481,21 +564,29 @@ public class Game {
         }
     }
 
+    /**
+     * Whenever the player wants to move, this method is called. A  
+     * switch-case determines which of the possible directions the player 
+     * wants to move, and then checks whether the player is trying to move to 
+     * another step, or something else - possibly a new room.
+     * @param commandword - command given by the player, which indicates the
+     * direction in which the player wants to move.
+     */
     private void move(CommandWord commandword) {
         String direction = "";
-        switch(commandword) {
+        switch (commandword) {
             case W:
                 direction = "north";
                 break;
-                
+
             case A:
                 direction = "west";
                 break;
-                
+
             case S:
                 direction = "south";
                 break;
-                
+
             case D:
                 direction = "east";
                 break;
@@ -507,9 +598,16 @@ public class Game {
             currentRoom.printStep(nextStep);
         } else {
             goRoom(direction);
-        } 
+        }
     }
 
+    /**
+     * This method is called when the player uses the quit-command. It checks 
+     * whether there is a second word in the command, to make sure that it 
+     * was not a mistake.
+     * @param command - the command given by the player.
+     * @return a boolean indicating whether or not the player actually wants to quit.
+     */
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
@@ -519,6 +617,14 @@ public class Game {
         }
     }
 
+    /**
+     * Used when the player gives the accuse-command. It handles checking whether 
+     * the player is correct, starting a fight with the accused character, and 
+     * changing the amount of remaining attempts. Additionally, this method is 
+     * used to check if the game is over.
+     * @param room - the room that the player is currently in.
+     * @return a boolean that is true if the game is over - either won or lost.
+     */
     private boolean accuse(Room room) {
         if (room.currentPosition().getNPC() != null) {
             NPC npc = room.currentPosition().getNPC();
@@ -527,12 +633,12 @@ public class Game {
             if (npc.isMurderer()) {
                 System.out.println("You are correct, " + character.getName() + " is the murderer. ");
                 System.out.println(character.getName() + " wants to fight you. ");
-                fight(new Command(CommandWord.FIGHT, "character"));
+                fight();
                 return true;
             } else {
                 System.out.println("You are not correct, " + character.getName() + " is not the murderer. ");
                 System.out.println(character.getName() + " wants to fight you for believing he was a murderer. ");
-                fight(new Command(CommandWord.FIGHT, "character"));
+                fight();
                 player.setLives(1);
                 if (player.getLives() <= 0) {
                     System.out.println("you lost, you accused to many people wrongly");
@@ -548,8 +654,11 @@ public class Game {
         return false;
 
     }
-
-    // Vi havde vidst slet ikke brugt SearchSpeed til at tælle tiden op. Jeg har tilføjet den her, men kun når det faktisk er en clue, der searches. /P
+    
+    /**
+     * This method is called when the player uses the search-command.
+     * @return a boolean which is always false.
+     */
     public boolean search() {
         if (currentRoom.currentPosition().getItem() != null) {
             Item item = currentRoom.currentPosition().getItem();
@@ -567,8 +676,14 @@ public class Game {
         System.out.println("There is no item here");
         return false;
     }
-
-    // Tiden tælles vidst ikke op, når man snakker med folk. Bør dette ændres? /P
+    
+    /**
+     * Called when the player talks to another character. Handles giving the player 
+     * the correct information from the character, and automatically adding this to 
+     * the list of notes. Also checks whether the character trusts the player enough 
+     * to talk to them.
+     * @return a boolean that is always false.
+     */
     public boolean talk() {
         if (currentRoom.currentPosition().getNPC() == null) {
             System.out.println("There is no one to talk to");
@@ -586,11 +701,11 @@ public class Game {
         player.increaseLikeability(20);
         boolean hasNote = false;
         if (!currentRoom.currentPosition().getNPC().friendly()) {
-        	for (String note : notes.getNotes()) {
-        		if (note.equals(currentRoom.currentPosition().getCharacter().getName() + " said: " + information)) {
-        			hasNote = true;
-        		}
-        	} 
+            for (String note : notes.getNotes()) {
+                if (note.equals(currentRoom.currentPosition().getCharacter().getName() + " said: " + information)) {
+                    hasNote = true;
+                }
+            }
         }
         if (!hasNote) {
             notes.addNote(currentRoom.currentPosition().getCharacter().getName(), information);
@@ -603,6 +718,10 @@ public class Game {
         return false;
     }
 
+    /**
+     * Executes the changes that happen whenever the player uses an item.
+     * @param item - the item the player wants to use.
+     */
     private void getItemEffect(Item item) {
         switch ((Consumable) item) {
             case BEER:
@@ -658,6 +777,12 @@ public class Game {
         }
     }
 
+    /**
+     * Describes what a consumable item does. This method is called when the player wants to 
+     * inspect an item closer.
+     * @param item - the item that is currently being handled.
+     * @return a description of the item
+     */
     private String getItemString(Item item) {
         switch ((Consumable) item) {
             case BEER:
@@ -674,6 +799,12 @@ public class Game {
         }
     }
 
+    /**
+     * Accessor for a clue that the player can inspect. A switch-case is used to identify
+     * which of the possible clues is currently being handled.
+     * @param item - the item that the player is currently looking at.
+     * @return the information of the appropriate clue.
+     */
     private void getClue(Item item) {
         switch ((Clue) item) {
             case VICTIM:
