@@ -6,8 +6,8 @@
 package worldofzuul2;
 
 /**
- *
- * @author Simon
+ * This is an interface
+ * It's implemented by Consumables and Clues
  */
 public interface Item {
     
