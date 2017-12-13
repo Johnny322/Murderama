@@ -320,8 +320,10 @@ public class Game {
      */
     private void printWelcome() {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to Murderama!");
+        System.out.println("This is a game where nothing happens by chance, everything is a mystery and nobody is trustworthy. Do you dare to play?
+.");
+        System.out.println("Someone has been murdered! Find the murderer and make him pay for what he did!");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -407,7 +409,7 @@ public class Game {
      * the help-command.
      */
     private void printHelp() {
-        System.out.println("You are lost. You are alone. You wander");
+        System.out.println("You are lost. You are alone. Be aware");
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
