@@ -13,7 +13,7 @@ public class Parser
     private Scanner reader;
 
     /**
-     * Constructor for the Parser-class
+     * Constructor for the Parser-class.
      */
     public Parser() 
     {
@@ -22,8 +22,8 @@ public class Parser
     }
 
     /**
-     * Accessor to get the Command 
-     * @return Command depending on the String given by the user
+     * Accessor to get the Command.
+     * @return Command depending on the String given by the user.
      */
     public Command getCommand() 
     {
@@ -48,7 +48,7 @@ public class Parser
     }
 
     /**
-     * Shows all the valid commands
+     * Shows all the valid commands.
      */
     public void showCommands()
     {

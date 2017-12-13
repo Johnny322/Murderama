@@ -7,7 +7,7 @@ package worldofzuul2;
 
 
 /**
- *
+ * Method for initailizing the game.
  * @author Simon
  */
 public class WorldOfZuul2 {
