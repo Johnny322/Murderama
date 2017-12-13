@@ -1,51 +1,41 @@
 package worldofzuul2;
 
-public enum Consumable implements Item {
-    POTION("potion"),
-    BEER("beer"),
-    COFFEE("coffee"),
-    KEY("key"),
-    UNKNOWN("");
+import java.util.HashMap;
 
-    public String name;
+public class Consumables {
 
-    /**
-     * Accessor for the Consumables.
-     *
-     * @param item.
-     * @returns Item name.
-     */
-    private Consumable(String item) {
-        this.name = item;
+    private HashMap<String, Consumable> listOfConsumables;
+/**
+ * Constructor which is used instantiate Consumable.
+ */
+    public Consumables() {
+        listOfConsumables = new HashMap<String, Consumable>();
+        for (Consumable consumable : Consumable.values()) {
+            if (consumable != Consumable.UNKNOWN) {
+                listOfConsumables.put(consumable.toString(), consumable);
+            }
+        }
     }
-
-    /**
-     * Overrides the previous string.
-     *
-     * @return the name.
-     */
-    @Override
-    public String toString() {
-        return name;
+/**
+ * Accessor which accesses the Consumable from listOfConsumables
+ * @param Consumable - it is a Consumable from the list.
+ * @return it is the Consumable from the list.
+ * 
+ */
+    public Consumable getConsumable(String consumable) {
+        Consumable temp = listOfConsumables.get(consumable.toLowerCase());
+        if (temp != null) {
+            return temp;
+        } else {
+            return Consumable.UNKNOWN;
+        }
     }
-
-    /**
-     * Accessor for the name of the Consumable
-     *
-     * @return the name of item.
-     */
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * If the consumable is movable it returns true.
-     *
-     * @return true.
-     */
-    @Override
-    public boolean isMovable() {
-        return true;
+/**
+ * It clue is in the list by checking for key(Consumable).
+ * @param aString it is the key.
+ * @return it returns the Consumable.
+ */
+    public boolean isItem(String aString) {
+        return listOfConsumables.containsKey(aString);
     }
 }
