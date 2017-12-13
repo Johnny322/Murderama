@@ -11,9 +11,9 @@ public class Command
     private String secondWord;
 
     /**
-     * Constructor for the Command-class
-     * @param commandWord The commandword that tells the switch-case which command is chosen
-     * @param secondWord Second word of command, to tell directions
+     * Constructor for the Command-class.
+     * @param commandWord The commandword that tells the switch-case which command is chosen.
+     * @param secondWord Second word of command, to tell directions.
      */
     public Command(CommandWord commandWord, String secondWord)
     {
@@ -22,8 +22,8 @@ public class Command
     }
     
     /**
-     * Accessor
-     * @return CommandWord
+     * Accessor for the CommandWord.
+     * @return the accessed commandWord.
      */
     public CommandWord getCommandWord()
     {
@@ -31,7 +31,7 @@ public class Command
     }
     
     /**
-     * Accessor
+     * Accessor for the secondWord.
      * @return secondWord for the 2nd word of the command
      */
     public String getSecondWord()
@@ -40,8 +40,8 @@ public class Command
     }
 
     /**
-     * Returns true if the command is not known
-     * @return boolean
+     * 
+     * @return true if the command is not known
      */
     public boolean isUnknown()
     {
