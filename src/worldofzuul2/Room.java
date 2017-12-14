@@ -140,7 +140,7 @@ public class Room
             space2 = random.nextInt(3);
         }
         
-        this.stepList[space1][space2] = new Step(new Evil("Jeff", 10, 10, "I don’t know anything I just arrived", true, "Student, big guy, large feet, small hands"));
+        this.stepList[space1][space2] = new Step(new Evil("Jeff", 10, 60, "I don’t know anything I just arrived", true, "Student, big guy, large feet, small hands"));
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if(this.stepList[i][j] == null) {
@@ -186,7 +186,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 150, 10, " saw something moving in the basement, I can assure that it did not belong down there", false, true, "Det er sindssygt", 200,  "A very nervous guy. Needs to get to know you before he will tell you anything"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 12, 110, " I saw something moving in the basement, I can assure that it did not belong down there", false, true, "No more info", 200,  "A very nervous guy. Needs to get to know you before he will tell you anything"));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -215,7 +215,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Lunchlady", 150, 10, "TThe victim was from Jeff's class in Computer Systems,  their teacher Erik may know what happened", false, true, "They had an argument some days ago", 100, "Lunchlady, has a lot of information"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Lunchlady", 11, 70, "The victim was from Jeff's class in Computer Systems,  their teacher Srik may know what happened", false, true, "They had an argument some days ago", 100, "Lunchlady, has a lot of information"));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -243,7 +243,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Janiel Dørgensen", 150, 10, "", false, false, "The murderer is a genius! Not that what he did was good, but he is sharp minded like me", 0, "Teacher of Object Oriented Programming"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Janiel Dørgensen", 10, 100, "", false, false, "The murderer is a genius! Not that what he did was good, but he is sharp minded like me", 0, "Teacher of Object Oriented Programming"));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -271,7 +271,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Librarian", 150, 10, "I saw a shadow behind the bookshelves. When i went to look I saw bloodstains on the ground. It was a big shadow, some heavy breaths, but eyes can betray. Surely this murderer is good at planning", false, true, "lol", 20, "Librarian, likely tells the truth"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Librarian", 10, 120, "I saw a shadow behind the bookshelves. When i went to look I saw bloodstains on the ground. It was a big shadow, some heavy breaths, but eyes can betray. Surely this murderer is good at planning", false, true, "No more info", 20, "Librarian, likely tells the truth"));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -299,7 +299,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Evil("Srik Eørensen", 10, 150, "TSome pupils had a fight today after class, i do not know what it was about but Jeff seemed a bit nervous. He is a lonely kid, loneliness can make you do stupid things. My advise will be to talk to Jan Ithor, he is the janitor and knows the school better than any of us.", false, "Teacher of Computer Systems, small feet and large hands"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Evil("Srik Eørensen", 10, 150, "Some pupils had a fight today after class, i do not know what it was about but Jeff seemed a bit nervous. He is a lonely kid, loneliness can make you do stupid things. My advise will be to talk to Jan Ithor, he is the janitor and knows the school better than any of us.", false, "Teacher of Computer Systems, small feet and large hands"));
 
         
     	for(int i = 0; i < 3; i++) {
