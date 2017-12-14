@@ -193,7 +193,8 @@ public class FXMLDocumentController implements Initializable {
         // TODO
         game = new Game();
         area1.setText(game.getRoom());
-        
+        area2.setText(game.getInformation());
+
         
     }
 }
