@@ -138,7 +138,6 @@ public class Game {
                 printHelp();
                 break;
 
-
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -219,7 +218,7 @@ public class Game {
         character.changeHp(player.getDamage());
         setInformation("You have " + player.getHp() + " hp" + "\n" + character.getName() + " has " + character.getHp() + " hp");
         if (character.getHp() <= 0) {
-            setInformation("Enemy is dead!");
+            setInformation(getInformation() + "\n" + "Enemy is dead!");
             if (npc.isEvil() && jeffAccused < 1) {
                 npc.setHostile(false);
                 character.setHP(100);
@@ -233,12 +232,12 @@ public class Game {
             return false;
         }
         if (player.getHp() <= 0) {
-            setInformation("You got knocked out");
+            setInformation(getInformation() + "\n" + "You got knocked out");
             player.setLives(1);
-            setInformation("You now have " + player.getLives() + " live(s left");
+            setInformation(getInformation() + "\n" + "You now have " + player.getLives() + " live(s left");
             player.setHP(150);
         } if (player.getLives() <= 0){
-            setInformation("You are dead");
+            setInformation(getInformation() + "\n" + "You are dead");
             hasLost = true;
             return false;
         }
@@ -298,7 +297,7 @@ public class Game {
 
         if (!command.hasSecondWord()) {
             setInformation("Use what?");
-            setInformation(player.showInventory());
+            setInformation(getInformation() + "\n" + player.showInventory());
             return false;
         }
         for (int i = 0; i < inventory.length; i++) {
@@ -428,19 +427,19 @@ public class Game {
             npc.setHostile(true);
             if (npc.isMurderer()) {
                 setInformation("You are correct, " + character.getName() + " is the murderer. \n" + character.getName() + " wants to fight you. ");
-                setInformation(character.getName() + " wants to fight you. ");
+                setInformation(getInformation() + "\n" + character.getName() + " wants to fight you. ");
                 return false;
             } else {
                 setInformation("You are not correct, " + character.getName() + " is not the murderer. ");
-                setInformation(character.getName() + " wants to fight you for believing he was a murderer. ");
+                setInformation(getInformation() + "\n" + character.getName() + " wants to fight you for believing he was a murderer. ");
                 player.setLives(1);
                 if (player.getLives() <= 0) {
-                    setInformation("you lost, you accused to many people wrongly");
+                    setInformation(getInformation() + "\n" + "you lost, you accused to many people wrongly");
                     return true;
                 }
-                setInformation("You now have " + player.getLives() + " lives left");
+                setInformation(getInformation() + "\n" + "You now have " + player.getLives() + " lives left");
                 player.increaseLikeability(-100);
-                setInformation("People will like you less because of your mistake.");
+                setInformation(getInformation() + "\n" + "People will like you less because of your mistake.");
                 return false;
             }
         }
@@ -532,7 +531,7 @@ public class Game {
             case POTION:
                 player.setHp(-25);
                 setInformation("Potion has been used. ");
-                setInformation("Your current hp has been increased by 25 to " + player.getHp());
+                setInformation(getInformation() + "\n" + "Your current hp has been increased by 25 to " + player.getHp());
                 break;
 
             case COFFEE:
