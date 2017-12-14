@@ -78,7 +78,7 @@ public class Game {
         hallway.setExit("south", cafeteria);
         hallway.setExit("north", library);
         outside.setExit("east", hallway);
-        U55.setExit("east", hallway);
+        U55.setExit("west", hallway);
         TEK.setExit("east", outside);
         TEK.setExit("north", U183);
         U183.setExit("south", TEK);
