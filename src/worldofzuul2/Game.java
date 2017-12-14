@@ -382,6 +382,12 @@ public class Game {
         } else if(currentRoom.currentPosition().getItem() != null ) {
             setInformation("Item: " + currentRoom.currentPosition().getItem().getName());
         }
+        
+        if(currentRoom.currentPosition().getNPC() != null ) {
+            if(currentRoom.currentPosition().getNPC().friendly()) {
+                talk();
+            }
+        }
     }
 
     /**
@@ -494,13 +500,12 @@ public class Game {
         setInformation(s);
         player.increaseLikeability(20);
         boolean hasNote = false;
-        if (!currentRoom.currentPosition().getNPC().friendly()) {
-        	for (String note : notes.getNotes()) {
-        		if (note.equals(currentRoom.currentPosition().getCharacter().getName() + " said: " + s)) {
-        			hasNote = true;
-        		}
-        	} 
-        }
+        for (String note : notes.getNotes()) {
+            if (note.equals(currentRoom.currentPosition().getCharacter().getName() + " said: " + s)) {
+        		hasNote = true;
+        	}
+        } 
+        
         if (!hasNote) {
             notes.addNote(currentRoom.currentPosition().getCharacter().getName(), s);
         }
