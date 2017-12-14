@@ -23,7 +23,7 @@
       <Button fx:id="button3" layoutX="393.0" layoutY="193.0" mnemonicParsing="false" onAction="#handleButtonA" text="A" />
       <Button fx:id="button4" layoutX="426.0" layoutY="218.0" mnemonicParsing="false" onAction="#handleButtonS" text="S" />
       <Button fx:id="button2" layoutX="454.0" layoutY="193.0" mnemonicParsing="false" onAction="#handleButtonD" text="D" />
-      <TextArea fx:id="area1" layoutX="45.0" layoutY="37.0" prefHeight="243.0" prefWidth="270.0" />
-      <TextArea fx:id="area2" layoutX="343.0" layoutY="37.0" prefHeight="116.0" prefWidth="124.0" />
+      <TextArea fx:id="area1" editable="false" layoutX="45.0" layoutY="37.0" prefHeight="243.0" prefWidth="270.0" />
+      <TextArea fx:id="area2" editable="false" layoutX="343.0" layoutY="37.0" prefHeight="116.0" prefWidth="124.0" />
     </children>
 </AnchorPane>
