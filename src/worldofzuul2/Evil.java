@@ -73,8 +73,7 @@ public class Evil extends Character implements NPC {
     @Override
     public String getInformation() {
         if(this.isHostile) {
-            System.out.println(super.getName() + " is hostile and cannot be talked to until you defeat them in combat");
-            return null;
+            return super.getName() + " is hostile and cannot be talked to until you defeat them in combat";
         }
         return this.information;
     }

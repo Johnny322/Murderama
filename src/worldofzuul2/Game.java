@@ -422,12 +422,10 @@ public class Game {
             if (npc.isMurderer()) {
                 setInformation("You are correct, " + character.getName() + " is the murderer. \n" + character.getName() + " wants to fight you. ");
                 setInformation(character.getName() + " wants to fight you. ");
-                fight(new Command(CommandWord.FIGHT, "character"));
                 return false;
             } else {
                 setInformation("You are not correct, " + character.getName() + " is not the murderer. ");
                 setInformation(character.getName() + " wants to fight you for believing he was a murderer. ");
-                fight(new Command(CommandWord.FIGHT, "character"));
                 player.setLives(1);
                 if (player.getLives() <= 0) {
                     setInformation("you lost, you accused to many people wrongly");
@@ -522,13 +520,13 @@ public class Game {
                 player.setFightSpeed(2);
                 player.setSearchSpeed(2);
                 player.increaseLikeability(25);
-                System.out.println("You feel slower, but more talkative. ");
+                setInformation("You feel slower, but more talkative. ");
                 break;
 
             case POTION:
                 player.setHp(-25);
-                System.out.println("Potion has been used. ");
-                System.out.println("Your current hp has been increased by 25 to " + player.getHp());
+                setInformation("Potion has been used. ");
+                setInformation("Your current hp has been increased by 25 to " + player.getHp());
                 break;
 
             case COFFEE:
@@ -549,7 +547,7 @@ public class Game {
                 } else {
                     player.setFightSpeed(-1);
                 }
-                System.out.println("You feel energized. ");
+                setInformation("You feel energized. ");
                 break;
 
             case KEY:
@@ -558,14 +556,14 @@ public class Game {
                     basement.setExit("east", hallway);
                     basement.setExit("south", outside);
                     outside.setExit("north", basement);
-                    System.out.println("The key has opened a door to the basement!");
+                    setInformation("The key has opened a door to the basement!");
                 } else {
-                    System.out.println("The key doesn't fit in any doors in this area.");
+                    setInformation("The key doesn't fit in any doors in this area.");
                 }
                 break;
 
             default:
-                System.out.println("This item does not exist. ");
+                setInformation("This item does not exist. ");
                 break;
         }
     }
