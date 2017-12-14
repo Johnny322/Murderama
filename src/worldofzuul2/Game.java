@@ -603,7 +603,7 @@ public class Game {
     private void getClue(Item item) {
         switch ((Clue) item) {
             case VICTIM:
-                setInformation("This is victim");
+                setInformation("This is the victim. He seems to have been strangled by someone with small hands");
                 break;
 
             case KNIFE:
