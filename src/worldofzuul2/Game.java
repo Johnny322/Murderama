@@ -273,13 +273,17 @@ public class Game {
      * @return a boolean which is always false.
      */
     private boolean loot(Room room) {
-        if (room.currentPosition().getItem() != null) {
+        if (room.currentPosition().getItem() != null && room.currentPosition().getItem().isMovable()) {
             points.updateOnAction(player.getFightSpeed());
             player.increaseLikeability(player.getFightSpeed());
             setInformation(player.lootItem(room.currentPosition().getItem()));
             room.currentPosition().voidItem();
-        } else {
-            setInformation("No item here");
+        }
+        else if (room.currentPosition().getItem() != null) {
+            setInformation("This item cannot be picked up");
+        }
+        else {
+            setInformation("There is no item here");
         }
         return false;
     }
