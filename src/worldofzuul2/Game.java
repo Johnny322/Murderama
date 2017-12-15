@@ -456,7 +456,7 @@ public class Game {
     }
 
     /**
-     * This method is called when the player uses the search-command.
+     * This method is called when the player uses the Inspect-command.
      * @return a boolean which is always false.
      */
     public boolean search() {
