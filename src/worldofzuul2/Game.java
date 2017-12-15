@@ -17,7 +17,6 @@ public class Game {
      /**
      * Various attributes for describing the current situation in the game.
      */
-    private final Parser parser;
     private Room currentRoom;
     private final Consumables items = new Consumables();
     private final PointSystem points = new PointSystem();
@@ -40,7 +39,6 @@ public class Game {
         printHighscore();
         createRooms();
         setInformation(printWelcome());
-        parser = new Parser();
     }
     
     /**
