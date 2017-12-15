@@ -181,6 +181,12 @@ public class FXMLDocumentController implements Initializable {
         area1.setText(game.getRoom());
     }
     
+    @FXML
+    private void handleButtonHelp(ActionEvent event) {
+        game.convertToCommand("help");
+        area2.setText(game.getInformation());
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

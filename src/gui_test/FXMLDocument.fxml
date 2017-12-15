@@ -38,5 +38,6 @@
          </font></Button>
       <TextArea fx:id="area1" editable="false" layoutX="11.0" layoutY="23.0" prefHeight="193.0" prefWidth="179.0" wrapText="true" />
       <TextArea fx:id="area2" editable="false" layoutX="202.0" layoutY="23.0" prefHeight="263.0" prefWidth="273.0" wrapText="true" />
+      <Button fx:id="help" layoutX="370.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleButtonHelp" text="Help" />
     </children>
 </AnchorPane>
