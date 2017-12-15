@@ -565,9 +565,9 @@ public class Game {
                     basement.setExit("east", library);
                     basement.setExit("south", outside);
                     outside.setExit("north", basement);
-                    setInformation("The key has opened a door to the basement!"); //denne bliver ikke vist
+                    setInformation("The key has opened a door to the basement!");
                 } else {
-                    setInformation("The key doesn't fit in any doors in this area."); //denne er også et problem
+                    setInformation("The key doesn't fit in any doors in this area.");
                 }
                 break;
 
