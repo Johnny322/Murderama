@@ -1,20 +1,15 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package worldofzuul2;
 
 /**
- *
+ * Class for the playable character in the game. This stores attributes related to 
+ * the player itself.
  * @author Simon
  */
 public class Player extends Character {
-    /**
-     * various atributs to describe the player.
-     */
     
+    /**
+     * various attributes to describe the player.
+     */
     private final Item[] inventory;
     private int lives;
     private boolean isMurdererAlive = true;
@@ -28,7 +23,7 @@ public class Player extends Character {
      * Creates the playable Character.
      * @param name - The name of the player.
      * @param damage - The damage the player deals.
-     * @param hp - The amout of hp the player has.
+     * @param hp - The amount of hp the player has.
      */
     public Player(String name, int damage, int hp) {
         super(name, hp, damage);
@@ -42,128 +37,114 @@ public class Player extends Character {
     }
 
     /**
-     * Setter for the amout of lives the player has.
+     * Mutator for the amount of lives the player has.
      * @param lives - how many lives the player loses.
      */
-    
     public void setLives(int lives) {
         this.lives -= lives;
     }
 
     /**
-     * Method for checking if the murder is alive.
-     * @param isMurdererAlive - Sets if the murder is alive.
+     * Method for setting whether or not the murderer is alive.
+     * @param isMurdererAlive - true if the murderer is alive.
      */
-    
     public void setIsMurdererAlive(boolean isMurdererAlive) {
         this.isMurdererAlive = isMurdererAlive;
     }
 
     /**
-     * Setter for the player walk speed.
-     * @param walkSpeed - Sets the walk speed for the player.
+     * Setter for the players walk speed.
+     * @param walkSpeed - the new walk speed for the player.
      */
-    
     public void setWalkSpeed(int walkSpeed) {
         this.walkSpeed = walkSpeed;
     }
 
     /**
-     * Setter for the player fight speed.
-     * @param fightSpeed - The speed that the player fights.
+     * Setter for the players fight speed.
+     * @param fightSpeed - The speed at which the player fights.
      */
-    
     public void setFightSpeed(int fightSpeed) {
         this.fightSpeed = fightSpeed;
     }
 
     /**
-     * Setter for the player Search speed.
+     * Setter for the players Search speed.
      * @param searchSpeed - The speed of how long the player takes to search.
      */
-    
     public void setSearchSpeed(int searchSpeed) {
         this.searchSpeed = searchSpeed;
     }
 
     /**
-     * Accesor for the player inventory.
-     * @return Returns the player inventory.
+     * Accessor for the players inventory.
+     * @return the player inventory.
      */
-
     public Item[] getInventory() {
         return this.inventory;
     }
 
     /**
-     * Accesor for the player lives.
-     * @return Returns the amount of lives the Player has left.
+     * Accessor for the player lives.
+     * @return the amount of lives the Player has left.
      */
-    
     public int getLives() {
         return this.lives;
     }
 
     /**
-     * Mehtod for checking if the murder is alive.
-     * @return Returns if the Murder is alive.
+     * Method for checking if the murderer is alive.
+     * @return true if the Murderer is alive.
      */
-    
     public boolean isIsMur1dererAlive() {
         return this.isMurdererAlive;
     }
 
     /**
-     * Accesor for the player walk speed.
-     * @return Returns the player walkspeed.
+     * Accessor for the player walk speed.
+     * @return the player walkspeed.
      */
-    
     public int getWalkSpeed() {
         return this.walkSpeed;
     }
 
     /**
-     * Accesor for the notes.
-     * @return Returns the notes.
+     * Accessor for the notes.
+     * @return the notes that the player has.
      */
-    
     public Notes getNotes() {
         return this.notes;
     }
 
     /**
-     * Accesor for the player fight speed.
-     * @return Returns the plaer fight speed.
+     * Accessor for the player fight speed.
+     * @return the players fight speed.
      */
-    
     public int getFightSpeed() {
         return this.fightSpeed;
     }
 
     /**
-     * Accesor for the player search speed.
-     * @return Returns the player search speed.
+     * Accessor for the player search speed.
+     * @return the players search speed.
      */
-    
     public int getSearchSpeed() {
         return this.searchSpeed;
     }
 
     /**
-     * Setter for the Player hp.
-     * @param i - the amout of hp that the player should have.
+     * Method for decreasing the players hp.
+     * @param i - the amount of hp that the player lost.
      */
-    
     public void setHp(int i) {
         super.changeHp(i);
     }
     
     /**
-     * Metod for looting a item on a step.
-     * @param item - What item that should be looted.
-     * @return Returns if the item has or has not been added to the inventory.
+     * Method for looting an item on a step.
+     * @param item - the item that should be looted.
+     * @return a string indicating whether or not the item has been added to inventory, and why if it has not.
      */
-    
     public String lootItem(Item item) {
         if (item.isMovable()) {
             for (int i = 0; i < this.inventory.length; i++) {
@@ -182,9 +163,8 @@ public class Player extends Character {
     
     /**
      * Setter for the player hp.
-     * @param hp - the amout the hp should be set to.
+     * @param hp - the amount the hp should be set to.
      */
-    
     public void setCurrentHp (int hp) {
         super.setHP(hp);
     } 
@@ -193,21 +173,20 @@ public class Player extends Character {
      * Method for printing the items in the inventory.
      * @return String to be printed in GUI.
      */
-    
     public String showInventory() {
         String s = "";
         for(int i = 0; i < this.inventory.length; i++) {
             if(inventory[i] != null) {
-                s = s +"A " + inventory[i].getName() + "\n";
+                s = s + inventory[i].getName() + "\n";
             }
         }
         return s;
-    }  
+    }
+    
     /**
      * Method for adding a item to the inventory.
      * @param item - the item being added to the inventory.
      */
-    
     public void addInventory(Item item) {
         for (int i = 0; i < this.inventory.length; i++) {
                 if (this.inventory[i] == null) {
@@ -219,21 +198,17 @@ public class Player extends Character {
 
     /**
      * Method for increasing the likeability of the player.
-     * @param increment - the amout the likeability should be increased by.
+     * @param increment - the amount the likeability should be increased by.
      */
-    
     public void increaseLikeability(int increment) {
         this.likeability += increment;
     }
 
     /**
-     * Accesor for the likeability.
-     * @return Returns the likeability of the player.
+     * Accessor for the likeability.
+     * @return the likeability of the player.
      */
-    
     public int getLikeability() {
         return this.likeability;
     }
 }
-
-    
