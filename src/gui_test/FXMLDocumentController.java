@@ -168,13 +168,9 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void handleButtonUse(ActionEvent event) {
-        if(writable.getText() != null) {
             game.convertToCommand("use " + writable.getText());
             area2.setText(game.getInformation());
             area1.setText(game.getRoom());
-        } else {
-            area2.setText("What item?");
-        }
     }
     
     @FXML
