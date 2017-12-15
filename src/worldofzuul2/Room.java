@@ -26,8 +26,7 @@ public class Room
      * Constructor for a Room.
      * @param description - Describes the Room.
      */
-    public Room(String description) 
-    {
+    public Room(String description) {
         this.description = description;
         this.exits = new HashMap<String, Room>();
         this.stepList = new Step[3][3];
@@ -39,8 +38,7 @@ public class Room
      * @param direction - The direction of the next Room.
      * @param neighbor - The neighboring Rooms.
      */
-    public void setExit(String direction, Room neighbor) 
-    {
+    public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
     }
 
@@ -48,8 +46,7 @@ public class Room
      * Accessor for the description of this Room.
      * @return the description of this Room.
      */
-    public String getShortDescription()
-    {
+    public String getShortDescription() {
         return description;
     }
 
@@ -58,8 +55,7 @@ public class Room
      * @param direction - The direction of the next exit.
      * @return the Room on the other side of an exit in a certain direction.
      */
-    public Room getExit(String direction) 
-    {
+    public Room getExit(String direction) {
         return exits.get(direction);
     }
     
@@ -105,7 +101,7 @@ public class Room
         Random random = new Random();
         int space1 = random.nextInt(3);
         int space2 = random.nextInt(3);
-        //this.stepList[space1][space2] = new Step( ***ITEM HERE?*** );
+        this.stepList[space1][space2] = new Step(Consumable.KNIFE);
 
         int spaceCharacter1 = random.nextInt(3);
         int spaceCharacter2 = random.nextInt(3);
@@ -113,8 +109,23 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        //this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new ***CHARACTER HERE?*** );
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Monster("Monster", 20, 100, "It was Jeff, I saw it!", "This is a dangerous monster. It may know many things about the university!"));
 
+        
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[i][j] == null) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+    
+    /**
+     * Method for building Nedenunder.
+     */
+    public void buildNedenunder() {
+        this.stepList[2][1] = new Step(Consumable.BEER);
         
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -132,15 +143,13 @@ public class Room
         Random random = new Random();
         int space1 = random.nextInt(3);
         int space2 = random.nextInt(3);
-        //Lav liste over Rooms til 0,0 i outside for map
-       // this.stepList[0][0] = new Step();
 
         while(space1 == 0 && space2 == 0) {
             space1 = random.nextInt(3);
             space2 = random.nextInt(3);
         }
         
-        this.stepList[space1][space2] = new Step(new Evil("Jeff", 10, 60, "I don’t know anything I just arrived.", true, "Student, big guy, large feet, small hands."));
+        this.stepList[space1][space2] = new Step(new Evil("Jeff", 10, 93, "I don’t know anything I just arrived.", true, "Student, big guy, large feet, small hands."));
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if(this.stepList[i][j] == null) {
@@ -201,10 +210,14 @@ public class Room
      * Method for building the Cafeteria.
      */
     public void buildCafeteria() {
+        int space1 = 2;
+        int space2 = 1;
+        this.stepList[space1][space2] = new Step(Consumable.COFFEE);
+        
         Random random = new Random();
-        int space1 = random.nextInt(3);
-        int space2 = random.nextInt(3);
-        this.stepList[space1][space2] = new Step(Clue.FINGERPRINT);
+//        int space1 = random.nextInt(3);
+//        int space2 = random.nextInt(3);
+//        this.stepList[space1][space2] = new Step(Clue.FINGERPRINT);
 
         int spaceCharacter1 = random.nextInt(3);
         int spaceCharacter2 = random.nextInt(3);
@@ -385,34 +398,18 @@ public class Room
      */
     public boolean checkIfRoomTraversalIsOkay(String direction) {
         if(direction.toLowerCase().equals("east")) {
-    		if(this.currentPosition != this.stepList[1][2]) {
-    			return false;
-    		} else {
-                    return true;
-                }
+            return this.currentPosition == this.stepList[1][2];
     	} 
     	if(direction.toLowerCase().equals("west")) {
-    		if(this.currentPosition != this.stepList[1][0]) {
-    			return false;
-    		} else {
-                    return true;
-                }
+            return this.currentPosition == this.stepList[1][0];
     	} 
     	
     	if(direction.toLowerCase().equals("north")) {
-    		if(this.currentPosition != this.stepList[0][1]) {
-    			return false;
-    		} else {
-                    return true;
-                }
+            return this.currentPosition == this.stepList[0][1];
     	}
     	
     	if(direction.toLowerCase().equals("south")) {
-    		if(this.currentPosition != this.stepList[2][1]) {
-    			return false;
-    		} else {
-                    return true;
-                }
+            return this.currentPosition == this.stepList[2][1];
     	} 
     	return false;
     }
