@@ -68,6 +68,8 @@ public class Game {
         projectRoom.buildProjectRoom();
         nedenunder = new Room("in the bar of the university. You can always get beer here.");
         nedenunder.buildNedenunder();
+        basement = new Room("in the basement of the university.");
+        basement.buildBasement();
         
 
         outside.setExit("west", TEK);
@@ -549,8 +551,6 @@ public class Game {
 
             case KEY:
                 if (currentRoom == outside || currentRoom == library) {
-                    basement = new Room("in the basement of the university.");
-                    basement.buildBasement();
                     library.setExit("west", basement);
                     basement.setExit("east", library);
                     basement.setExit("south", outside);
@@ -633,7 +633,7 @@ public class Game {
      */
     public void SaveData() {
 
-        File file = new File("src/Data/data.txt");
+        File file = new File("/Murderama-master/src/Data/data.txt");
         try {
             Scanner scanner = new Scanner(file);
 
@@ -696,7 +696,7 @@ public class Game {
      * attributes to the correct values.
      */
     public void LoadData() {
-        File file = new File("src/Data/data.txt");
+        File file = new File("Murderama-master/src/Data/data.txt");
         try {
             Scanner scanner = new Scanner(file);
 
@@ -808,7 +808,7 @@ public class Game {
      * started.
      */
     public void printHighscore() {
-        File file = new File("src/Data/Highscore.txt");
+        File file = new File("Murderama-master/src/Data/Highscore.txt");
         try {
             Scanner scanner = new Scanner(file);
             String s = "Current highscore is: " + scanner.nextInt();
@@ -826,7 +826,7 @@ public class Game {
      * @return String to print from GUI.
      */
     public String updateHighscore() {
-        File file = new File("src/Data/Highscore.txt");
+        File file = new File("Murderama-master/src/Data/Highscore.txt");
         String s = "";
         int currentScore = points.getPoints();
         try {

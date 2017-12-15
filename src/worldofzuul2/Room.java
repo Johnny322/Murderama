@@ -125,7 +125,19 @@ public class Room
      * Method for building Nedenunder.
      */
     public void buildNedenunder() {
-        this.stepList[2][1] = new Step(Consumable.BEER);
+        int space1 = 2;
+        int space2 = 1;
+        this.stepList[space1][space2] = new Step(Consumable.BEER);
+        
+        Random random = new Random();
+
+        int spaceCharacter1 = random.nextInt(3);
+        int spaceCharacter2 = random.nextInt(3);
+        while(spaceCharacter1 == space1 && spaceCharacter2 == space2) {
+            spaceCharacter1 = random.nextInt(3);
+            spaceCharacter2 = random.nextInt(3);
+        }
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(Clue.FINGERPRINT);
         
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -215,9 +227,6 @@ public class Room
         this.stepList[space1][space2] = new Step(Consumable.COFFEE);
         
         Random random = new Random();
-//        int space1 = random.nextInt(3);
-//        int space2 = random.nextInt(3);
-//        this.stepList[space1][space2] = new Step(Clue.FINGERPRINT);
 
         int spaceCharacter1 = random.nextInt(3);
         int spaceCharacter2 = random.nextInt(3);
