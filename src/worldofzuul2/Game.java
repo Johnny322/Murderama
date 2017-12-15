@@ -57,7 +57,6 @@ public class Game {
         cafeteria.buildCafeteria();
         U55 = new Room("in lecture room U55");
         U55.buildU55();
-        basement = new Room("in the basement of the university");
         hallway = new Room("in the long hallway in front of room U55");
         hallway.buildHallway();
         library = new Room(" in the university's library");
@@ -134,7 +133,7 @@ public class Game {
             return false;
         }
         switch (commandWord) {
-            case HELP:
+            case HELP:              // sker aldrig
                 printHelp();
                 break;
 
@@ -198,7 +197,7 @@ public class Game {
      * Prints out a helping message for the player. Is called when the player uses 
      * the help-command.
      */
-    private void printHelp() {
+    private void printHelp() {           // --- denne er overflødig?
         setInformation("You are lost. You are alone. You wander + \n around at the university. \n \n Your command words are: \n " + parser.showCommands());
     }
     
@@ -310,7 +309,7 @@ public class Game {
                     points.updateOnAction(player.getFightSpeed());
                     player.increaseLikeability(player.getFightSpeed());
                     getItemEffect(items.getConsumable(secondWord));
-                    setInformation("Used " + inventory[i].getName());
+                    //setInformation("Used " + inventory[i].getName());  --- setInformation bliver kaldt af alle cases
                     if(!secondWord.equals("key")) {
                     	inventory[i] = null;
                     }
@@ -340,7 +339,7 @@ public class Game {
             player.increaseLikeability((player.getWalkSpeed()));
             nextRoom.setCurrentPosition(currentRoom.currentPosition(), direction);
             currentRoom = nextRoom;
-            setInformation(currentRoom.getLongDescription());
+            setInformation(currentRoom.getLongDescription()); // longDescription giver ikke mening længere - du kan se exits visuelt
         }
     }
 
@@ -561,13 +560,15 @@ public class Game {
 
             case KEY:
                 if (currentRoom == outside || currentRoom == hallway) {
-                    hallway.setExit("west", basement);
-                    basement.setExit("east", hallway);
+                    basement = new Room("in the basement of the university");
+                    basement.buildBasement();
+                    library.setExit("west", basement);
+                    basement.setExit("east", library);
                     basement.setExit("south", outside);
                     outside.setExit("north", basement);
-                    setInformation("The key has opened a door to the basement!");
+                    setInformation("The key has opened a door to the basement!"); //denne bliver ikke vist
                 } else {
-                    setInformation("The key doesn't fit in any doors in this area.");
+                    setInformation("The key doesn't fit in any doors in this area."); //denne er også et problem
                 }
                 break;
 
