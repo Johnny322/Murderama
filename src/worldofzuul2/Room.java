@@ -12,7 +12,7 @@ import java.util.Random;
 public class Room 
 {
     /**
-     * Various atributs to describe a Room.
+     * Various attributes to describe a Room and the players position within it.
      */
     private final String description;
     private final HashMap<String, Room> exits;
@@ -20,9 +20,10 @@ public class Room
     private int currentPosition1 = 0;
     private int currentPosition2 = 0;
     private Step currentPosition;
+	
     /**
-     * Constructor for the room that the player spawns in.
-     * @param description - Describes the Room and its postition.
+     * Constructor for a Room.
+     * @param description - Describes the Room and its position.
      */
     public Room(String description) 
     {
@@ -43,30 +44,27 @@ public class Room
     }
 
     /**
-     * Accesor for the describtion of this Room.
+     * Accessor for the describtion of this Room.
      * @return description - Returns the description of this Room.
      */
-    
     public String getShortDescription()
     {
         return description;
     }
 
     /**
-     * Accesor for the long description for this Room.
+     * Accessor for the long description for this Room.
      * @return LongDescription - Returns the Long description for this room.
      */
-    
     public String getLongDescription()
     {
         return "You are " + description + ".\n" + getExitString();
     }
     
     /**
-     * Accesor for the Exits availbe for current room.
+     * Accessor for the Exits available for current room.
      * @return Exits - Returns the avaible exits for this room.
      */
-    
     private String getExitString()
     {
         String returnString = "Exits:";
@@ -78,11 +76,10 @@ public class Room
     }
 
     /**
-     * Accesor for the Exit in a certain direction.
+     * Accessor for the Exit in a certain direction.
      * @param direction - The direction of the next exit.
      * @return exits.get(direction) - Returns the exit in a certain direction.
      */
-    
     public Room getExit(String direction) 
     {
         return exits.get(direction);
@@ -93,7 +90,6 @@ public class Room
      * @param step - What step the player currently is on.
      * @param direction  - The direction the player is traveling.
      */
-    
     public void setCurrentPosition(Step step, String direction) {
     	if(direction.toLowerCase().equals("east")) {
     		this.currentPosition1 = 1;
@@ -123,11 +119,37 @@ public class Room
         	System.out.println("Currently at 0, 1");
     	}
     }
-    
+	
     /**
-     * Constructer for the Outside
+     * Method for building the basement-Room.
      */
-    
+    public void buildBasement() {
+        Random random = new Random();
+        int space1 = random.nextInt(3);
+        int space2 = random.nextInt(3);
+        //this.stepList[space1][space2] = new Step( ***ITEM HERE?*** );
+
+        int spaceCharacter1 = random.nextInt(3);
+        int spaceCharacter2 = random.nextInt(3);
+        while(spaceCharacter1 == space1 && spaceCharacter2 == space2) {
+            spaceCharacter1 = random.nextInt(3);
+            spaceCharacter2 = random.nextInt(3);
+        }
+        //this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new ***CHARACTER HERE?*** );
+
+        
+    	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(this.stepList[i][j] == null) {
+                    this.stepList[i][j] = new Step();
+                }
+            }
+        }
+    }
+	
+    /**
+     * Method for building the Room describing the Outside.
+     */
     public void buildOutside() {
         Random random = new Random();
         int space1 = random.nextInt(3);
@@ -151,9 +173,8 @@ public class Room
     }
     
     /**
-     * Constructer for the Hallway
+     * Method for buildsing the Hallway.
      */
-    
     public void buildHallway() {
         Random random = new Random();
         int space1 = random.nextInt(3);
@@ -171,9 +192,8 @@ public class Room
     }
     
     /**
-     * Constructer for TEK
+     * Method for constructing TEK.
      */
-    
     public void buildTEK() {
         Random random = new Random();
         int space1 = random.nextInt(3);
@@ -200,9 +220,8 @@ public class Room
     
     
     /**
-     * Constructer for the Cafeteria.
+     * Method for building the Cafeteria.
      */
-    
     public void buildCafeteria() {
         Random random = new Random();
         int space1 = random.nextInt(3);
@@ -228,9 +247,8 @@ public class Room
     }
     
     /**
-     * Constructer for U55.
+     * Method for building U55.
      */
-    
     public void buildU55() {
         Random random = new Random();
         int space1 = random.nextInt(3);
@@ -256,9 +274,8 @@ public class Room
     }
     
     /**
-     * Constructer for the Library.
+     * Method for building the Library
      */
-    
     public void buildLibrary() {
         Random random = new Random();
         int space1 = random.nextInt(3);
@@ -284,9 +301,8 @@ public class Room
     }
     
     /**
-     * Constructer for U183.
+     * Method for bulding U183.
      */
-    
     public void buildU183() {
         Random random = new Random();
         int space1 = random.nextInt(3);
@@ -312,9 +328,8 @@ public class Room
     }
     
     /**
-     * Constructer for Projectroom.
+     * Method for building Projectroom.
      */
-    
     public void buildProjectRoom() {
         Random random = new Random();
         int space1 = random.nextInt(3);
@@ -481,56 +496,50 @@ public class Room
         return s;
     }
     
-        /**
-     * Accesor method for getting the players current position.
-     * @return Returns the players current postion.
+   /**
+     * Accessor method for getting the players current position.
+     * @return Returns the players current position.
      */
-    
     public Step currentPosition() {
     	return this.stepList[currentPosition1][currentPosition2];
     }
    
     /**
-     * Accesor for the steplist.
+     * Accessor for the steplist.
      * @return Returns the steplist.
      */
-    
     public Step[][] getStepList() {
         return stepList;
     }
     
     /**
-     * Setter for the currentposition1
-     * @param currentPosition1 - The first cordinate of the player position.
+     * Setter for currentposition1.
+     * @param currentPosition1 - The first coordinate of the player position.
      */
-    
     public void setCurrentPosition1(int currentPosition1) {
         this.currentPosition1 = currentPosition1;
     }
 
     /**
-     * Setter for the currentposition2
-     * @param currentPosition2 - The second cordinate for the players posirion.
+     * Setter for currentposition2.
+     * @param currentPosition2 - The second coordinate of the players position.
      */
-    
     public void setCurrentPosition2(int currentPosition2) {
         this.currentPosition2 = currentPosition2;
     }
     
     /**
-     * Accesor for the players current position.
+     * Accessor for the players current position.
      * @return Returns the Players current position.
      */
-    
     public Step getCurrentPosition() {
         return currentPosition;
     }
     
     /**
-     * Accesor for two cordinates of the players position.
-     * @return Returns the Cordinates of the players position.
+     * Accessor for two cordinates of the players position.
+     * @return Returns the Coordinates of the players position.
      */
-    
     public String getPosition() {
         return currentPosition1 + " " + currentPosition2;
     }
