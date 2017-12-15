@@ -625,13 +625,13 @@ public class Game {
     
     /**
      * This method is used for saving a current game. It writes several
-     * important attributes to data.ser, so these can later be loaded back in to
+     * important attributes to data.txt, so these can later be loaded back in to
      * the game, in case the player wants to continue from this point in the
      * game.
      */
     public void SaveData() {
 
-        File file = new File("Murderama-master/src/Data/data.txt");
+        File file = new File("src/Data/data.txt");
         try {
             Scanner scanner = new Scanner(file);
 
@@ -682,7 +682,7 @@ public class Game {
             writer.print(" www");
 
             scanner.close();
-            setInformation("Game has been saved");
+            setInformation("Game has been saved.");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -690,11 +690,11 @@ public class Game {
     
     /**
      * This method loads the game data that has been saved by SaveData. It reads
-     * the values from data.ser, and uses these to set the appropriate
+     * the values from data.txt, and uses these to set the appropriate
      * attributes to the correct values.
      */
     public void LoadData() {
-        File file = new File("Murderama-master/src/Data/data.txt");
+        File file = new File("src/Data/data.txt");
         try {
             Scanner scanner = new Scanner(file);
 
@@ -810,7 +810,7 @@ public class Game {
      * started.
      */
     public void printHighscore() {
-        File file = new File("Murderama-master/src/Data/Highscore.txt");
+        File file = new File("src/Data/Highscore.txt");
         try {
             Scanner scanner = new Scanner(file);
             String s = "Current highscore is: " + scanner.nextInt();
@@ -828,7 +828,7 @@ public class Game {
      * @return String to print from GUI.
      */
     public String updateHighscore() {
-        File file = new File("Murderama-master/src/Data/Highscore.txt");
+        File file = new File("src/Data/Highscore.txt");
         String s = "";
         int currentScore = points.getPoints();
         try {
