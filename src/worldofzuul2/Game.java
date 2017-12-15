@@ -218,7 +218,7 @@ public class Game {
         character.changeHp(player.getDamage());
         setInformation("You have " + player.getHp() + " hp" + "\n" + character.getName() + " has " + character.getHp() + " hp");
         if (character.getHp() <= 0) {
-            setInformation(getInformation() + "\n" + "Enemy is dead!");
+            setInformation(getInformation() + "\n" + "Enemy has been defeated!");
             if (npc.isEvil() && jeffAccused < 1) {
                 npc.setHostile(false);
                 character.setHP(100);
