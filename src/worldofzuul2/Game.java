@@ -227,9 +227,6 @@ public class Game {
             if (npc.isEvil() && murdererAccused < 1) {
                 npc.setHostile(false);
                 character.setHP(100);
-                if (npc.isMurderer()) {
-                    murdererAccused++;
-                }
             } else {
                 currentRoom.currentPosition().voidNPC();
             }
@@ -404,7 +401,7 @@ public class Game {
      * @return String for printing in GUI
      */
     public String getRoom() {
-        return currentRoom.printRoom();
+        return currentRoom.printRoom() + "\n\nYour current score is: " + points.getPoints();
     }
 
     /**
@@ -420,6 +417,7 @@ public class Game {
             Character character = room.currentPosition().getCharacter();
             npc.setHostile(true);
             if (npc.isMurderer()) {
+                murdererAccused++;
                 setInformation("You are correct, " + character.getName() + " is the murderer.");
                 setInformation(getInformation() + "\n" + character.getName() + " wants to fight you. Defeat him to win the game!");
                 return false;
@@ -633,7 +631,7 @@ public class Game {
      */
     public void SaveData() {
 
-        File file = new File("src/Data/data.txt");
+        File file = new File("Murderama-master/src/Data/data.txt");
         try {
             Scanner scanner = new Scanner(file);
 
@@ -696,7 +694,7 @@ public class Game {
      * attributes to the correct values.
      */
     public void LoadData() {
-        File file = new File("src/Data/data.txt");
+        File file = new File("Murderama-master/src/Data/data.txt");
         try {
             Scanner scanner = new Scanner(file);
 
@@ -756,16 +754,19 @@ public class Game {
                     case "potion":
                         player.addInventory(Consumable.POTION);
                         break;
+                        
                     case "coffee":
                         player.addInventory(Consumable.COFFEE);
                         break;
+                        
                     case "beer":
                         player.addInventory(Consumable.BEER);
                         break;
+                        
                     case "key":
                         player.addInventory(Consumable.KEY);
                         break;
-                    //case " ": continue;
+                        
                     default:
                         break;
                 }
@@ -789,11 +790,12 @@ public class Game {
             s = "";
             s = s + "Notes: \n" + notes.showNotes() + "\n";
             s = s + "Your score is: " + (points.getPoints()) + "\n";
-            s = s +  "You currently have " + player.getHp() + " Hp" + "\n";
+            s = s + "You currently have " + player.getHp() + " Hp" + "\n";
             s = s + "Your walking speed is currently: " + player.getWalkSpeed() + "\n";
             s = s + "Your fighting speed is currently: " + player.getFightSpeed() + "\n";
+            s = s + "Your inspecting speed is currently: " + player.getSearchSpeed() + "\n";
             s = s + " " + "\n";
-            s = s + "You're currently at " + roomName + "\n";
+            s = s + "You're currently " + currentRoom.getShortDescription() + "\n";
             setInformation(s);
 
         } catch (FileNotFoundException ex) {
@@ -808,7 +810,7 @@ public class Game {
      * started.
      */
     public void printHighscore() {
-        File file = new File("src/Data/Highscore.txt");
+        File file = new File("Murderama-master/src/Data/Highscore.txt");
         try {
             Scanner scanner = new Scanner(file);
             String s = "Current highscore is: " + scanner.nextInt();
@@ -826,7 +828,7 @@ public class Game {
      * @return String to print from GUI.
      */
     public String updateHighscore() {
-        File file = new File("src/Data/Highscore.txt");
+        File file = new File("Murderama-master/src/Data/Highscore.txt");
         String s = "";
         int currentScore = points.getPoints();
         try {
