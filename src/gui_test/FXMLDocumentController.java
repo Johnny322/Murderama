@@ -57,15 +57,27 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button showNotes;
     
+    /**
+    * ActionEvent handler to handle a click on button D in the GUI
+    * @param event
+    * parses the string to the convertToCommand method in Game Class 
+    * @param d String
+    */
+    
     @FXML
     private void handleButtonD(ActionEvent event) {
         game.convertToCommand("d");
         area2.setText(game.getInformation());
-
         area1.setText(game.getRoom());
 
     }
     
+  /**
+    * ActionEvent handler to handle a click on button W in the GUI
+    * @param event
+    * parses the string to the convertToCommand method in Game Class 
+    * @param w String
+    */
     @FXML
     private void handleButtonW(ActionEvent event) {
         game.convertToCommand("w");
@@ -73,7 +85,12 @@ public class FXMLDocumentController implements Initializable {
         area1.setText(game.getRoom());
 
     }
-    
+    /**
+    * ActionEvent handler to handle a click on button A in the GUI
+    * @param event
+    * parses the string to the convertToCommand method in Game Class 
+    * @param a String
+    */
     @FXML
     private void handleButtonA(ActionEvent event) {
         game.convertToCommand("a");
@@ -81,7 +98,12 @@ public class FXMLDocumentController implements Initializable {
         area1.setText(game.getRoom());
 
     }
-    
+    /**
+    * ActionEvent handler to handle a click on button S in the GUI
+    * @param event
+    * parses the string to the convertToCommand method in Game Class 
+    * @param s String
+    */
     @FXML
     private void handleButtonS(ActionEvent event) {
         game.convertToCommand("s");
