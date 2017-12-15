@@ -299,7 +299,7 @@ public class Game {
         String secondWord = command.getSecondWord();
 
         if (!command.hasSecondWord()) {
-            setInformation("Use what?");
+            setInformation("Use what? Your inventory contains: ");
             setInformation(getInformation() + "\n" + player.showInventory());
             return false;
         }
@@ -309,7 +309,6 @@ public class Game {
                     points.updateOnAction(player.getFightSpeed());
                     player.increaseLikeability(player.getFightSpeed());
                     getItemEffect(items.getConsumable(secondWord));
-                    //setInformation("Used " + inventory[i].getName());  --- setInformation bliver kaldt af alle cases
                     if(!secondWord.equals("key")) {
                     	inventory[i] = null;
                     }
@@ -559,7 +558,7 @@ public class Game {
                 break;
 
             case KEY:
-                if (currentRoom == outside || currentRoom == hallway) {
+                if (currentRoom == outside || currentRoom == library) {
                     basement = new Room("in the basement of the university");
                     basement.buildBasement();
                     library.setExit("west", basement);
