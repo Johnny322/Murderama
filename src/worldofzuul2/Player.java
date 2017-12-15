@@ -129,7 +129,6 @@ public class Player extends Character {
      * @return a string indicating whether or not the item has been added to inventory, and why if it has not.
      */
     public String lootItem(Item item) {
-        if (item.isMovable()) {
             for (int i = 0; i < this.inventory.length; i++) {
                 if (this.inventory[i] == null) {
                     this.inventory[i] = item;
@@ -137,10 +136,6 @@ public class Player extends Character {
                 }
             }
             return "Inventory is full";
-        } else {
-            return item.getName() + " is not movable";
-        }
-
     }
     
     /**
