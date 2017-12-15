@@ -1,5 +1,9 @@
 package worldofzuul2;
 
+
+/**
+ * Enum describing the limited possibilities of consumable-type Items.
+ */
 public enum Consumable implements Item {
     POTION("potion"),
     BEER("beer"),
@@ -7,21 +11,21 @@ public enum Consumable implements Item {
     KEY("key"),
     UNKNOWN("");
 
+    /**
+     * All consumables have a string containing the name of the item.
+     */
     public String name;
 
     /**
-     * Accessor for the Consumables.
-     *
-     * @param item.
-     * @returns Item name.
+     * Constructor for the Consumables.
+     * @param item - the name of the constructed Consumable.
      */
     private Consumable(String item) {
         this.name = item;
     }
 
     /**
-     * Overrides the previous string.
-     *
+     * Overrides toString from the Object-class. Describes how a Consumable is converted to a String.
      * @return the name.
      */
     @Override
@@ -31,7 +35,6 @@ public enum Consumable implements Item {
 
     /**
      * Accessor for the name of the Consumable
-     *
      * @return the name of item.
      */
     @Override
@@ -41,8 +44,7 @@ public enum Consumable implements Item {
 
     /**
      * If the consumable is movable it returns true.
-     *
-     * @return true.
+     * @return true - all consumable items are movable.
      */
     @Override
     public boolean isMovable() {

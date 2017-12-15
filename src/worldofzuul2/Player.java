@@ -12,7 +12,6 @@ public class Player extends Character {
      */
     private final Item[] inventory;
     private int lives;
-    private boolean isMurdererAlive = true;
     private int walkSpeed;
     private final Notes notes;
     private int fightSpeed;
@@ -42,14 +41,6 @@ public class Player extends Character {
      */
     public void setLives(int lives) {
         this.lives -= lives;
-    }
-
-    /**
-     * Method for setting whether or not the murderer is alive.
-     * @param isMurdererAlive - true if the murderer is alive.
-     */
-    public void setIsMurdererAlive(boolean isMurdererAlive) {
-        this.isMurdererAlive = isMurdererAlive;
     }
 
     /**
@@ -90,14 +81,6 @@ public class Player extends Character {
      */
     public int getLives() {
         return this.lives;
-    }
-
-    /**
-     * Method for checking if the murderer is alive.
-     * @return true if the Murderer is alive.
-     */
-    public boolean isIsMur1dererAlive() {
-        return this.isMurdererAlive;
     }
 
     /**
@@ -154,7 +137,6 @@ public class Player extends Character {
                 }
             }
             return "Inventory is full";
-
         } else {
             return item.getName() + " is not movable";
         }

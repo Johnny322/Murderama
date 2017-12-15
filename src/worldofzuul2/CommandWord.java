@@ -1,6 +1,7 @@
 package worldofzuul2;
 
 /**
+ * Since there is a limited number of possible commands, an enum is used.
  * @author Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
@@ -29,16 +30,14 @@ public enum CommandWord {
 
     /**
      * Constructor for the CommandWord-class.
-     *
-     * @param commandString.
+     * @param commandString the string used in this command.
      */
     CommandWord(String commandString) {
         this.commandString = commandString;
     }
 
     /**
-     * Converts the CommandWord to a String.
-     *
+     * Converts the CommandWord to a String. Override from the Object-class.
      * @return the CommandWord as a String.
      */
     @Override

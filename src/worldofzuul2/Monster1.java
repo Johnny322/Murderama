@@ -7,7 +7,7 @@
 package worldofzuul2;
 
 /**
- *
+ * Class for a Monster-type NPC.
  * @author Simon
  */
 public class Monster1 extends Character implements NPC {
@@ -18,14 +18,13 @@ public class Monster1 extends Character implements NPC {
     private String description;
 
     /**
-     *
+     * Constructor used for instantiating a Monster.
      * @param name the name of the Character.
      * @param damage the damage the character deals.
      * @param hp the amount of health points the character has.
      * @param information the information the character knows.
      * @param description a description of character.
      */
-    //Constructor for monster, tager name, damage og hp og bruger dem i Character-constructoren. 
     public Monster1(String name, int damage, int hp, String information, String description) {
         super(name, damage, hp);
         this.information = information;
@@ -35,8 +34,7 @@ public class Monster1 extends Character implements NPC {
     }
 
     /**
-     * Constructor gets the characters Information.
-     *
+     * Gets the characters Information.
      * @return the Information of the character.
      */
     @Override
@@ -49,8 +47,7 @@ public class Monster1 extends Character implements NPC {
     }
 
     /**
-     * Constructor gets the characters Threshold.
-     *
+     * Gets the characters Threshold.
      * @return the Threshold of the character.
      */
     @Override
@@ -59,8 +56,7 @@ public class Monster1 extends Character implements NPC {
     }
 
     /**
-     * Constructor gets the characters description.
-     *
+     * Gets the characters description.
      * @return the description of the character.
      */
     public String getDescription() {
@@ -68,9 +64,8 @@ public class Monster1 extends Character implements NPC {
     }
 
     /**
-     * Makes the the character hostile.
-     *
-     * @param isHostile - checks if the character is hostile.
+     * Mutator for the isHostile-attribute of the Monster.
+     * @param isHostile - the state the characters hostility should be set to.
      */
     @Override
     public void setHostile(boolean isHostile) {
@@ -78,9 +73,8 @@ public class Monster1 extends Character implements NPC {
     }
 
     /**
-     * Constructor which checks if the character is hostile.
-     *
-     * @return if true it makes the character hostile.
+     * Method which checks the characters hostility.
+     * @return true if the character is hostile.
      */
     @Override
     public boolean isHostile() {
@@ -88,9 +82,8 @@ public class Monster1 extends Character implements NPC {
     }
 
     /**
-     * Constructor which checks if the character is Murderer.
-     *
-     * @return if true it makes the character Murderer.
+     * Checks if the character is Murderer.
+     * @return true if the character is the Murderer.
      */
     @Override
     public boolean isMurderer() {
@@ -98,9 +91,8 @@ public class Monster1 extends Character implements NPC {
     }
 
     /**
-     * Constructor which checks if the character is Evil.
-     *
-     * @return if true it makes the character Evil.
+     * Method which checks if the character is Evil.
+     * @return always true, since Monsters are always Evil.
      */
     @Override
     public boolean isEvil() {
@@ -108,20 +100,11 @@ public class Monster1 extends Character implements NPC {
     }
 
     /**
-     * Constructor which checks if the character is friendly.
-     *
-     * @return if true it makes the character friendly.
+     * Method which checks if the character is friendly.
+     * @return always false, since a Monster is never friendly.
      */
+    @Override
     public boolean friendly() {
         return false;
-    }
-
-    /**
-     * Constructor gets the characters Additional Information.
-     *
-     * @return the Additional Information of the character.
-     */
-    public String getAdditionalInformation() {
-        return "No more info";
     }
 }

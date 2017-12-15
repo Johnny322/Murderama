@@ -1,8 +1,12 @@
 package worldofzuul2;
 
+/**
+ * Class for the individual Steps within Rooms.
+ */
 public class Step {
-	/**e
-         * Various atributes to describe a step.
+    
+	/**
+         * Various attributes to describe what a Step contains.
          */
 	private Item item;  
 	private String information;
@@ -36,26 +40,24 @@ public class Step {
 	}
 	
         
-
          /**
-         * Accessor for NPC
-         * @return Returns the NPC on a step
+         * Accessor for NPC.
+         * @return the NPC on this step.
          */
 	public NPC getNPC() {
 		return this.npc;
 	}
         /**
-         * Accesor for a Character
-         * @return Returns the Character on a step
+         * Accessor for a Character.
+         * @return the Character on this step.
          */
         public Character getCharacter() {
             return (Character) this.npc;
         }
 	
         /**
-         * Method to void an Item at the Step
+         * Method to void an Item at the Step.
          */
-	// Temp shitty setup
         public void voidItem() {
             this.item = null;
         }
@@ -63,13 +65,12 @@ public class Step {
         /**
          * Method to void an Item at the Step.
          */
-	// Temp shitty setup
         public void voidNPC() {
             this.npc = null;
         }
 	
         /**
-         * Accesor for the item on this step.
+         * Accessor for the item on this step.
          * @return Item on Step.
          */
 	public Item getItem() {
@@ -77,7 +78,7 @@ public class Step {
 	}
 	
         /**
-         * Accesor for the information on this step.
+         * Accessor for the information on this step.
          * @return information on Step.
          */
 	public String getInformation() {

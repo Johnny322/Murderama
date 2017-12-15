@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Class for handling most of the things that happen in the game.
  * @author Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
@@ -49,21 +50,21 @@ public class Game {
      */
     private void createRooms() {
 
-        outside = new Room("outside the main entrance of the university");
+        outside = new Room("outside the main entrance of the university.");
         outside.buildOutside();
-        cafeteria = new Room("in the cafeteria");
+        cafeteria = new Room("in the cafeteria.");
         cafeteria.buildCafeteria();
-        U55 = new Room("in lecture room U55");
+        U55 = new Room("in lecture room U55.");
         U55.buildU55();
-        hallway = new Room("in the long hallway in front of room U55");
+        hallway = new Room("in the long hallway in front of room U55.");
         hallway.buildHallway();
-        library = new Room(" in the university's library");
+        library = new Room(" in the university's library.");
         library.buildLibrary();
-        TEK = new Room("in front of the bronze stairs at TEK");
+        TEK = new Room("in front of the bronze stairs at TEK.");
         TEK.buildTEK();
-        U183 = new Room("inside room U183"); 
+        U183 = new Room("inside room U183."); 
         U183.buildU183();
-        projectRoom = new Room("inside a project room at TEK");
+        projectRoom = new Room("inside a project room at TEK.");
         projectRoom.buildProjectRoom();
         
 
@@ -92,7 +93,9 @@ public class Game {
      */
     private String printWelcome() {
         return "Welcome to Murderama \n This is a game where nothing happens by chance, everything is a mystery and nobody is trustworthy. Do you dare to play?"
-                + " \n Someone has been murdered! Find the murderer and make him pay for what he did! \n ";
+                + " \n Someone has been murdered! Find the murderer and make him pay for what he did! \n "
+                + "\nYou walk around by pressing the W, A, S and D buttons to the left. Below you will find buttons for various actions. To the left is a map of the current room, which shows you the following things:\n"
+                + "X is where you are currently at\nO indicates an empty field\nC indicates a character\nI indicates an item\nd marks the available doors\n\nHave fun!";
     }
     
     /**
@@ -131,16 +134,16 @@ public class Game {
             return false;
         }
         switch (commandWord) {
-            case HELP:              // sker aldrig
-                printHelp();
-                break;
+//            case HELP:
+//                printHelp();
+//                break;
 
-            case QUIT:
-                wantToQuit = quit(command);
-                break;
+//            case QUIT:
+//                wantToQuit = quit(command);
+//                break;
 
             case FIGHT:
-                return fight(command);
+                return fight();
 
             case LOOT:
                 return loot(currentRoom);
@@ -195,9 +198,9 @@ public class Game {
      * Prints out a helping message for the player. Is called when the player uses 
      * the help-command.
      */
-    private void printHelp() {           // --- denne er overflødig?
-        setInformation("You are lost. You are alone. You wander + \n around at the university. \n \n Your command words are: \n " + parser.showCommands());
-    }
+//    private void printHelp() {
+//        setInformation("You are lost. You are alone. You wander + \n around at the university. \n \n Your command words are: \n " + parser.showCommands());
+//    }
     
     /**
      * Processes a fight between the player and a NPC, called when the fight-command is used. 
@@ -205,7 +208,7 @@ public class Game {
      * game if it is killed. If the player defeats the murderer, the hasWon-boolean is set to 
      * true, resulting in the player winning the game.
      * @param npc - the non-player character that the player is fighting.
-     * @return a boolean that represents whether or not the fight is over.
+     * @return a boolean that indicates whether the fight is over.
      */
     private boolean processFight(NPC npc) {
         Character character = (Character) npc;
@@ -215,28 +218,36 @@ public class Game {
         character.changeHp(player.getDamage());
         setInformation("You have " + player.getHp() + " hp" + "\n" + character.getName() + " has " + character.getHp() + " hp");
         if (character.getHp() <= 0) {
+            if(npc.isMurderer()) {
+                setInformation(getInformation() + "\nYou beat the murderer! You have won the game!");
+                hasWon = true;
+                return true;
+            }
             setInformation(getInformation() + "\n" + "Enemy has been defeated!");
             if (npc.isEvil() && jeffAccused < 1) {
                 npc.setHostile(false);
                 character.setHP(100);
-                jeffAccused++;
-            } else if(npc.isMurderer()) {
-                hasWon = true;
-                return true;
+                //jeffAccused++;
             } else {
                 currentRoom.currentPosition().voidNPC();
             }
             return false;
         }
         if (player.getHp() <= 0) {
-            setInformation(getInformation() + "\n" + "You got knocked out");
+            setInformation(getInformation() + "\n" + "You got knocked out.");
             player.setLives(1);
-            setInformation(getInformation() + "\n" + "You now have " + player.getLives() + " live(s left");
-            player.setHP(150);
-        } if (player.getLives() <= 0){
-            setInformation(getInformation() + "\n" + "You are dead");
+            if (player.getLives() <= 0){
+            setInformation(getInformation() + "\n" + "You have no more lives left! You have lost the game!");
             hasLost = true;
             return false;
+            }
+            if (player.getLives() == 1) {
+                setInformation(getInformation() + "\n" + "You now have " + player.getLives() + " life left");
+            }
+            else {
+                setInformation(getInformation() + "\n" + "You now have " + player.getLives() + " lives left");
+            }
+            player.setHP(150);
         }
         return true;
     }
@@ -247,19 +258,19 @@ public class Game {
      * @return a boolean which is always false. This saves code by removing the 
      * need for else-statements.
      */
-    private boolean fight(Command command) {
+    private boolean fight() {
         Room room = currentRoom;
         if (room.currentPosition().getCharacter() != null) {
             NPC npc = room.currentPosition().getNPC();
             Character character = (Character) npc;
             if (!npc.isHostile()) {
-                setInformation(character.getName() + " is not hostile");
+                setInformation(character.getName() + " is not hostile.");
                 return false;
             }
             processFight(npc);
             return false;
         }
-        setInformation("There is no enemy here");
+        setInformation("There is no enemy here.");
         return false;
     }
 
@@ -277,10 +288,10 @@ public class Game {
             room.currentPosition().voidItem();
         }
         else if (room.currentPosition().getItem() != null) {
-            setInformation("This item cannot be picked up");
+            setInformation("This item cannot be picked up.");
         }
         else {
-            setInformation("There is no item here");
+            setInformation("There is no item here.");
         }
         return false;
     }
@@ -297,7 +308,7 @@ public class Game {
         String secondWord = command.getSecondWord();
 
         if (!command.hasSecondWord()) {
-            setInformation("Use what? Your inventory contains: ");
+            setInformation("Use what? Your inventory contains:");
             setInformation(getInformation() + "\n" + player.showInventory());
             return false;
         }
@@ -327,16 +338,12 @@ public class Game {
     private void goRoom(String direction) {
         Room nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom == null) {
-            setInformation("There is no door!");
-        } else if (!currentRoom.checkIfRoomTraversalIsOkay(direction)) {
-            setInformation("Try again!");
-        } else {
+        if (nextRoom != null && currentRoom.checkIfRoomTraversalIsOkay(direction)) {
             points.updateOnAction(player.getWalkSpeed());
             player.increaseLikeability((player.getWalkSpeed()));
             nextRoom.setCurrentPosition(currentRoom.currentPosition(), direction);
             currentRoom = nextRoom;
-            setInformation(currentRoom.getLongDescription()); // longDescription giver ikke mening længere - du kan se exits visuelt
+            setInformation(getInformation() + "You are " + currentRoom.getShortDescription());
         }
     }
 
@@ -375,35 +382,32 @@ public class Game {
             goRoom(direction);
         } 
         if(currentRoom.currentPosition().getNPC() != null) {
-            setInformation("NPC: " + currentRoom.currentPosition().getCharacter().getName());
-        } else if (currentRoom.currentPosition().getNPC()!= null) {
-            setInformation("Monster");
-        } else if(currentRoom.currentPosition().getItem() != null ) {
-            setInformation("Item: " + currentRoom.currentPosition().getItem().getName());
-        }
-        
-        if(currentRoom.currentPosition().getNPC() != null ) {
+            setInformation("NPC: " + currentRoom.currentPosition().getCharacter().getName() + ".");
             if(currentRoom.currentPosition().getNPC().friendly()) {
                 talk();
             }
+//        } else if (currentRoom.currentPosition().getNPC()!= null) {
+//            setInformation("Monster");
+        } else if(currentRoom.currentPosition().getItem() != null ) {
+            setInformation("Item: " + currentRoom.currentPosition().getItem().getName() + ".");
+        } else {
+            setInformation("You are " + currentRoom.getShortDescription());
         }
     }
 
     /**
-     * This method is called when the player uses the quit-command. It checks 
-     * whether there is a second word in the command, to make sure that it 
-     * was not a mistake.
+     * This method is called to quit the game.
      * @param command - the command given by the player.
      * @return a boolean indicating whether or not the player actually wants to quit.
      */
-    private boolean quit(Command command) {
-        if (command.hasSecondWord()) {
-            setInformation("Quit what?");
-            return false;
-        } else {
-            return true;
-        }
-    }
+//    private boolean quit(Command command) {
+//        if (command.hasSecondWord()) {
+//            setInformation("Quit what?");
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
     
     /**
      * Method to parse String of room from class Room to GUI. 
@@ -426,26 +430,29 @@ public class Game {
             Character character = room.currentPosition().getCharacter();
             npc.setHostile(true);
             if (npc.isMurderer()) {
-                setInformation("You are correct, " + character.getName() + " is the murderer. \n" + character.getName() + " wants to fight you. ");
-                setInformation(getInformation() + "\n" + character.getName() + " wants to fight you. ");
-                return false;
-            } else {
-                setInformation("You are not correct, " + character.getName() + " is not the murderer. ");
-                setInformation(getInformation() + "\n" + character.getName() + " wants to fight you for believing he was a murderer. ");
-                player.setLives(1);
-                if (player.getLives() <= 0) {
-                    setInformation(getInformation() + "\n" + "you lost, you accused to many people wrongly");
-                    return true;
-                }
-                setInformation(getInformation() + "\n" + "You now have " + player.getLives() + " lives left");
-                player.increaseLikeability(-100);
-                setInformation(getInformation() + "\n" + "People will like you less because of your mistake.");
+                setInformation("You are correct, " + character.getName() + " is the murderer.");
+                setInformation(getInformation() + "\n" + character.getName() + " wants to fight you. Defeat him to win the game!");
                 return false;
             }
+            player.setLives(1);
+            if (player.getLives() <= 0) {
+                setInformation("You accused the wrong person! You have lost the game!");
+                hasLost = true;
+                return true;
+            }
+            setInformation("You are incorrect, " + character.getName() + " is not the murderer. ");
+            if (player.getLives() == 1) {
+                setInformation(getInformation() + "\n" + "You now have " + player.getLives() + " life left.");
+            } else {
+                setInformation(getInformation() + "\n" + "You now have " + player.getLives() + " lives left.");
+            }
+            player.increaseLikeability(-100);
+            setInformation(getInformation() + "\n" + "People will like you less because of your mistake.");
+            setInformation(getInformation() + "\n" + character.getName() + " wants to fight you for believing he was a murderer. ");
+            return false;
         }
-        setInformation("No character here");
+        setInformation("Nobody is here. ");
         return false;
-
     }
 
     /**
@@ -471,7 +478,7 @@ public class Game {
             setInformation(currentRoom.currentPosition().getNPC().getDescription());
             return false;
         }
-        setInformation("There is no item or person here");
+        setInformation("There is nothing here.");
         return false;
     }
 
@@ -484,19 +491,20 @@ public class Game {
      */
     public boolean talk() {
         if (currentRoom.currentPosition().getNPC() == null) {
-            setInformation("There is no one to talk to");
+            setInformation("There is no one to talk to. ");
             return false;
         }
-        String s = currentRoom.currentPosition().getNPC().getInformation();
-        if (s.equals(currentRoom.currentPosition().getCharacter().getName() + " is hostile and cannot be talked to until you defeat them in combat")) {
-            setInformation(s);
+        if (currentRoom.currentPosition().getNPC().isHostile()) {
+            setInformation(currentRoom.currentPosition().getCharacter().getName() + " is hostile and cannot be talked to until you defeat them in combat.");
             return false;
         }
         if (player.getLikeability() < currentRoom.currentPosition().getNPC().getThreshold()) {
-            setInformation("This person does not trust you yet.");
+            setInformation(getInformation() + "\n This person does not trust you yet.");
             return false;
         }
-        setInformation(s);
+        String s = currentRoom.currentPosition().getNPC().getInformation();
+        setInformation(currentRoom.currentPosition().getCharacter().getName() + " says: " + s);
+        points.updateOnAction(player.getWalkSpeed());
         player.increaseLikeability(20);
         boolean hasNote = false;
         for (String note : notes.getNotes()) {
@@ -504,12 +512,8 @@ public class Game {
         		hasNote = true;
         	}
         } 
-        
         if (!hasNote) {
             notes.addNote(currentRoom.currentPosition().getCharacter().getName(), s);
-        }
-        if (currentRoom.currentPosition().getNPC().getAdditionalInformation() != null) {
-            setInformation(getInformation() + "\n" +  currentRoom.currentPosition().getNPC().getAdditionalInformation());
         }
         return false;
     }
@@ -525,13 +529,13 @@ public class Game {
                 player.setFightSpeed(2);
                 player.setSearchSpeed(2);
                 player.increaseLikeability(25);
-                setInformation("You feel slower, but more talkative. ");
+                setInformation(getInformation() + "\nYou feel slower, but more talkative. ");
                 break;
 
             case POTION:
                 player.setHp(-25);
                 setInformation("Potion has been used. ");
-                setInformation(getInformation() + "\n" + "Your current hp has been increased by 25 to " + player.getHp());
+                setInformation(getInformation() + "\nYour current hp has been increased by 25. Your hp is now " + player.getHp() + ".");
                 break;
 
             case COFFEE:
@@ -552,20 +556,20 @@ public class Game {
                 } else {
                     player.setFightSpeed(-1);
                 }
-                setInformation("You feel energized. ");
+                setInformation(getInformation() + "\nYou feel energized! ");
                 break;
 
             case KEY:
                 if (currentRoom == outside || currentRoom == library) {
-                    basement = new Room("in the basement of the university");
+                    basement = new Room("in the basement of the university.");
                     basement.buildBasement();
                     library.setExit("west", basement);
                     basement.setExit("east", library);
                     basement.setExit("south", outside);
                     outside.setExit("north", basement);
-                    setInformation("The key has opened a door to the basement!");
+                    setInformation("The key has opened a door to the basement!"); //denne bliver ikke vist
                 } else {
-                    setInformation("The key doesn't fit in any doors in this area.");
+                    setInformation("The key doesn't fit in any doors in this area."); //denne er også et problem
                 }
                 break;
 
@@ -584,19 +588,19 @@ public class Game {
     private String getItemString(Item item) {
         switch ((Consumable) item) {
             case BEER:
-                return "Makes you slower, but more likable";
+                return "Makes you slower, but more likeable.";
 
             case POTION:
-                return "Heals you";
+                return "Heals you.";
 
             case COFFEE:
-                return "Makes you faster";
+                return "Makes you faster.";
                 
             case KEY:
-                return "Open hidden doors";
+                return "Can open hidden doors.";
 
             default:
-                return "This item does not exist";
+                return "This item does not exist.";
         }
     }
 
@@ -609,7 +613,7 @@ public class Game {
     private void getClue(Item item) {
         switch ((Clue) item) {
             case VICTIM:
-                setInformation("This is the victim. He seems to have been strangled by someone with small hands");
+                setInformation("This is the victim. He seems to have been strangled by someone with small hands.");
                 break;
 
             case KNIFE:
@@ -621,11 +625,11 @@ public class Game {
                 break;
 
             case FINGERPRINT:
-                setInformation("Small bloody fingerprints");
+                setInformation("Small bloody fingerprints.");
                 break;
 
             case FOOTPRINT:
-                setInformation("Large footprints");
+                setInformation("Large footprints.");
                 break;
 
             case CLOTHES:
@@ -647,7 +651,6 @@ public class Game {
      * the game, in case the player wants to continue from this point in the
      * game.
      */
-    
     public void SaveData() {
 
         File file = new File("src/Data/data.ser");
@@ -840,8 +843,7 @@ public class Game {
      * necessary. It is called at the end of the game, and it checks whether the
      * players current score is higher than the one saved in Highscore.txt. If
      * it is, then the current score is saved as the new highscore.
-     *
-     * @return String to print from GUI
+     * @return String to print from GUI.
      */
     public String updateHighscore() {
         File file = new File("src/Data/Highscore.txt");
@@ -864,32 +866,32 @@ public class Game {
     }
     
     /**
-     * The method to get information from the game-class to the GUI
-     * @return String to pass to GUI
+     * The method to get information from the game-class to the GUI.
+     * @return String to pass to GUI.
      */
     public String getInformation() {
         return information;
     }
     
     /**
-     * The method to set information from the game-class to the GUI
-     * @param s parsed information from class Game
+     * The method to set information from the game-class to the GUI.
+     * @param s parsed information from class Game.
      */
     public void setInformation(String s) {
         information = s;
     }
     
     /**
-     * Method to check if the player has won
-     * @return boolean, true if the player has defeated the murderer
+     * Method to check if the player has won.
+     * @return boolean, true if the player has defeated the murderer.
      */
     public boolean hasWon() {
         return hasWon;
     }
     
     /**
-     * Method to check if the player has lost
-     * @return boolean, true if the player has lost all three lives
+     * Method to check if the player has lost.
+     * @return boolean, true if the player has lost all three lives.
      */
     public boolean hasLost() {
         return hasLost;

@@ -2,11 +2,18 @@ package worldofzuul2;
 
 import java.util.HashMap;
 
+/**
+ * Class for describing Consumable-type Items.
+ */
 public class Consumables {
 
+    /**
+     * HashMap containing the consumables.
+     */
     private HashMap<String, Consumable> listOfConsumables;
+    
 /**
- * Constructor which is used instantiate Consumable.
+ * Constructor which is used to instantiate Consumable.
  */
     public Consumables() {
         listOfConsumables = new HashMap<String, Consumable>();
@@ -16,11 +23,11 @@ public class Consumables {
             }
         }
     }
+    
 /**
- * Accessor which accesses the Consumable from listOfConsumables
- * @param Consumable - it is a Consumable from the list.
+ * Accessor which accesses the Consumable from listOfConsumables.
+ * @param consumable - a String indicating the wanted Consumable.
  * @return it is the Consumable from the list.
- * 
  */
     public Consumable getConsumable(String consumable) {
         Consumable temp = listOfConsumables.get(consumable.toLowerCase());
@@ -30,10 +37,11 @@ public class Consumables {
             return Consumable.UNKNOWN;
         }
     }
+    
 /**
- * It clue is in the list by checking for key(Consumable).
+ * Checks if the given key for a Consumable is contained on the list of existing Consumables.
  * @param aString it is the key.
- * @return it returns the Consumable.
+ * @return true if the String represents an existing Consumable.
  */
     public boolean isItem(String aString) {
         return listOfConsumables.containsKey(aString);

@@ -14,6 +14,7 @@ public enum Clue implements Item {
     WITNESS("witness"),
     UNKNOWN(""),
     LAMP("lamp");
+    
     /**
      *
      * This shows Clue has a String. Clues contains information needed to play
@@ -53,7 +54,7 @@ public enum Clue implements Item {
     /**
      * It checks if the clue is Movable
      *
-     * @return false - if it is, it should return false.
+     * @return always false - clues cannot be moved.
      */
     @Override
     public boolean isMovable() {

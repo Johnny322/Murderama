@@ -2,19 +2,22 @@
 package worldofzuul2;
 
 /** 
+ * Class for commands in the game.
  * @author  Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
-
 public class Command
 {
+    /**
+     * Attributes used to describe a command.
+     */
     private CommandWord commandWord;
     private String secondWord;
 
     /**
      * Constructor for the Command-class.
-     * @param commandWord The commandword that tells the switch-case which command is chosen.
-     * @param secondWord Second word of command, to tell directions.
+     * @param commandWord The commandword that tells us which command is chosen.
+     * @param secondWord Second word of command, used to tell things like directions.
      */
     public Command(CommandWord commandWord, String secondWord)
     {
@@ -33,7 +36,7 @@ public class Command
     
     /**
      * Accessor for the secondWord.
-     * @return secondWord for the 2nd word of the command
+     * @return the 2nd word of the command.
      */
     public String getSecondWord()
     {
@@ -41,8 +44,8 @@ public class Command
     }
 
     /**
-     * 
-     * @return true if the command is not known
+     * Method to check if the given command is unknown.
+     * @return true if the command is not known.
      */
     public boolean isUnknown()
     {
@@ -50,8 +53,8 @@ public class Command
     }
 
     /**
-     * 
-     * @return boolean true if the word has a second word
+     * Checks if the given command has a secondWord.
+     * @return boolean, true if the command has a second word.
      */
     public boolean hasSecondWord()
     {

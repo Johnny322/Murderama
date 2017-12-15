@@ -2,27 +2,29 @@ package worldofzuul2;
 
 
 /**
- *
+ * Class for Evil characters - this implements the NPC-interface.
  * @author Simon
  */
 public class Evil extends Character implements NPC {
     
+    /**
+     * Various attributes used to describe an Evil-type NPC.
+     */
     private final String information;
     private final boolean isMurderer;
     private boolean isHostile;
-    private int threshold;
-    private String description;
+    private final int threshold;
+    private final String description;
     
     /**
-     * 
+     * Constructor for Evil.
      * @param name the name of the Character.
      * @param damage the damage the character deals.
      * @param hp the amount of health points the character has.
      * @param information the information the character knows.
-     * @param isMurderer if the character is the murderer.
-     * @param description a description of character.
+     * @param isMurderer boolean, true if the character is the murderer.
+     * @param description a description of the character.
      */
-   
     public Evil (String name, int damage, int hp, String information, boolean isMurderer, String description) {
         super(name, damage, hp);
         this.information = information;
@@ -31,80 +33,75 @@ public class Evil extends Character implements NPC {
         this.threshold = 0;
         this.description = description;
     }
+    
     /**
      * Mutator which sets the hostility of the character.
-     * @param isHostile 
+     * @param isHostile the boolean we want to set isHostile to.
      */
     @Override
     public void setHostile(boolean isHostile) {
         this.isHostile = isHostile;
     }
-/**
- * Constructor which checks if the character is hostile.
- * @return if true it makes the character hostile.
- */
+    
+    /**
+     * Method which checks if the character is hostile.
+     * @return true if the character is hostile.
+     */
     @Override
     public boolean isHostile() {
         return this.isHostile;
     }
 
-/**
- * Constructor which checks if the character is Murderer.
- * @return if true it makes the character the Murderer.
- */
+    /**
+     * Method which checks if the character is the Murderer.
+     * @return true if the character is the Murderer.
+     */
     @Override
     public boolean isMurderer() {
         return isMurderer;
     }
     
     /**
-     * Constructor gets the characters description.
+     * Accessor which gets the characters description.
      * @return the description of the character.
      */
+    @Override
     public String getDescription() {
         return description;
     }
     
     /**
-     * Constructor gets the characters Information.
+     * Accessor which gets the characters Information.
      * @return the Information of the character.
      */
-    
     @Override
     public String getInformation() {
-        if(this.isHostile) {
-            return super.getName() + " is hostile and cannot be talked to until you defeat them in combat";
-        }
         return this.information;
     }
     /**
-     * Constructor gets the characters Threshold.
+     * Getter-method for the characters Threshold.
      * @return the Threshold of the character.
      */
     @Override
     public int getThreshold() {
         return this.threshold;
     }
+    
     /**
-     * Constructor which checks if the character is evil. If it is then it returns true.
-     * @return
+     * Method which checks if the character is evil.
+     * @return always true, since Evil-type characters are always Evil.
      */
     @Override
     public boolean isEvil() {
         return true;
     }
-        /**
-     * Constructor checks if the character is friendly. If it is then it returns false.
-     * @return
+    
+    /**
+     * Method which checks if the character is friendly.
+     * @return always false, since Evil-type characters are never Friendly.
      */
+    @Override
     public boolean friendly(){
         return false;
-    }
-    /**
-     * Constructor gets the characters Additional Information.
-     * @return the Additional Information of the character.
-     */
-    public String getAdditionalInformation() {    
-        return "No more info";
     }
 }

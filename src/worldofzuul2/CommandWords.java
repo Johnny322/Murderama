@@ -3,20 +3,21 @@ package worldofzuul2;
 import java.util.HashMap;
 
 /**
+ * Class for the commandwords.
  * @author  Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
-
 public class CommandWords
 {
+    /**
+     * Hashmap for containing the commands.
+     */
     private HashMap<String, CommandWord> validCommands;
 
     /**
-     * Checks if the commandWord is valid.
      * Constructor for CommandWords.
      */
-    public CommandWords()
-    {
+    public CommandWords() {
         validCommands = new HashMap<String, CommandWord>();
         for(CommandWord command : CommandWord.values()) {
             if(command != CommandWord.UNKNOWN) {
@@ -27,7 +28,7 @@ public class CommandWords
 
     /**
      * Accessor method based on a String commandWord.
-     * @param commandWord.
+     * @param commandWord - String used to find the wanted commandWord.
      * @return the String CommandWord.
      */
     public CommandWord getCommandWord(String commandWord)
@@ -43,7 +44,7 @@ public class CommandWords
     
     /**
      * Checks if the String is a Command.
-     * @param aString.
+     * @param aString - the given command as a string.
      * @return true if the Command is present in validCommands.
      */
     public boolean isCommand(String aString)

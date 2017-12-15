@@ -1,5 +1,9 @@
 package worldofzuul2;
 
+/**
+ *
+ * @author Patrick
+ */
 public abstract class Character {
 
     private final String name;
@@ -7,7 +11,7 @@ public abstract class Character {
     private int damage;
 
     /**
-     * Constructor for NPC with Item(s).
+     * Constructor for character with Item(s).
      *
      * @param name - Name of the NPC.
      * @param hp - hp of the NPC.
@@ -38,7 +42,6 @@ public abstract class Character {
 
     /**
      * Mutator that sets the hp of the Character.
-     *
      * @param hp - the Health Points of the Character.
      */
     public void setHP(int hp) {
@@ -66,7 +69,7 @@ public abstract class Character {
     /**
      * This method checks if the Character is alive.
      *
-     * @return true if the monster har move than 0 hp.
+     * @return true if the monster has more than 0 hp.
      */
     public boolean alive() {
         return this.hp > 0;

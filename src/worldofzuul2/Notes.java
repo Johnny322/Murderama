@@ -1,13 +1,14 @@
 package worldofzuul2;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
 * This is the class responsible for handling the notes that the player has available.
 */
 public class Notes {
 
-   
+   /**
+    * ArrayList containing all notes.
+    */
     private ArrayList<String> notes = new ArrayList<>();
     
     /**
@@ -26,17 +27,6 @@ public class Notes {
         this.notes.add(note);
     }
     
-//    /*
-//    This should be called when the user wants to write a new note. The method reads what the user writes, then adds it to the list of notes.
-//     */
-//    public void writeNewNote() {
-//        Scanner in = new Scanner(System.in);
-//        System.out.println("Write the new note:");
-//        addNote("You ", in.nextLine());
-//        in.close();
-//    }
-    
-    
     /**
      * Adds a new note to the list, with the name of who gave the player this information.
      * @param name - the name of the character who gave this information to the player.
@@ -50,7 +40,7 @@ public class Notes {
      * Adds a new note to the list.
      * @param note - the information to be added to the list of notes.
      */
-   public void addNote(String note) {
+    public void addNote(String note) {
         this.notes.add(note);
     }
     
@@ -59,6 +49,9 @@ public class Notes {
      * @return a String that is printed in the GUI.
      */
     public String showNotes() {
+        if (this.notes.isEmpty()) {
+            return "You currently have no notes!";
+        }
         String s = "";
         for (int i = 0; i < this.notes.size(); i++) {
             s = s + (i+1) + ". " + this.notes.get(i) + "\n";
@@ -72,21 +65,6 @@ public class Notes {
      */
     public ArrayList<String> getNotes() {
         return this.notes;
-    }
-    
-    /**
-     * Removes the note at index i from the notes-list.
-     * @param i - index of the note that should be removed.
-     */
-    public void removeNote(int i) {
-        this.notes.remove(i);
-    }
-    
-    /**
-     * Clears the list of notes entirely.
-     */
-    public void clearNotes() {
-        this.notes.clear();
     }
     
     /**

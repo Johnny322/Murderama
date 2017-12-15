@@ -6,6 +6,7 @@ import java.util.Random;
 
 
 /**
+ * Class for constructing the rooms in which the game is played.
  * @author  Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
@@ -23,7 +24,7 @@ public class Room
 	
     /**
      * Constructor for a Room.
-     * @param description - Describes the Room and its position.
+     * @param description - Describes the Room.
      */
     public Room(String description) 
     {
@@ -44,8 +45,8 @@ public class Room
     }
 
     /**
-     * Accessor for the describtion of this Room.
-     * @return description - Returns the description of this Room.
+     * Accessor for the description of this Room.
+     * @return the description of this Room.
      */
     public String getShortDescription()
     {
@@ -53,32 +54,9 @@ public class Room
     }
 
     /**
-     * Accessor for the long description for this Room.
-     * @return LongDescription - Returns the Long description for this room.
-     */
-    public String getLongDescription()
-    {
-        return "You are " + description + ".\n" + getExitString();
-    }
-    
-    /**
-     * Accessor for the Exits available for current room.
-     * @return Exits - Returns the avaible exits for this room.
-     */
-    private String getExitString()
-    {
-        String returnString = "Exits:";
-        Set<String> keys = exits.keySet();
-        for(String exit : keys) {
-            returnString += " " + exit;
-        }
-        return returnString;
-    }
-
-    /**
      * Accessor for the Exit in a certain direction.
      * @param direction - The direction of the next exit.
-     * @return exits.get(direction) - Returns the exit in a certain direction.
+     * @return the Room on the other side of an exit in a certain direction.
      */
     public Room getExit(String direction) 
     {
@@ -162,7 +140,7 @@ public class Room
             space2 = random.nextInt(3);
         }
         
-        this.stepList[space1][space2] = new Step(new Evil("Jeff", 10, 60, "I don’t know anything I just arrived", true, "Student, big guy, large feet, small hands"));
+        this.stepList[space1][space2] = new Step(new Evil("Jeff", 10, 60, "I don’t know anything I just arrived.", true, "Student, big guy, large feet, small hands."));
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if(this.stepList[i][j] == null) {
@@ -173,7 +151,7 @@ public class Room
     }
     
     /**
-     * Method for buildsing the Hallway.
+     * Method for building the Hallway.
      */
     public void buildHallway() {
         Random random = new Random();
@@ -181,7 +159,7 @@ public class Room
         int space2 = random.nextInt(3);
 
         
-        this.stepList[space1][space2] = new Step(new Friendly("Jan Ithor", 10, 150, "I have lost my key, help me find it and it may lead you to the murderer", false, true, "What's your problem?", 150, "Janitor, big guy, large feet and large hands"));
+        this.stepList[space1][space2] = new Step(new Friendly("Jan Ithor", 10, 150, "I have lost my key, help me find it and it may lead you to the murderer.", true, 150, "Janitor, big guy, large feet and large hands."));
     	for(int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if(this.stepList[i][j] == null) {
@@ -206,7 +184,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmør", 12, 110, " I saw something moving in the basement, I can assure that it did not belong down there", false, true, "No more info", 200,  "A very nervous guy. Needs to get to know you before he will tell you anything"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Programmer", 12, 110, " I saw something moving in the basement, I can assure you that it did not belong down there.", true, 300,  "A very nervous guy. Needs to get to know you before he will tell you anything."));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -234,7 +212,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Lunchlady", 11, 70, "The victim was from Jeff's class in Computer Systems,  their teacher Srik may know what happened", false, true, "They had an argument some days ago", 100, "Lunchlady, has a lot of information"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Lunchlady", 11, 70, "The victim was from Jeff's class in Computer Systems, their teacher Srik may know what happened. \n They had an argument some days ago.", true, 100, "Lunchlady, has a lot of information."));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -261,7 +239,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Janiel Dørgensen", 10, 100, "", false, false, "The murderer is a genius! Not that what he did was good, but he is sharp minded like me", 0, "Teacher of Object Oriented Programming"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Janiel Dørgensen", 10, 100, "The murderer is a genius! Not that what he did was good, but he is sharp minded like me.", false, 0, "Teacher of Object Oriented Programming."));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -288,7 +266,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Librarian", 10, 120, "I saw a shadow behind the bookshelves. When i went to look I saw bloodstains on the ground. It was a big shadow, some heavy breaths, but eyes can betray. Surely this murderer is good at planning", false, true, "No more info", 20, "Librarian, likely tells the truth"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Friendly("Librarian", 10, 120, "I saw a shadow behind the bookshelves. When I went to look I saw bloodstains on the ground. It was a big shadow, some heavy breaths, but eyes can betray. Surely this murderer is good at planning.", true, 20, "Librarian, likely tells the truth."));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -315,7 +293,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Evil("Srik Eørensen", 10, 150, "Some pupils had a fight today after class, i do not know what it was about but Jeff seemed a bit nervous. He is a lonely kid, loneliness can make you do stupid things. My advise will be to talk to Jan Ithor, he is the janitor and knows the school better than any of us.", false, "Teacher of Computer Systems, small feet and large hands"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Evil("Srik Eørensen", 10, 150, "Some pupils had a fight today after class, i do not know what it was about but Jeff seemed a bit nervous. He is a lonely kid, loneliness can make you do stupid things. My advice will be to talk to Jan Ithor, he is the janitor and knows the school better than any of us.", false, "Teacher of Computer Systems, small feet and large hands."));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -342,7 +320,7 @@ public class Room
             spaceCharacter1 = random.nextInt(3);
             spaceCharacter2 = random.nextInt(3);
         }
-        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Evil("Steen", 10, 150, "I not aware of what have happened but let me tell you something. We people have a bad habit. We tend to always believe on what's obvious, and it make sense but is it not always what we see that is the truth", false, "Head of SIF, small stature, small feet and small hands"));
+        this.stepList[spaceCharacter1][spaceCharacter2] = new Step(new Evil("Steen", 10, 150, "I'm not aware of what happened but let me tell you something. We people have a bad habit. We tend to always believe what's obvious, and it makes sense, but is it not always what we see that is the truth.", false, "Head of SIF, small stature, small feet and small hands."));
 
         
     	for(int i = 0; i < 3; i++) {
@@ -357,7 +335,7 @@ public class Room
     /**
      * Method for moving the player.
      * @param move - What direction the player needs to be moved.
-     * @return Returns the new postion of the player.
+     * @return the new position of the player, as a Step.
      */
     public Step move(String move) {
     	if(move.toLowerCase().equals("north")) {
@@ -403,7 +381,7 @@ public class Room
      /**
      * Method for checking if the player can move to the next room.
      * @param direction - What direction the player is trying to move.
-     * @return Returns if it is posible to move to the next room.
+     * @return boolean indicating if it is possible to move to the next room.
      */
     public boolean checkIfRoomTraversalIsOkay(String direction) {
         if(direction.toLowerCase().equals("east")) {
@@ -436,14 +414,12 @@ public class Room
                     return true;
                 }
     	} 
-        
-    	
     	return false;
     }
     
 
      /**
-     * Method for printing the exits of the current room + the information, item, NPC and Monster on the current step the player is on.
+     * Method for printing the current room and everything in it, including doors leading to adjacent rooms.
      * @return String for printing in GUI
      */
     public String printRoom() {
@@ -498,7 +474,7 @@ public class Room
     
    /**
      * Accessor method for getting the players current position.
-     * @return Returns the players current position.
+     * @return the players current position.
      */
     public Step currentPosition() {
     	return this.stepList[currentPosition1][currentPosition2];
@@ -506,7 +482,7 @@ public class Room
    
     /**
      * Accessor for the steplist.
-     * @return Returns the steplist.
+     * @return the steplist.
      */
     public Step[][] getStepList() {
         return stepList;
@@ -537,8 +513,8 @@ public class Room
     }
     
     /**
-     * Accessor for two cordinates of the players position.
-     * @return Returns the Coordinates of the players position.
+     * Accessor for two coordinates of the players position.
+     * @return the Coordinates of the players position.
      */
     public String getPosition() {
         return currentPosition1 + " " + currentPosition2;
