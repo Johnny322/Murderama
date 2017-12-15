@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -19,11 +20,23 @@
       <Button fx:id="save" layoutX="425.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleButtonSave" prefHeight="25.0" text="Save" />
       <Button fx:id="showNotes" layoutX="14.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleButtonShowNotes" prefHeight="25.0" text="Show Notes" />
       <TextField fx:id="writable" layoutX="256.0" layoutY="297.0" prefHeight="25.0" prefWidth="80.0" />
-      <Button fx:id="button1" layoutX="76.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleButtonW" prefHeight="25.0" prefWidth="30.0" text="W" />
-      <Button fx:id="button3" layoutX="46.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleButtonA" prefHeight="25.0" prefWidth="30.0" text="A" />
-      <Button fx:id="button4" layoutX="76.0" layoutY="286.0" mnemonicParsing="false" onAction="#handleButtonS" prefHeight="25.0" prefWidth="30.0" text="S" />
-      <Button fx:id="button2" layoutX="106.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleButtonD" prefHeight="25.0" prefWidth="30.0" text="D" />
-      <TextArea fx:id="area1" editable="false" layoutX="11.0" layoutY="23.0" prefHeight="193.0" prefWidth="179.0" />
-      <TextArea fx:id="area2" wrapText="true" editable="false" layoutX="202.0" layoutY="23.0" prefHeight="263.0" prefWidth="273.0" />
+      <Button fx:id="button1" layoutX="76.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleButtonW" prefHeight="25.0" prefWidth="30.0" text="W">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="button3" layoutX="46.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleButtonA" prefHeight="25.0" prefWidth="30.0" text="A">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="button4" layoutX="76.0" layoutY="286.0" mnemonicParsing="false" onAction="#handleButtonS" prefHeight="25.0" prefWidth="30.0" text="S">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="button2" layoutX="106.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleButtonD" prefHeight="25.0" prefWidth="30.0" text="D">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <TextArea fx:id="area1" editable="false" layoutX="11.0" layoutY="23.0" prefHeight="193.0" prefWidth="179.0" wrapText="true" />
+      <TextArea fx:id="area2" editable="false" layoutX="202.0" layoutY="23.0" prefHeight="263.0" prefWidth="273.0" wrapText="true" />
     </children>
 </AnchorPane>
