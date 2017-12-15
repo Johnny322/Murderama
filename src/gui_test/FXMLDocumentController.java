@@ -108,7 +108,7 @@ public class FXMLDocumentController implements Initializable {
         if(game.hasLost()) {
             area2.setText(game.getInformation());
             game.printHighscore();
-            area1.setText("You cannot set a highscore, because you've lost.");    
+            area1.setText(game.getInformation() + "\nYou cannot set a highscore, because you've lost.");    
             game = null;
         }
     }
@@ -128,13 +128,14 @@ public class FXMLDocumentController implements Initializable {
         if(game.hasWon() || game.hasLost()) {
             if(game.hasWon()) {
                 area2.setText(game.getInformation());
+                String s = game.updateHighscore();
                 game.printHighscore();
-                area1.setText(game.updateHighscore());    
+                area1.setText(s + "\n" + game.getInformation());    
             }
             if(game.hasLost()) {
                 area2.setText(game.getInformation());
                 game.printHighscore();
-                area1.setText("You cannot set a highscore, because you've lost.");    
+                area1.setText(game.getInformation() + "\nYou cannot set a highscore, because you've lost.");    
             }
             game = null;
         }
