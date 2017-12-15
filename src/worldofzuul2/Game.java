@@ -633,7 +633,7 @@ public class Game {
      */
     public void SaveData() {
 
-        File file = new File("/Murderama-master/src/Data/data.txt");
+        File file = new File("src/Data/data.txt");
         try {
             Scanner scanner = new Scanner(file);
 
@@ -696,7 +696,7 @@ public class Game {
      * attributes to the correct values.
      */
     public void LoadData() {
-        File file = new File("Murderama-master/src/Data/data.txt");
+        File file = new File("src/Data/data.txt");
         try {
             Scanner scanner = new Scanner(file);
 
@@ -808,7 +808,7 @@ public class Game {
      * started.
      */
     public void printHighscore() {
-        File file = new File("Murderama-master/src/Data/Highscore.txt");
+        File file = new File("src/Data/Highscore.txt");
         try {
             Scanner scanner = new Scanner(file);
             String s = "Current highscore is: " + scanner.nextInt();
@@ -826,7 +826,7 @@ public class Game {
      * @return String to print from GUI.
      */
     public String updateHighscore() {
-        File file = new File("Murderama-master/src/Data/Highscore.txt");
+        File file = new File("src/Data/Highscore.txt");
         String s = "";
         int currentScore = points.getPoints();
         try {
