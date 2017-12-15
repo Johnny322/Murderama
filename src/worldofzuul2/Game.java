@@ -22,13 +22,13 @@ public class Game {
     private final Consumables items = new Consumables();
     private final PointSystem points = new PointSystem();
     private final Notes notes = new Notes();
-    private Room outside, cafeteria, U55, basement, library, hallway, TEK, U183, projectRoom;
+    private Room outside, cafeteria, U55, basement, library, hallway, TEK, U183, projectRoom, nedenunder;
     private final Player player = new Player("Jeff", 150, 12);
     private boolean hasWon = false;
     private boolean hasLost = false;
     private final CommandWords commands = new CommandWords();
     private String information;
-    private int jeffAccused = 0;
+    private int murdererAccused = 0;
     
     
 
@@ -52,13 +52,13 @@ public class Game {
 
         outside = new Room("outside the main entrance of the university.");
         outside.buildOutside();
-        cafeteria = new Room("in the cafeteria.");
+        cafeteria = new Room("in the cafeteria. You can always get coffee here.");
         cafeteria.buildCafeteria();
         U55 = new Room("in lecture room U55.");
         U55.buildU55();
         hallway = new Room("in the long hallway in front of room U55.");
         hallway.buildHallway();
-        library = new Room(" in the university's library.");
+        library = new Room("in the university's library.");
         library.buildLibrary();
         TEK = new Room("in front of the bronze stairs at TEK.");
         TEK.buildTEK();
@@ -66,6 +66,10 @@ public class Game {
         U183.buildU183();
         projectRoom = new Room("inside a project room at TEK.");
         projectRoom.buildProjectRoom();
+        nedenunder = new Room("in the bar of the university. You can always get beer here.");
+        nedenunder.buildNedenunder();
+        basement = new Room("in the basement of the university.");
+        basement.buildBasement();
         
 
         outside.setExit("west", TEK);
@@ -83,6 +87,8 @@ public class Game {
         cafeteria.setExit("north", hallway);
         library.setExit("south", hallway);
         hallway.setExit("west", outside);
+        nedenunder.setExit("north", U55);
+        U55.setExit("south", nedenunder);
 
         currentRoom = outside;
     }
@@ -94,8 +100,7 @@ public class Game {
     private String printWelcome() {
         return "Welcome to Murderama \n This is a game where nothing happens by chance, everything is a mystery and nobody is trustworthy. Do you dare to play?"
                 + " \n Someone has been murdered! Find the murderer and make him pay for what he did! \n "
-                + "\nYou walk around by pressing the W, A, S and D buttons to the left. Below you will find buttons for various actions. To the left is a map of the current room, which shows you the following things:\n"
-                + "X is where you are currently at\nO indicates an empty field\nC indicates a character\nI indicates an item\nd marks the available doors\n\nHave fun!";
+                + printHelp();
     }
     
     /**
@@ -125,23 +130,13 @@ public class Game {
      * @return the appropriate method call for the given command.
      */
     private boolean processCommand(Command command) {
-        boolean wantToQuit = false;
-
         CommandWord commandWord = command.getCommandWord();
 
-        if (commandWord == CommandWord.UNKNOWN || commandWord == CommandWord.FLEE) {
+        if (commandWord == CommandWord.UNKNOWN) {
             setInformation("I don't know what you mean...");
             return false;
         }
         switch (commandWord) {
-//            case HELP:
-//                printHelp();
-//                break;
-
-//            case QUIT:
-//                wantToQuit = quit(command);
-//                break;
-
             case FIGHT:
                 return fight();
 
@@ -188,19 +183,24 @@ public class Game {
                 LoadData();   
                 break;
                 
+            case HELP:
+                setInformation(printHelp());
+                break;
+                
             default:
-                return wantToQuit;
+                return false;
         }
-        return wantToQuit;
+        return false;
     }
 
     /**
      * Prints out a helping message for the player. Is called when the player uses 
      * the help-command.
      */
-//    private void printHelp() {
-//        setInformation("You are lost. You are alone. You wander + \n around at the university. \n \n Your command words are: \n " + parser.showCommands());
-//    }
+    private String printHelp() {
+        return "\nYou walk around by pressing the W, A, S and D buttons to the left. Below you will find buttons for various actions. To the left is a map of the current room, which shows you the following things:" +
+"                \nX is where you are currently at\nO indicates an empty field\nC indicates a character\nI indicates an item\nd marks the available doors\n\nHave fun!";
+    }
     
     /**
      * Processes a fight between the player and a NPC, called when the fight-command is used. 
@@ -218,16 +218,15 @@ public class Game {
         character.changeHp(player.getDamage());
         setInformation("You have " + player.getHp() + " hp" + "\n" + character.getName() + " has " + character.getHp() + " hp");
         if (character.getHp() <= 0) {
-            if(npc.isMurderer()) {
+            if(npc.isMurderer() && murdererAccused >= 1) {
                 setInformation(getInformation() + "\nYou beat the murderer! You have won the game!");
                 hasWon = true;
                 return true;
             }
             setInformation(getInformation() + "\n" + "Enemy has been defeated!");
-            if (npc.isEvil() && jeffAccused < 1) {
+            if (npc.isEvil() && murdererAccused < 1) {
                 npc.setHostile(false);
                 character.setHP(100);
-                //jeffAccused++;
             } else {
                 currentRoom.currentPosition().voidNPC();
             }
@@ -285,7 +284,9 @@ public class Game {
             points.updateOnAction(player.getFightSpeed());
             player.increaseLikeability(player.getFightSpeed());
             setInformation(player.lootItem(room.currentPosition().getItem()));
-            room.currentPosition().voidItem();
+            if (room.currentPosition().getItem() != Consumable.COFFEE && room.currentPosition().getItem() != Consumable.BEER) {
+                room.currentPosition().voidItem();
+            }
         }
         else if (room.currentPosition().getItem() != null) {
             setInformation("This item cannot be picked up.");
@@ -396,25 +397,11 @@ public class Game {
     }
 
     /**
-     * This method is called to quit the game.
-     * @param command - the command given by the player.
-     * @return a boolean indicating whether or not the player actually wants to quit.
-     */
-//    private boolean quit(Command command) {
-//        if (command.hasSecondWord()) {
-//            setInformation("Quit what?");
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
-    
-    /**
      * Method to parse String of room from class Room to GUI. 
      * @return String for printing in GUI
      */
     public String getRoom() {
-        return currentRoom.printRoom();
+        return currentRoom.printRoom() + "\n\nYour current score is: " + points.getPoints();
     }
 
     /**
@@ -430,6 +417,7 @@ public class Game {
             Character character = room.currentPosition().getCharacter();
             npc.setHostile(true);
             if (npc.isMurderer()) {
+                murdererAccused++;
                 setInformation("You are correct, " + character.getName() + " is the murderer.");
                 setInformation(getInformation() + "\n" + character.getName() + " wants to fight you. Defeat him to win the game!");
                 return false;
@@ -561,8 +549,6 @@ public class Game {
 
             case KEY:
                 if (currentRoom == outside || currentRoom == library) {
-                    basement = new Room("in the basement of the university.");
-                    basement.buildBasement();
                     library.setExit("west", basement);
                     basement.setExit("east", library);
                     basement.setExit("south", outside);
@@ -571,6 +557,11 @@ public class Game {
                 } else {
                     setInformation("The key doesn't fit in any doors in this area."); //denne er også et problem
                 }
+                break;
+                
+            case KNIFE:
+                player.changeDamage(3);
+                setInformation("You will now use this knife as a weapon! You hit harder.");
                 break;
 
             default:
@@ -598,6 +589,9 @@ public class Game {
                 
             case KEY:
                 return "Can open hidden doors.";
+                
+            case KNIFE:
+                return "Can make you hit harder.";
 
             default:
                 return "This item does not exist.";
@@ -616,28 +610,12 @@ public class Game {
                 setInformation("This is the victim. He seems to have been strangled by someone with small hands.");
                 break;
 
-            case KNIFE:
-                setInformation("");
-                break;
-
-            case WITNESS:
-                player.setWalkSpeed(-2);
-                break;
-
             case FINGERPRINT:
                 setInformation("Small bloody fingerprints.");
                 break;
 
             case FOOTPRINT:
                 setInformation("Large footprints.");
-                break;
-
-            case CLOTHES:
-                player.setWalkSpeed(-2);
-                break;
-
-            case LAMP:
-
                 break;
 
             default:
@@ -653,7 +631,7 @@ public class Game {
      */
     public void SaveData() {
 
-        File file = new File("src/Data/data.ser");
+        File file = new File("Murderama-master/src/Data/data.txt");
         try {
             Scanner scanner = new Scanner(file);
 
@@ -716,7 +694,7 @@ public class Game {
      * attributes to the correct values.
      */
     public void LoadData() {
-        File file = new File("src/Data/data.ser");
+        File file = new File("Murderama-master/src/Data/data.txt");
         try {
             Scanner scanner = new Scanner(file);
 
@@ -776,16 +754,19 @@ public class Game {
                     case "potion":
                         player.addInventory(Consumable.POTION);
                         break;
+                        
                     case "coffee":
                         player.addInventory(Consumable.COFFEE);
                         break;
+                        
                     case "beer":
                         player.addInventory(Consumable.BEER);
                         break;
+                        
                     case "key":
                         player.addInventory(Consumable.KEY);
                         break;
-                    //case " ": continue;
+                        
                     default:
                         break;
                 }
@@ -809,11 +790,12 @@ public class Game {
             s = "";
             s = s + "Notes: \n" + notes.showNotes() + "\n";
             s = s + "Your score is: " + (points.getPoints()) + "\n";
-            s = s +  "You currently have " + player.getHp() + " Hp" + "\n";
+            s = s + "You currently have " + player.getHp() + " Hp" + "\n";
             s = s + "Your walking speed is currently: " + player.getWalkSpeed() + "\n";
             s = s + "Your fighting speed is currently: " + player.getFightSpeed() + "\n";
+            s = s + "Your inspecting speed is currently: " + player.getSearchSpeed() + "\n";
             s = s + " " + "\n";
-            s = s + "You're currently at " + roomName + "\n";
+            s = s + "You're currently " + currentRoom.getShortDescription() + "\n";
             setInformation(s);
 
         } catch (FileNotFoundException ex) {
@@ -828,7 +810,7 @@ public class Game {
      * started.
      */
     public void printHighscore() {
-        File file = new File("src/Data/Highscore.txt");
+        File file = new File("Murderama-master/src/Data/Highscore.txt");
         try {
             Scanner scanner = new Scanner(file);
             String s = "Current highscore is: " + scanner.nextInt();
@@ -846,7 +828,7 @@ public class Game {
      * @return String to print from GUI.
      */
     public String updateHighscore() {
-        File file = new File("src/Data/Highscore.txt");
+        File file = new File("Murderama-master/src/Data/Highscore.txt");
         String s = "";
         int currentScore = points.getPoints();
         try {

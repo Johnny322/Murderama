@@ -6,8 +6,6 @@ package worldofzuul2;
  * @version 2006.03.30
  */
 public enum CommandWord {
-    GO("go"),
-    QUIT("quit"),
     HELP("help"),
     UNKNOWN("?"),
     FIGHT("fight"),
@@ -15,7 +13,6 @@ public enum CommandWord {
     USE("use"),
     MOVE("move"),
     ACCUSE("accuse"),
-    FLEE("flee"),
     TALK("talk"),
     SHOWNOTES("show"),
     W("w"),

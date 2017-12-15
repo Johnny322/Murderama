@@ -22,6 +22,7 @@ public class Friendly extends Character implements NPC {
      * @param damage - the damage the character deals.
      * @param hp - the amount of health points the character has.
      * @param information - the information the character knows.
+     * @param friendly - boolean, true if the character is willing to initiate contacts with the player.
      * @param threshold - how likely a character is to trust the player.
      * @param description - a description of the character.
      */

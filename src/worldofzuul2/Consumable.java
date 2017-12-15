@@ -9,6 +9,7 @@ public enum Consumable implements Item {
     BEER("beer"),
     COFFEE("coffee"),
     KEY("key"),
+    KNIFE("knife"),
     UNKNOWN("");
 
     /**

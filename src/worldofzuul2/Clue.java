@@ -5,15 +5,10 @@ package worldofzuul2;
  * Since there's only a few Clues, we decided to use enum for the clues.
  */
 public enum Clue implements Item {
-
-    KNIFE("knife"),
     FINGERPRINT("fingerprint"),
     FOOTPRINT("footprint"),
-    CLOTHES("bloody clothes"),
     VICTIM("victim"),
-    WITNESS("witness"),
-    UNKNOWN(""),
-    LAMP("lamp");
+    UNKNOWN("");
     
     /**
      *
