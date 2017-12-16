@@ -513,9 +513,23 @@ public class Game {
     private void getItemEffect(Item item) {
         switch ((Consumable) item) {
             case BEER:
-                player.setWalkSpeed(2);
-                player.setFightSpeed(2);
-                player.setSearchSpeed(2);
+                if (player.getWalkSpeed() +4 < 30) {
+                    player.setWalkSpeed(this.player.getWalkSpeed()+4);       
+                } else {
+                    player.setWalkSpeed(15);
+                }
+
+                if (player.getSearchSpeed() +15 < 90) {
+                    player.setSearchSpeed(this.player.getSearchSpeed()+15);
+                } else {
+                    player.setSearchSpeed(90);
+                }
+
+                if (player.getFightSpeed() + 4 < 25) {
+                    player.setFightSpeed(this.player.getFightSpeed()-1);
+                } else {
+                    player.setFightSpeed(22);
+                }
                 player.increaseLikeability(25);
                 setInformation(getInformation() + "\nYou feel slower, but more talkative. ");
                 break;
@@ -529,10 +543,8 @@ public class Game {
             case COFFEE:
                 if (player.getWalkSpeed() -2 > 5) {
                     player.setWalkSpeed(this.player.getWalkSpeed()-2);       
-                    System.out.println("walkspeed is now" + this.player.getWalkSpeed());    
                 } else {
                     player.setWalkSpeed(5);
-                    System.out.println("walk is set to 5");
                 }
 
                 if (player.getSearchSpeed() - 3 > 10) {
@@ -541,10 +553,10 @@ public class Game {
                     player.setSearchSpeed(10);
                 }
 
-                if (player.getFightSpeed() - 1 < 0) {
-                    player.setFightSpeed(0);
+                if (player.getFightSpeed() - 1 > 2) {
+                    player.setFightSpeed(this.player.getFightSpeed()-1);
                 } else {
-                    player.setFightSpeed(-1);
+                    player.setFightSpeed(2);
                 }
                 setInformation(getInformation() + "\nYou feel energized! ");
                 break;
