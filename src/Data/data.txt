@@ -1,23 +1,26 @@
-1 2
+1 1
 
-3
+-3
 
-267
+500
 
-2
+0
 
-2
+10
 
 70
 
-2
+32
 
-hallway
+outside
 
-beer coffee coffee beer beer beer beer beer beer beer  qqq 
-Jeff said: I don’t know anything I just arrived. xxx
-Janiel Dørgensen said: The murderer is a genius! Not that what he did was good, but he is sharp minded like me. xxx
-Jan Ithor said: I have lost my key, help me find it and it may lead you to the murderer. xxx
-Lunchlady said: The victim was from Jeff's class in Computer Systems, their teacher Srik may know what happened. 
- They had an argument some days ago. xxx
+potion coffee coffee beer beer beer beer beer beer  qqq 
+ Jeff said: I don’t know anything I just arrived. xxx
+ Janiel Dørgensen said: The murderer is a genius! Not that what he did was good, but he is sharp minded like me. xxx
+ Jan Ithor said: I have lost my key, help me find it and it may lead you to the murderer. xxx
+ Lunchlady said: The victim was from Jeff's class in Computer Systems, their teacher Srik may know what happened. They had an argument some days ago. xxx
+ Jeff said: I don’t know anything I just arrived. xxx
+ Janiel Dørgensen said: The murderer is a genius! Not that what he did was good, but he is sharp minded like me. xxx
+ Jan Ithor said: I have lost my key, help me find it and it may lead you to the murderer. xxx
+ Lunchlady said: The victim was from Jeff's class in Computer Systems, their teacher Srik may know what happened. They had an argument some days ago. xxx
  www
