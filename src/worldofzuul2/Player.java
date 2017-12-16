@@ -29,8 +29,8 @@ public class Player extends Character {
         this.inventory = new Item[10];
         this.lives = 3;
         this.walkSpeed = 10;
-        this.fightSpeed = 5;
-        this.searchSpeed = 25;
+        this.fightSpeed = walkSpeed/2;
+        this.searchSpeed = walkSpeed*3; 
         this.notes = new Notes();
         this.likeability = 0;
     }

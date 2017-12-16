@@ -444,7 +444,7 @@ public class Game {
     }
 
     /**
-     * This method is called when the player uses the Inspect-command.
+     * This method is called when the player uses the Search-command.
      * @return a boolean which is always false.
      */
     public boolean search() {
@@ -527,16 +527,18 @@ public class Game {
                 break;
 
             case COFFEE:
-                if (player.getWalkSpeed() - 2 < 5) {
-                    player.setWalkSpeed(0);
+                if (player.getWalkSpeed() -2 > 5) {
+                    player.setWalkSpeed(this.player.getWalkSpeed()-2);       
+                    System.out.println("walkspeed is now" + this.player.getWalkSpeed());    
                 } else {
-                    player.setWalkSpeed(-2);
+                    player.setWalkSpeed(5);
+                    System.out.println("walk is set to 5");
                 }
 
-                if (player.getSearchSpeed() - 3 < 10) {
-                    player.setSearchSpeed(0);
+                if (player.getSearchSpeed() - 3 > 10) {
+                    player.setSearchSpeed(this.player.getSearchSpeed()-3);
                 } else {
-                    player.setSearchSpeed(-3);
+                    player.setSearchSpeed(10);
                 }
 
                 if (player.getFightSpeed() - 1 < 0) {
